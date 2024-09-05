@@ -1,8 +1,8 @@
 class Tvmv < Formula
   desc "Bulk-rename TV episode files with minimal fuss"
   homepage "https://github.com/keithfancher/tvmv"
-  url "https://github.com/keithfancher/tvmv/archive/refs/tags/0.5.0.tar.gz"
-  sha256 "5c668cef09a24bc2952fa2ec877a95016090b728c6f379f3a3b6f904dd275bc5"
+  url "https://github.com/keithfancher/tvmv/archive/refs/tags/0.6.0.tar.gz"
+  sha256 "c5fdfdf3da415ddeb1b60da112b6d80c677d42390a93b3185ecfc73536bfee33"
   license "GPL-3.0-or-later"
 
   bottle do
