@@ -1,13 +1,13 @@
-name: Bump casks on schedule or request
+name: Bump formulae on schedule or request
 
 on:
   workflow_dispatch:
     inputs:
-      casks:
-        description: Custom list of casks to livecheck and bump if outdated
+      formulae:
+        description: Custom list of formulae to livecheck and bump if outdated
         required: false
   schedule:
-    - cron: "15 */2 * * *"
+    - cron: "15 */6 * * *"
 
 permissions:
   contents: read
@@ -38,4 +38,4 @@ jobs:
         continue-on-error: true
         with:
           token: ${{ secrets.BOT_TOKEN }}
-          casks: ${{ github.event.inputs.casks || steps.autobump.outputs.autobump_list }}
+          casks: ${{ github.event.inputs.formulae || steps.autobump.outputs.autobump_list }}
