@@ -14,6 +14,6 @@ class SurgeCli < Formula
 
   test do
     assert_match version.to_s, shell_output("#{bin}/surge --version")
-    assert_match "Not Authenticated", shell_output("#{bin}/surge whoami", 1)
+    assert_match "Not Authenticated", shell_output("#{bin}/surge whoami")
   end
 end
