@@ -7,6 +7,13 @@ class MasLegacy < Formula
   license "MIT"
   head "https://github.com/mas-cli/mas.git", branch: "main"
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma: "467c75e387264ca71d2169b487d2319e2a9d953445f518e012f601e64753fbd5"
+    sha256 cellar: :any_skip_relocation, ventura:      "61103d216596928bdf17ae6f12bbd695e7fa8bc4676a1512938df4682a07297b"
+    sha256 cellar: :any_skip_relocation, monterey:     "8b761b9d99057c89bb2eba0448fd30f9c24ce879f0afec6ba1027a7519ee18f1"
+  end
+
   depends_on :macos
   on_arm do
     depends_on xcode: ["12.2", :build]
