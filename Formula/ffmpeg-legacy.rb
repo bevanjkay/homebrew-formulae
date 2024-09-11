@@ -13,6 +13,14 @@ class FfmpegLegacy < Formula
     regex(/href=.*?ffmpeg[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 arm64_sonoma: "ca5a3deeae438c7110d47ba8c0f757a8d80f3b06229209f30fbd719bd0f8df5f"
+    sha256 ventura:      "975b8a721e9eb11f8f1b43adff353bcda94a673233e36b4fc8b3948cf5fb63d2"
+    sha256 monterey:     "612cde65693e98840808c6152dfb448b9121a83ce3b28bb5229907824d4ae441"
+    sha256 x86_64_linux: "ec76d0cb2be106deffdaab6d6b23105e8bbc3c1d7fcc23fc9ea976fad004145e"
+  end
+
   depends_on "pkg-config" => :build
   depends_on "aom"
   depends_on "aribb24"
