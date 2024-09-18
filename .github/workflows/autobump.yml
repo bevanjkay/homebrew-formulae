@@ -7,7 +7,7 @@ on:
         description: Custom list of formulae to livecheck and bump if outdated
         required: false
   schedule:
-    - cron: "15 */6 * * *"
+    - cron: "0 22 * * *"
 
 permissions:
   contents: read
