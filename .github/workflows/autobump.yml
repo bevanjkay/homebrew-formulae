@@ -38,4 +38,4 @@ jobs:
         continue-on-error: true
         with:
           token: ${{ secrets.BOT_TOKEN }}
-          casks: ${{ github.event.inputs.formulae || steps.autobump.outputs.autobump_list }}
+          formulae: ${{ github.event.inputs.formulae || steps.autobump.outputs.autobump_list }}
