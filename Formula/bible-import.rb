@@ -3,8 +3,9 @@ class BibleImport < Formula
 
   desc "Import custom Bibles into ProPresenter"
   homepage "https://github.com/martijnlentink/propresenter-custom-bibles"
-  url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2024-07-17.tar.gz"
-  sha256 "bfa52f79aea96f2f3dde58ad3dcc51819c94592a445f3a11af59d98e6d605949"
+  url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2024-09-18-pre.tar.gz"
+  version "2024-09-18-pre"
+  sha256 "ef91dd86177c2360fb25cd220cb51c8da0142482c60c3d08dcef77fedc0b5d17"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
