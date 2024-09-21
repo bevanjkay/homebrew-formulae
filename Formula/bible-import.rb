@@ -8,10 +8,10 @@ class BibleImport < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "26fa2c1bfeb7dcebebec3a2a49f179088408182a3f915d586a10be77139b86b5"
-    sha256 cellar: :any_skip_relocation, ventura:      "9e0060daab97429b2b12462045d24d875d17ad177c460969ccfff544f021c552"
-    sha256 cellar: :any_skip_relocation, monterey:     "5788e149f4533e3d2252a9e77cb747cd60816af7383464ccad4865d4d4c9c580"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "991bd0cdb14cae3358919648f4bb4c41c169fd02e77214562d45c170e23f96c5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma: "efaffd4e6b98e94230321228141ea5ef3d28480c035894cb436c146ae40aa549"
+    sha256 cellar: :any_skip_relocation, ventura:      "c27d48a106421b28a82dad392fa442a2f94f9a8e0e0ebf29f745b9502d341e40"
+    sha256 cellar: :any_skip_relocation, monterey:     "f37b06cef1115ee64602f60fbfde248cf4277a876188def62367aeb63bc1579b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "8d1827ea890d4dac1ee44df9324dac5c650d298852f72089d9661aa3f395e822"
   end
 
   depends_on "python@3.12"
