@@ -15,6 +15,9 @@ jobs:
     strategy:
       matrix:
         include:
+          - name: macOS 15 (arm64)
+            runs-on: macos-15
+            cleanup-before: true
           - name: macOS 14 (arm64)
             runs-on: macos-14
             cleanup-before: true
