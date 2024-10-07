@@ -4,6 +4,7 @@ class SurgeCli < Formula
   url "https://registry.npmjs.org/surge/-/surge-0.24.6.tgz"
   sha256 "becf2678a30ad17c8384c36382f5c62e27ce73a9ba184c8664cea4ee40053ee0"
   license "ISC"
+  revision 1
 
   depends_on "node"
 
