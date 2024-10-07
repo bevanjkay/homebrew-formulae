@@ -17,10 +17,11 @@ class AdobeFontsRevealer < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "a2506cae464eda509754631bd7a2407b5619f9f84a277a41d654733004987390"
-    sha256 cellar: :any_skip_relocation, ventura:      "2725280b5554ce7e721b81635a5dc52833dab9d9cfc4766cf41d14b2eea011d0"
-    sha256 cellar: :any_skip_relocation, monterey:     "d949e7a468c2a21e8c34fb5234c1cbfbfd899c6cb7a3f00f768a22eb37754752"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "bb00af8502b3ede102865da0407a2a3920f67d411f8092625c8fdbe9929fab18"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "21e496d58320cdb9ca76d250acc8e87f8b9dd4603ab1feec90885af58fd43202"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c5bce1a034e8396d8bf23d22034bb05ce8587544c7361c90b73341566c7442cb"
+    sha256 cellar: :any_skip_relocation, ventura:       "edd07abfb89bbcdd08b565eaf5fdd0d6d4d9fc96b4b93aa6308bc802256a3ae8"
+    sha256 cellar: :any_skip_relocation, monterey:      "4a3bcec8b39de9a8847fc69ff3639c1afa830203df9b7d0fa14dafa688fef58c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f4a262f094308077cd8b455a7f30f450252eda9de01a776d19df519ef1eae532"
   end
 
   depends_on "lcdf-typetools"
