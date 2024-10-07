@@ -5,6 +5,7 @@ class MasLegacy < Formula
       tag:      "v1.8.6",
       revision: "560c89af2c1fdf0da9982a085e19bb6f5f9ad2d0"
   license "MIT"
+  revision 1
   head "https://github.com/mas-cli/mas.git", branch: "main"
 
   bottle do
