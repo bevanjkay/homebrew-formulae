@@ -21,6 +21,8 @@ class SevenzipLegacy < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:  "a66bd97c93cacf6c8122b77a475a423c4ab078ad385c615eb0b2fa0da32efdd0"
   end
 
+  depends_on macos: :monterey
+
   def install
     cd "CPP/7zip/Bundles/Alone2" do
       mac_suffix = Hardware::CPU.intel? ? "x64" : Hardware::CPU.arch
