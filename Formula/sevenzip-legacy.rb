@@ -14,12 +14,15 @@ class SevenzipLegacy < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0f3844336c8a61bfdb95b1f4241d9a375c3d1ea145d71ad819c53e2cd16ca4a8"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "37c91f3b002f0cb493a5e1c9571784fc192ba553e8d924f4d2933a81b9b48e29"
-    sha256 cellar: :any_skip_relocation, ventura:       "f178078be5e74daccbf7646d98831b18c94ba51175733fa465df13b43f0a7a44"
-    sha256 cellar: :any_skip_relocation, monterey:      "6210894327071dc44a3f74a05e16e5a9b68897b5e5f5fb4076afd5187e3c40f1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a66bd97c93cacf6c8122b77a475a423c4ab078ad385c615eb0b2fa0da32efdd0"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "63ed8442f8af01a5588cd9e81af258eb2a3c30ff76e7ed842301d900d5159803"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "03c59cd6b0ade85c2ff91606237f87ab239efb3ed1dc43d8d6eca10b35c8b089"
+    sha256 cellar: :any_skip_relocation, ventura:       "35541752c7c6740be90f4aa2ddb32dadf29002e5bd42e155c2892793f6c447c1"
+    sha256 cellar: :any_skip_relocation, monterey:      "737c5e04c4b48615bcede664a007e2b804f82a813544cb19312619d7c3a9ef0b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7296700d5bde372b2c9ed94020b96497043415ed8a669cb1a3c7a76f0676c524"
   end
+
+  depends_on macos: :monterey
 
   def install
     cd "CPP/7zip/Bundles/Alone2" do

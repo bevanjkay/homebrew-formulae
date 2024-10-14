@@ -10,11 +10,14 @@ class MasLegacy < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "220d9b5a85ee95a6393ef6ab922caef4596a751a717e2dae240975f28b640a4b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9710343abbd55c7d367b8e1d17450bf86ebac35b1322e19b5973e56b2d505d70"
-    sha256 cellar: :any_skip_relocation, ventura:       "9f15bcbab85d0883647f301f6fae0cd280551d2fbb504d66b92b7dc6f61e6f95"
-    sha256 cellar: :any_skip_relocation, monterey:      "72e13bb368c1cb41af844fe0244b836624278cf11687ea366033cd6f9eaa538c"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "553604cecbbc9abe53ec13574ca3b28cccd3d56819b9e9ef043e90d5bc9c7c92"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5ba7c76217e1f21529ff051e89d1e9fe689b8de1f0495eddd05a9ade20078f70"
+    sha256 cellar: :any_skip_relocation, ventura:       "0630d0e102f0b24df76b28b0b9a76ba0ea51cc98ff916581eebfcb8e8bfc8639"
+    sha256 cellar: :any_skip_relocation, monterey:      "4d51b77c33dbac0efdd148cb427a919a80572eab9964c3e00f92c84aed88716e"
   end
+
+  depends_on macos: :monterey
 
   depends_on :macos
   on_arm do
