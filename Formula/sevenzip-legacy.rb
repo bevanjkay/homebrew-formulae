@@ -12,6 +12,15 @@ class SevenzipLegacy < Formula
     regex(/>\s*Download\s+7-Zip\s+v?(\d+(?:\.\d+)+)\s+\([^)]+?\)/im)
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0f3844336c8a61bfdb95b1f4241d9a375c3d1ea145d71ad819c53e2cd16ca4a8"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "37c91f3b002f0cb493a5e1c9571784fc192ba553e8d924f4d2933a81b9b48e29"
+    sha256 cellar: :any_skip_relocation, ventura:       "f178078be5e74daccbf7646d98831b18c94ba51175733fa465df13b43f0a7a44"
+    sha256 cellar: :any_skip_relocation, monterey:      "6210894327071dc44a3f74a05e16e5a9b68897b5e5f5fb4076afd5187e3c40f1"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a66bd97c93cacf6c8122b77a475a423c4ab078ad385c615eb0b2fa0da32efdd0"
+  end
+
   def install
     cd "CPP/7zip/Bundles/Alone2" do
       mac_suffix = Hardware::CPU.intel? ? "x64" : Hardware::CPU.arch
