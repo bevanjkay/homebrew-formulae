@@ -16,6 +16,8 @@ class MasLegacy < Formula
     sha256 cellar: :any_skip_relocation, monterey:      "72e13bb368c1cb41af844fe0244b836624278cf11687ea366033cd6f9eaa538c"
   end
 
+  depends_on macos: :monterey
+
   depends_on :macos
   on_arm do
     depends_on xcode: ["12.2", :build]
