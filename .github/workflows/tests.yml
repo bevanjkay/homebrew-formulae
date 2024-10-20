@@ -11,45 +11,65 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  test-bot:
+  setup-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.setup-matrix.outputs.matrix }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Check PR Labels
+      id: check-pr-labels
+      if: github.event_name == 'pull_request'
+      run: |
+        gh pr view "${{ github.event.pull_request.number }}" --json 'labels' | jq -r '.labels[].name' > labels.txt
+        echo "labels=$(cat labels.txt)" >> $GITHUB_OUTPUT
+      env:
+        GH_TOKEN: ${{ github.token }}
+
+    - name: Set up matrix
+      id: setup-matrix
+      uses: actions/github-script@v7
+      with:
+        script: |    
+          try {
+            const fs = require('fs');
+            const runners = fs.readFileSync('./.github/runners.json');
+            let matrix = JSON.parse(runners);
+
+            const labels = JSON.parse("[" + process.env.labels + "]");
+
+            if (labels.includes("macos only")) {
+              matrix = matrix.filter(runner => runner.runs_on !== "ubuntu-22.04");
+            }
+            console.log(JSON.stringify(matrix));
+          } catch (error) {
+            core.setFailed(error.message);
+          }  
+
+    - name: Debug
+      run: echo ${{ steps.setup-matrix.outputs.matrix }}  
+  
+  tests:
+    needs: setup-matrix
     strategy:
-      matrix:
-        include:
-          - name: macOS 15 (arm64)
-            runs-on: macos-15
-            cleanup-before: true
-          - name: macOS 14 (arm64)
-            runs-on: macos-14
-            cleanup-before: true
-          - name: macOS 13 (x86_64)
-            runs-on: macos-13
-            cleanup-before: true
-          - name: macOS 12 (x86_64)
-            runs-on: macos-12
-            cleanup-before: true
-          - name: Ubuntu 22.04
-            runs-on: ubuntu-22.04
-            cleanup-before: false
-            container:
-              image: ghcr.io/homebrew/ubuntu22.04:master
-              options: --user=linuxbrew
-            working-directory: /github/home
-            if: github.event.pull_request.labels.*.name != 'macos only'
+      matrix: ${{fromJson(needs.setup-matrix.outputs.matrix)}}
     name: ${{ matrix.name }}
-    runs-on: ${{ matrix.runs-on }}
-    container: ${{ matrix.container }}
+    runs-on: ${{ matrix.runs_on }}
+    container: ${{ matrix.container || '' }}
     defaults:
       run:
         shell: bash
-        working-directory: ${{ matrix.working-directory || github.workspace }}
+        working-directory: ${{ matrix.working_directory || github.workspace }}
     env:
-      BOTTLES_DIR: ${{ matrix.working-directory || github.workspace }}/bottles
+      BOTTLES_DIR: ${{ matrix.working_directory || github.workspace }}/bottles
     steps:
       - name: Pre-test steps
         uses: Homebrew/actions/pre-build@master
         with:
           bottles-directory: ${{ env.BOTTLES_DIR }}
-          cleanup: ${{ matrix.cleanup-before }}
+          cleanup: ${{ matrix.cleanup_before }}
 
       - run: brew test-bot --only-tap-syntax
 
@@ -66,5 +86,5 @@ jobs:
         with:
           bottles-directory: ${{ env.BOTTLES_DIR }}
           logs-directory: ${{ format('{0}/logs', env.BOTTLES_DIR) }}
-          runner: ${{ matrix.runs-on }}
+          runner: ${{ matrix.runs_on }}
           cleanup: false
