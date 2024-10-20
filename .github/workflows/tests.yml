@@ -11,47 +11,85 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  test-bot:
+  check-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: false
+          cask: false
+          test-bot: true
+
+      - name: Check out Pull Request
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check syntax
+        run: brew test-bot --only-tap-syntax
+
+  setup-matrix:
+    runs-on: ubuntu-latest
+    needs: check-syntax
+    outputs:
+      matrix: ${{ steps.setup-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up matrix
+        id: setup-matrix
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            const runners = fs.readFileSync('./.github/runners.json');
+            let matrix = JSON.parse(runners);
+
+            const request = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            })
+
+            console.log(request.data);
+            const labels = request.data.labels.map(label => label.name);
+            console.log(labels);
+            if (labels.length) {
+              if (labels.includes("macos only")) {
+                matrix = matrix.filter(runner => runner.runs_on !== "ubuntu-22.04");
+              }
+            }
+
+            console.log(JSON.stringify(matrix));
+            core.setOutput('matrix', JSON.stringify({ include: matrix }));
+
+      - name: Debug
+        run: echo ${{ steps.setup-matrix.outputs.matrix }}
+
+  tests:
+    needs: setup-matrix
     strategy:
-      matrix:
-        include:
-          - name: macOS 15 (arm64)
-            runs-on: macos-15
-            cleanup-before: true
-          - name: macOS 14 (arm64)
-            runs-on: macos-14
-            cleanup-before: true
-          - name: macOS 13 (x86_64)
-            runs-on: macos-13
-            cleanup-before: true
-          - name: macOS 12 (x86_64)
-            runs-on: macos-12
-            cleanup-before: true
-          - name: Ubuntu 22.04
-            runs-on: ubuntu-22.04
-            cleanup-before: false
-            container:
-              image: ghcr.io/homebrew/ubuntu22.04:master
-              options: --user=linuxbrew
-            working-directory: /github/home
-            if: github.event.pull_request.labels.*.name != 'macos only'
+      matrix: ${{fromJson(needs.setup-matrix.outputs.matrix)}}
     name: ${{ matrix.name }}
-    runs-on: ${{ matrix.runs-on }}
-    container: ${{ matrix.container }}
+    runs-on: ${{ matrix.runs_on }}
+    container: ${{ matrix.container && matrix.container != '' && matrix.container || null }}
     defaults:
       run:
         shell: bash
-        working-directory: ${{ matrix.working-directory || github.workspace }}
+        working-directory: ${{ matrix.working_directory || github.workspace }}
     env:
-      BOTTLES_DIR: ${{ matrix.working-directory || github.workspace }}/bottles
+      BOTTLES_DIR: ${{ matrix.working_directory || github.workspace }}/bottles
     steps:
       - name: Pre-test steps
         uses: Homebrew/actions/pre-build@master
         with:
           bottles-directory: ${{ env.BOTTLES_DIR }}
-          cleanup: ${{ matrix.cleanup-before }}
-
-      - run: brew test-bot --only-tap-syntax
+          cleanup: ${{ matrix.cleanup_before }}
 
       - run: brew test-bot --only-formulae --root-url='https://ghcr.io/v2/bevanjkay/homebrew-formulae'
         id: brew-test-bot-formulae
@@ -66,5 +104,5 @@ jobs:
         with:
           bottles-directory: ${{ env.BOTTLES_DIR }}
           logs-directory: ${{ format('{0}/logs', env.BOTTLES_DIR) }}
-          runner: ${{ matrix.runs-on }}
+          runner: ${{ matrix.runs_on }}
           cleanup: false
