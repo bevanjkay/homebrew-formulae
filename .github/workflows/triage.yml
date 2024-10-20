@@ -1,0 +1,26 @@
+name: Triage tasks
+
+on: pull_request_target
+
+concurrency:
+  group: "triage-${{ github.event.number }}"
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label pull request
+        uses: Homebrew/actions/label-pull-requests@master
+        if: always()
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          def: |
+            - label: macos only
+              content: depends_on :macos
+            
+            - label: linux only
+              content: depends_on :linux
