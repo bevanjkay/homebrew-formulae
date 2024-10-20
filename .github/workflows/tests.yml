@@ -11,46 +11,66 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  check-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+        with:
+          core: false
+          cask: false
+          test-bot: true
+
+      - name: Check out Pull Request
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check syntax
+        run: brew test-bot --only-tap-syntax
+
   setup-matrix:
     runs-on: ubuntu-latest
+    needs: check-syntax
     outputs:
       matrix: ${{ steps.setup-matrix.outputs.matrix }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Check PR Labels
-      id: check-pr-labels
-      if: github.event_name == 'pull_request'
-      run: |
-        gh pr view "${{ github.event.pull_request.number }}" --json 'labels' | jq -r '.labels[].name' > labels.txt
-        echo "labels=$(cat labels.txt)" >> $GITHUB_OUTPUT
-      env:
-        GH_TOKEN: ${{ github.token }}
-
-    - name: Set up matrix
-      id: setup-matrix
-      uses: actions/github-script@v7
-      with:
-        script: |    
-          try {
+      - name: Set up matrix
+        id: setup-matrix
+        uses: actions/github-script@v7
+        with:
+          script: |
             const fs = require('fs');
+
             const runners = fs.readFileSync('./.github/runners.json');
             let matrix = JSON.parse(runners);
 
-            const labels = JSON.parse("[" + process.env.labels + "]");
+            const request = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            })
 
-            if (labels.includes("macos only")) {
-              matrix = matrix.filter(runner => runner.runs_on !== "ubuntu-22.04");
+            console.log(request.data);
+            const labels = request.data.labels.map(label => label.name);
+            console.log(labels);
+            if (labels.length) {
+              if (labels.includes("macos only")) {
+                matrix = matrix.filter(runner => runner.runs_on !== "ubuntu-22.04");
+              }
             }
-            console.log(JSON.stringify(matrix));
-          } catch (error) {
-            core.setFailed(error.message);
-          }  
 
-    - name: Debug
-      run: echo ${{ steps.setup-matrix.outputs.matrix }}  
-  
+            console.log(JSON.stringify(matrix));
+            core.setOutput('matrix', JSON.stringify({ include: matrix }));
+
+      - name: Debug
+        run: echo ${{ steps.setup-matrix.outputs.matrix }}
+
   tests:
     needs: setup-matrix
     strategy:
@@ -70,8 +90,6 @@ jobs:
         with:
           bottles-directory: ${{ env.BOTTLES_DIR }}
           cleanup: ${{ matrix.cleanup_before }}
-
-      - run: brew test-bot --only-tap-syntax
 
       - run: brew test-bot --only-formulae --root-url='https://ghcr.io/v2/bevanjkay/homebrew-formulae'
         id: brew-test-bot-formulae
