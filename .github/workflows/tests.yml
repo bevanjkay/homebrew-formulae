@@ -34,6 +34,7 @@ jobs:
               image: ghcr.io/homebrew/ubuntu22.04:master
               options: --user=linuxbrew
             working-directory: /github/home
+            if: github.event.pull_request.labels.*.name != 'macos only'
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.runs-on }}
     container: ${{ matrix.container }}
