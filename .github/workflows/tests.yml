@@ -77,7 +77,7 @@ jobs:
       matrix: ${{fromJson(needs.setup-matrix.outputs.matrix)}}
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.runs_on }}
-    container: ${{ matrix.container || '' }}
+    container: ${{ matrix.container && matrix.container != '' && matrix.container || null }}
     defaults:
       run:
         shell: bash
