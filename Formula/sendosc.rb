@@ -13,17 +13,17 @@ class Sendosc < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:  "363ffc8143bc8dd4295d27717935e2775b20c042b4b013a4a21594739e02fe16"
   end
 
-  on_ventura :or_older do
+  on_ventura :or_newer do
+    depends_on "node"
+  end
+
+  on_monterey :or_older do
     def caveats
       <<~EOS
         You need to install NodeJS to use this tool.
         Run `brew install bevanjkay/tap/node-static` to install it with brew.
       EOS
     end
-  end
-
-  on_monterey :or_newer do
-    depends_on "node"
   end
 
   def install
