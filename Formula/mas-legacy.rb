@@ -2,10 +2,9 @@ class MasLegacy < Formula
   desc "Mac App Store command-line interface"
   homepage "https://github.com/mas-cli/mas"
   url "https://github.com/mas-cli/mas.git",
-      tag:      "v1.8.6",
-      revision: "560c89af2c1fdf0da9982a085e19bb6f5f9ad2d0"
+      tag:      "v1.8.7",
+      revision: "4405807010987802c0967bbf349c08808062b824"
   license "MIT"
-  revision 1
   head "https://github.com/mas-cli/mas.git", branch: "main"
 
   bottle do
