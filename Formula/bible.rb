@@ -15,10 +15,11 @@ class Bible < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "34336e6ab08052fa46b6d651073d4a219652283720e7da6740a261c05042690b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0942b8bf8d0796d9915968c332acf7d6682c62aa55f1591d11a48e1df6c66ab5"
-    sha256 cellar: :any_skip_relocation, ventura:       "220302b6aee69488da0315535751cb50e2842f48ee2356ce3c42cbc3783264d1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f4298eb05b501cb5601e49e9efafdbf0a7fdfc3a8e9745673de904d5f28ae8a9"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "314c57bebf33f2717b07e2d14c89a01f6c02c8c262a6f6440764cb05a6aa66e5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "512cf20635bb793ce9fd22a4f1bda0b5c7fbb5fb568a3d4119a57e6b588e705e"
+    sha256 cellar: :any_skip_relocation, ventura:       "008c44f01e567d249110c92046bc478b128fea2be57bb720b7cccbb68cb76fc7"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d383a9a70b6a9058503522e0780cd0fa7c89375640ddc727c5be5d4a801811c6"
   end
 
   depends_on "deno" => :build
