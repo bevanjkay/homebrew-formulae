@@ -120,6 +120,6 @@ class BibleImport < Formula
       system bin/"bible-import"
     end
     sleep 20
-    assert_predicate testpath/"download", :exist?
+    assert_path_exists testpath/"download"
   end
 end
