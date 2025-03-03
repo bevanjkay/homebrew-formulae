@@ -1,11 +1,9 @@
 class Bible < Formula
   desc "CLI for YouVersion Suggest API"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts.git",
-  branch:   "main",
-  revision: "1e43e8e40cdac4734747362a34fce46f2e151579"
+  url "https://github.com/bevanjkay/custom-scripts/archive/1e43e8e40cdac4734747362a34fce46f2e151579.tar.gz"
   version "1e43e8e40cdac4734747362a34fce46f2e151579"
-  sha256 "20a8705ca97e1915208a71a3b06c687fcdd5edf84aaccfa6c9f02f1f6aa2249c"
+  sha256 "a5883d523dbdb805339a3ce9684ffc5ff68a831e03d96e0c79ce08121def6663"
   license "MIT"
 
   livecheck do
