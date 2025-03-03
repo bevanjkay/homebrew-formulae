@@ -15,10 +15,10 @@ class FluroSongs < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "16447436f46e38e6b4b9e6dcd1a66a77ef1185a2072bddfb3f01ef06732bcb80"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1951b7b10b3f94b376f93dd805e2b877333701f363546b03bf9de630743189f9"
-    sha256 cellar: :any_skip_relocation, ventura:       "61e1217ceb3502e7ae937bffba76a5e5415775f7f54db07ebc3a156f547b346d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d2f56d1934b44f4ff8cc791f87da612c523d928ae6ff5e2bf95d365b2bfe2de4"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1bcae053c3fe1d17e1f38beebda5de0576c64643dcea78fc84da2a1ac8db81a8"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f5de057ff935f82a463fb8a538089dbc102066e5f6e079c4c5558a3bc8cda2e2"
+    sha256 cellar: :any_skip_relocation, ventura:       "0bf1ba51d2fa62be3f61a1fbd1913a5f234b05ac134c110803f63825378fbf46"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5c3d4f4a8dd6b012a6d810c9b7ec6f33460d59c47d6b4561fa1623cb52c24bee"
   end
 
   depends_on "deno" => :build
