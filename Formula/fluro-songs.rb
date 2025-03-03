@@ -1,11 +1,9 @@
 class FluroSongs < Formula
   desc "Search for songs in Fluro"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts.git",
-  branch:   "main",
-  revision: "a33a463077af21465b8acaf47048409d480ed6b3"
-  version "a33a463077af21465b8acaf47048409d480ed6b3"
-  sha256 "20a8705ca97e1915208a71a3b06c687fcdd5edf84aaccfa6c9f02f1f6aa2249c"
+  url "https://github.com/bevanjkay/custom-scripts/archive/aee3201c71f7e6ce52608884d16802f63ffcc350.tar.gz"
+  version "aee3201c71f7e6ce52608884d16802f63ffcc350"
+  sha256 "d8f34d30c69724b7dc71e91d32c6245e1fac5147c2f68ca5b8c225bd81ecdbe4"
   license "MIT"
 
   livecheck do
