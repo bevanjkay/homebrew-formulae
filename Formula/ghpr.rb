@@ -12,10 +12,10 @@ class Ghpr < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1cc60b22ace1964a6f86b69f7c11f8615ad3d70aba4e8609a1bb51915674bbc4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4f4efe23d1add56daf9835e1af9404ef0159acc46963c76b27b9d8e900d2b5fb"
-    sha256 cellar: :any_skip_relocation, ventura:       "c5df6516d7a2f6200b0cedab5fca700b7427d27fa788c2d37dab717e603fff95"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9e2caede65ec944df3b539f1ba368b6d1e8cd7a1c627dd259040f23e6550de06"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "91295a6801bc268e3a82441391256d6504f31886798c0ddc2c3c69218972f4c5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "28264a05ad7a32b3a090b2a8827cb541fea18a0dbaebb7cf32993cc82d06fa0b"
+    sha256 cellar: :any_skip_relocation, ventura:       "152f6f0a9652f3c7db78eb86743459d69553fd32e6d3c92a84f0e4dda51faf35"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "411cb8b42aeb556afcc1d72d8d5091ad84f25438b5a9f2014faa76bdebae64a3"
   end
 
   depends_on "deno" => :build
