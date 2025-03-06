@@ -1,16 +1,13 @@
 class Bible < Formula
   desc "CLI for YouVersion Suggest API"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/1e43e8e40cdac4734747362a34fce46f2e151579.tar.gz"
-  version "1e43e8e40cdac4734747362a34fce46f2e151579"
-  sha256 "a5883d523dbdb805339a3ce9684ffc5ff68a831e03d96e0c79ce08121def6663"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/bible-1.0.6.tar.gz"
+  sha256 "2fd8363793ad9896d2a9f1f489e11a1ae3d1e27c98c7c0ed3cd015cf668752d9"
   license "MIT"
 
   livecheck do
-    url "https://api.github.com/repos/bevanjkay/custom-scripts/commits?path=bible"
-    strategy :json do |json|
-      json.first["sha"]
-    end
+    url :stable
+    regex(/^bible-(\d+(?:\.\d+)+)$/i)
   end
 
   bottle do
