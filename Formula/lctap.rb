@@ -12,10 +12,10 @@ class Lctap < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c025a7644124d69f5076bf3b92a3d0d97456a01813df6043c370beb9e354050e"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0d42646cc9b599b011a545ca4f9df253ab973b2019480751df7a20e99d1c955e"
-    sha256 cellar: :any_skip_relocation, ventura:       "0831f895c913b19c9d95a57f20edd45f2ea8401056e04b66b6818ddf0aa2803a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ff41bc82dfdb4cf1d7d6c17692fec3415b2f738af2f46036e09e2ab946029767"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a093fde6309b7385dcaa30b97db41a783c4d865ddabb4b30bc4739afbf3d885b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "40dfc0bc0d1b07e473490be3c00ca5175906181c765b798d00d4919c8fcf7e8e"
+    sha256 cellar: :any_skip_relocation, ventura:       "93f6eb5fccabb7944ff8c1624477938ca310ee96fdad406df234d2c92fdad7a0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ff3e0f05fb2fd7d8c7087d61dd656d1303ea419a188bdf9edbe66132323d4eed"
   end
 
   depends_on "jq"
