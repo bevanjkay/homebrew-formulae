@@ -19,7 +19,7 @@
         "runs_on": "ubuntu-24.04",
         "cleanup_before": false,
         "container": {
-            "image": "ghcr.io/homebrew/ubuntu24.04:master",
+            "image": "ghcr.io/homebrew/ubuntu22.04:master",
             "options": "--user=linuxbrew"
         },
         "working_directory": "/github/home"
@@ -29,7 +29,7 @@
         "runs_on": "ubuntu-24.04-arm",
         "cleanup_before": false,
         "container": {
-            "image": "ghcr.io/homebrew/ubuntu24.04:master",
+            "image": "ghcr.io/homebrew/ubuntu22.04:master",
             "options": "--user=linuxbrew"
         },
         "working_directory": "/github/home"
