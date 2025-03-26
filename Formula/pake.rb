@@ -4,6 +4,7 @@ class Pake < Formula
   url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.1.1.tgz"
   sha256 "ebeea895c247188a0817696818d1c0641c8a7440b84b4c7934504ffd9c6c4b56"
   license "MIT"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
