@@ -6,6 +6,10 @@ on:
       - main
   pull_request:
 
+env:
+  HOMEBREW_ARM64_TESTING: 1
+  HOMEBREW_DEVELOPER: 1
+
 concurrency:
   group: tests-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
