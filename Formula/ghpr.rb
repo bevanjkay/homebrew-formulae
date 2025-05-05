@@ -1,8 +1,8 @@
 class Ghpr < Formula
   desc "Approve and automerge GitHub PRs"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/ghpr-1.0.2.tar.gz"
-  sha256 "00c2b17600976144cfb4cfa4077123a9cf135f7e73bc04c3bf9175ba7509f099"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/ghpr-1.1.0.tar.gz"
+  sha256 "75d6513c79ac478adbb5197532af0e356b97fafc8d0056ddcb8b97c7c148a87d"
   license "MIT"
 
   livecheck do
@@ -12,10 +12,11 @@ class Ghpr < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "91295a6801bc268e3a82441391256d6504f31886798c0ddc2c3c69218972f4c5"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "28264a05ad7a32b3a090b2a8827cb541fea18a0dbaebb7cf32993cc82d06fa0b"
-    sha256 cellar: :any_skip_relocation, ventura:       "152f6f0a9652f3c7db78eb86743459d69553fd32e6d3c92a84f0e4dda51faf35"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "411cb8b42aeb556afcc1d72d8d5091ad84f25438b5a9f2014faa76bdebae64a3"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "55bffe38acfe3fd2641f321ddad2dd6e433168693d9830f156bcc16cbcd055bc"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b2155bb3b297df1515c17fba7f6b24305fd6a70c9e14fbfe84240776ad75486f"
+    sha256 cellar: :any_skip_relocation, ventura:       "e892a453b35c9a65fba0c00d198faaab8b9bfdba23c1d3f8b48a08e9830d3c37"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7195a7874f772f3a6a11bcc42b255d58ee917fb10e8880b8fd4e9aebcd522167"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a67952ccdf93743518b06c0f121c9727adf6e86d29b5a396f9b534730de94155"
   end
 
   depends_on "deno" => :build
