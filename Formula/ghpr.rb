@@ -1,8 +1,8 @@
 class Ghpr < Formula
   desc "Approve and automerge GitHub PRs"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/ghpr-1.0.2.tar.gz"
-  sha256 "00c2b17600976144cfb4cfa4077123a9cf135f7e73bc04c3bf9175ba7509f099"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/ghpr-1.1.0.tar.gz"
+  sha256 "75d6513c79ac478adbb5197532af0e356b97fafc8d0056ddcb8b97c7c148a87d"
   license "MIT"
 
   livecheck do
