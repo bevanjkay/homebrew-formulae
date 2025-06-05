@@ -1,7 +1,7 @@
 class BBun < Formula
   desc "Incredibly fast JavaScript runtime, bundler, transpiler and package manager"
   homepage "https://bun.sh/"
-  version "1.2.13"
+  version "1.2.15"
   license "MIT"
 
   livecheck do
@@ -11,34 +11,34 @@ class BBun < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256                               arm64_sequoia: "618e8acfd0c96be311a528c22733fe3882b933cfa1138fb69bb7e7c0a663c3b7"
-    sha256                               arm64_sonoma:  "0c74bbae9d4fdfb476469ba1360cf2cf0199008a46de1477d5982d7454ff5268"
-    sha256 cellar: :any_skip_relocation, ventura:       "a186950422dfa894efb5b22bfa745ce02dae53d645023deb058e1515adddd770"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c3afd61ab46143fe1d6e1215c1be00722e8d38debb48f9b4d3a76cef0074533d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "09271944505f9fb46228adb072ae300ff4b17a63c41814355737f738eab0c1f3"
+    sha256                               arm64_sequoia: "ae7bf2b3938d21a5a629de0d289849b5f112f49739d46784c06623c09b6089e4"
+    sha256                               arm64_sonoma:  "e5e0e154bfd7fda29645e902f4baab44bfe71b078923cce72f4f4b6dd4d24c72"
+    sha256 cellar: :any_skip_relocation, ventura:       "b5f432845b8aa75e1479f121b6972faa482086649f232a9d803e6b6ee1efd65b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "58668e1fce1c14424b834d5fa554d904d25e51c58f7cf335b98a2e0f97f0fbb0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fa73087c38ce828890f3cbb2a6968e443a138cd20adc1d3a71623f31bdc20785"
   end
 
   if OS.mac?
     if Hardware::CPU.arm? || Hardware::CPU.in_rosetta2?
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-darwin-aarch64.zip"
-      sha256 "8154367524d8c298edb269b8d0df61d469ec4194d361c07e4b8d2c65fbbc2efb" # bun-darwin-aarch64.zip
+      sha256 "ab0cd6fc7fc8d1ee4f8166d99b71086d4793c5aee0d0b5c73fdf9b70fa47ded4" # bun-darwin-aarch64.zip
     elsif Hardware::CPU.avx2?
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-darwin-x64.zip"
-      sha256 "25997191ce4235c9a4f6ff54c9d4774060a66cb330992e936c388ea4b38c7762" # bun-darwin-x64.zip
+      sha256 "a4d26f5f3c9e066493d7402d45a201defcde8f8f415cc1b54fb874d02d15940f" # bun-darwin-x64.zip
     else
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-darwin-x64-baseline.zip"
-      sha256 "05387a4645891538a0df7425e8912ec16b7425116cd416766aa52ca3013f8c64" # bun-darwin-x64-baseline.zip
+      sha256 "60b324330bb141a87a078ad01baa3f0b8ccfc2896fdcc72c005ab54a79099935" # bun-darwin-x64-baseline.zip
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-linux-aarch64.zip"
-      sha256 "b6a25537bc2d11ebe44a478dd62a8e01dbc9f4e1c4b7d2d730b4a7e9d3580cc9" # bun-linux-aarch64.zip
+      sha256 "3c3d006148f37200f967fd8070eefb340468287bacb44524a31cad1ee9d3bb7b" # bun-linux-aarch64.zip
     elsif Hardware::CPU.avx2?
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-linux-x64.zip"
-      sha256 "8bb2e4c47eae183f2473c55b9bce7798c4a2836d646c2587a7987a3d1062e100" # bun-linux-x64.zip
+      sha256 "a261626367835bb3754a01ae07f884484ed17b0886b01e417b799591fa4d7901" # bun-linux-x64.zip
     else
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-linux-x64-baseline.zip"
-      sha256 "9de5b4a6d392c1de6b9c612bf26e9644bbce47ce09f0c847cedf867d1536ad45" # bun-linux-x64-baseline.zip
+      sha256 "386ca291c7fa98720d0e94daa1133af811e69fa24352558a403c1b9759e7eb98" # bun-linux-x64-baseline.zip
     end
   else
     odie "Unsupported platform. Please submit a bug report here: https://bun.sh/issues\n#{OS.report}"
