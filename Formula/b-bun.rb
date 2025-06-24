@@ -1,7 +1,7 @@
 class BBun < Formula
   desc "Incredibly fast JavaScript runtime, bundler, transpiler and package manager"
   homepage "https://bun.sh/"
-  version "1.2.15"
+  version "1.2.17"
   license "MIT"
 
   livecheck do
@@ -21,24 +21,24 @@ class BBun < Formula
   if OS.mac?
     if Hardware::CPU.arm? || Hardware::CPU.in_rosetta2?
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-darwin-aarch64.zip"
-      sha256 "ab0cd6fc7fc8d1ee4f8166d99b71086d4793c5aee0d0b5c73fdf9b70fa47ded4" # bun-darwin-aarch64.zip
+      sha256 "9f55fd213f2f768d02eb5b9885aaa44b1e1307a680c18622b57095302a931af9" # bun-darwin-aarch64.zip
     elsif Hardware::CPU.avx2?
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-darwin-x64.zip"
-      sha256 "a4d26f5f3c9e066493d7402d45a201defcde8f8f415cc1b54fb874d02d15940f" # bun-darwin-x64.zip
+      sha256 "038023b8dbdccc93383398a0c1be2ca82716649479cfae708b533ca7a9c5d083" # bun-darwin-x64.zip
     else
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-darwin-x64-baseline.zip"
-      sha256 "60b324330bb141a87a078ad01baa3f0b8ccfc2896fdcc72c005ab54a79099935" # bun-darwin-x64-baseline.zip
+      sha256 "a54b6a1778a522d8f8cf57c18095aca7642b009cf81613e48805fd82954fb0c1" # bun-darwin-x64-baseline.zip
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-linux-aarch64.zip"
-      sha256 "3c3d006148f37200f967fd8070eefb340468287bacb44524a31cad1ee9d3bb7b" # bun-linux-aarch64.zip
+      sha256 "a0b996f48c977beb4e87b09a471ded7e63ee5c2fb4b72790c7ab4badbc147d6b" # bun-linux-aarch64.zip
     elsif Hardware::CPU.avx2?
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-linux-x64.zip"
-      sha256 "a261626367835bb3754a01ae07f884484ed17b0886b01e417b799591fa4d7901" # bun-linux-x64.zip
+      sha256 "6054207074653b4dbc2320d5a61e664e4b6f42379efc18d6181bffcc07a43193" # bun-linux-x64.zip
     else
       url "https://github.com/oven-sh/bun/releases/download/bun-v#{version}/bun-linux-x64-baseline.zip"
-      sha256 "386ca291c7fa98720d0e94daa1133af811e69fa24352558a403c1b9759e7eb98" # bun-linux-x64-baseline.zip
+      sha256 "6ea1861db6a6cd44d1c8b4bafb22006f4ae49f6a2d077623bf3f456ada026d67" # bun-linux-x64-baseline.zip
     end
   else
     odie "Unsupported platform. Please submit a bug report here: https://bun.sh/issues\n#{OS.report}"
