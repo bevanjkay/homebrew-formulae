@@ -17,15 +17,6 @@ class Sendosc < Formula
     depends_on "node"
   end
 
-  on_monterey :or_older do
-    def caveats
-      <<~EOS
-        You need to install NodeJS to use this tool.
-        Run `brew install bevanjkay/tap/node-static` to install it with brew.
-      EOS
-    end
-  end
-
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink Dir["#{libexec}/bin/*"]
