@@ -1,10 +1,9 @@
 class Pake < Formula
   desc "Turn any webpage into a desktop app with Rust with ease"
   homepage "https://github.com/tw93/Pake"
-  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.1.1.tgz"
-  sha256 "ebeea895c247188a0817696818d1c0641c8a7440b84b4c7934504ffd9c6c4b56"
+  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.2.3.tgz"
+  sha256 "9eea35b9e7f65d201fb78691f08dbe82fbffb90d9616df5f61536ba6b14e5191"
   license "MIT"
-  revision 2
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
