@@ -1,15 +1,15 @@
 class Pake < Formula
   desc "Turn any webpage into a desktop app with Rust with ease"
   homepage "https://github.com/tw93/Pake"
-  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.2.6.tgz"
-  sha256 "204d2596544d13ba4eec956a6ca8a6991f5a298f821c51b338ce8196ab26dd93"
+  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.2.7.tgz"
+  sha256 "7cc46d2314ff8560128335b99155c0ed4e7bb504213b091042ea68eee3b26224"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any, arm64_sequoia: "2fc7c672c2b1576e1d69f1526192d2cc4137c739fe97dca5b2ac180899502a15"
-    sha256 cellar: :any, arm64_sonoma:  "20c283275d3ac4c3f0331456d586250ef7c4311333284741b6c454a5da2ef295"
-    sha256 cellar: :any, ventura:       "5987f371bae4dfc86d64459be719f863f4534623df09d7195f9b8f6fa9b62a74"
+    sha256 cellar: :any, arm64_sequoia: "45e327de2d7c30d848db60f22aa88213b6bf26d84df8a76007b8a73d8c399cd0"
+    sha256 cellar: :any, arm64_sonoma:  "e273f1525e831a4e36099b1a7faf45c765abaa244e1171b96512cccbebe8850b"
+    sha256 cellar: :any, ventura:       "55fd61710c2a4f29d318efba72fc98a2d39b47f0bab9142a5e4c6f142d2b6a12"
   end
 
   depends_on :macos
