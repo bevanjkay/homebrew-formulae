@@ -29,13 +29,6 @@ jobs:
         with:
           username: ${{ (github.event_name == 'workflow_dispatch' && github.actor) || 'bkdbot' }}
 
-      - name: Get list of autobump casks
-        id: autobump
-        run: echo "autobump_list=$(brew tap-info bevanjkay/formulae --json | jq -c -r '.[0]["formula_names"]|join(" ")')" >> "$GITHUB_OUTPUT"
-
       - name: Bump casks
-        uses: Homebrew/actions/bump-packages@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.BOT_TOKEN }}
-          formulae: ${{ github.event.inputs.formulae || steps.autobump.outputs.autobump_list }}
+        id: autobump
+        run: brew bump --open-pr --no-fork --tap bevanjkay/formulae
