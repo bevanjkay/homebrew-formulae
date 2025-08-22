@@ -7,9 +7,9 @@ class Pake < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any, arm64_sequoia: "c2b108f75411d15af0c40e9003f73e9bc7a390364b4e723b6c08152006f9e555"
-    sha256 cellar: :any, arm64_sonoma:  "2d30f93160c32a99c6ab5c418df213af246eecf6a9007af780fb97f2a884ca14"
-    sha256 cellar: :any, ventura:       "25114b601e5d0f0b88fdd1b304f1cd1e39f813796163b2f6942dc597684786c0"
+    sha256 cellar: :any, arm64_sequoia: "a1c1092ed0b6febb260ee0b4a1a68e68486ee81099769a8bd0cd0227ea2956c6"
+    sha256 cellar: :any, arm64_sonoma:  "da57b921ee20b4098f888b8c2c0ce910a6033ec636b76179075e987b3f01e013"
+    sha256 cellar: :any, ventura:       "6eebf8f8a4cf974d922b8cf6e1774cac97010d9d7d669cfc89a04156bb01bb45"
   end
 
   depends_on :macos
