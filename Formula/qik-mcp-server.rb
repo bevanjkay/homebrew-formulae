@@ -1,8 +1,8 @@
 class QikMcpServer < Formula
   desc "MCP server for Qik"
   homepage "https://gitlab.com/qikdevelopers/qik-mcp-server"
-  url "https://registry.npmjs.org/@qikdev/mcp/-/mcp-6.6.25.tgz"
-  sha256 "a83a8282c2881d1d5bb97891105e8608fccd58ad5477c5ace62eb34aefba223d"
+  url "https://registry.npmjs.org/@qikdev/mcp/-/mcp-6.6.28.tgz"
+  sha256 "330f44a3e98ad13428c588875f59dfb5d53c25212ea0739107d1eb88790fb257"
   license "MIT"
 
   bottle do
