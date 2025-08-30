@@ -9,6 +9,8 @@ class BBun < Formula
     regex(/bun-v?(\d+(?:\.\d+)+)/i)
   end
 
+  no_autobump! because: :incompatible_version_format
+
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
     sha256                               arm64_sequoia: "d17126f0ee0da4f3fc76c17687228b11e3e6d9bfd4613eb8b14a14054cfc981f"
