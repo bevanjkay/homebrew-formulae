@@ -32,3 +32,5 @@ jobs:
       - name: Bump casks
         id: autobump
         run: brew bump --open-pr --no-fork --tap bevanjkay/formulae
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.BOT_TOKEN }}
