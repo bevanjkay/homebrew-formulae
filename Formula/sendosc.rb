@@ -4,6 +4,7 @@ class Sendosc < Formula
   url "https://registry.npmjs.org/sendosc/-/sendosc-1.0.1.tgz"
   sha256 "5fb846a19c7881366969d8b91ffe8ed26d5062e9294a391dd96a245b8965f158"
   license "MIT"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
@@ -14,6 +15,9 @@ class Sendosc < Formula
   end
 
   on_ventura :or_newer do
+    depends_on "node"
+  end
+  on_linux do
     depends_on "node"
   end
 
