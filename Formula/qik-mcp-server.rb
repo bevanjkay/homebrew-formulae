@@ -4,6 +4,7 @@ class QikMcpServer < Formula
   url "https://registry.npmjs.org/@qikdev/mcp/-/mcp-6.6.45.tgz"
   sha256 "c9133c432c8779ab71579c81dfadab97784d0d669bad2e247dfa0351bdf86d46"
   license "MIT"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
