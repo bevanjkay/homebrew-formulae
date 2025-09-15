@@ -4,6 +4,7 @@ class Ghpr < Formula
   url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/ghpr-1.1.3.tar.gz"
   sha256 "30f32f23ca9c62c0abac8547b714d9e06bff7062a756f456d8c9331dfd79b6ba"
   license "MIT"
+  revision 1
 
   livecheck do
     url :stable
