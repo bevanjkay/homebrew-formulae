@@ -4,6 +4,7 @@ class Lctap < Formula
   url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/lctap-1.0.2.tar.gz"
   sha256 "4ae75b676bac25380bb9a296328401666915786867cebba7935ad5b5be3654d5"
   license "MIT"
+  revision 1
 
   livecheck do
     url :stable
