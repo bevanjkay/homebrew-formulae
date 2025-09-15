@@ -61,12 +61,16 @@ jobs:
     steps:
       - name: Prepare runner matrix
         id: runner-matrix
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
         with:
           script: |
-            runners = fs.readFileSync('./.github/runners.json');
-            matrix = JSON.parse(runners);
+            const fs = require('fs');
+
+            const runners = fs.readFileSync('./.github/runners.json');
+            let matrix = JSON.parse(runners);
+
             return matrix
+            
   bottle:
     needs: prepare
     strategy:
