@@ -9,6 +9,7 @@ class BibleImport < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1be567dcb88658ae106c01eccbe884404437d33f428ed5bf7a6a628fabeaa5f1"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "f81e83ec07cb07a5cc82699e91f5ec12fcabc3b06e3a6c7f648f10649c75010b"
     sha256 cellar: :any_skip_relocation, arm64_sonoma:  "68db4735957e0c4f0ceaef38b9eb0f13f0e7d265083739b4fe2575c153afda43"
     sha256 cellar: :any_skip_relocation, ventura:       "7e6ff5161f7f75ac8c00ca377576bdf1d6fb1392eac92bace598bc2390d8b6f7"
