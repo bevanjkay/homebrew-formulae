@@ -13,6 +13,7 @@ class Lctap < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9bd54dd8e733896371995361e2154d43d3e724f220ad54504853f7074f84d4d4"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "c3cb8a4889e832227c6d936683de9edd48e6128645b57dce83766c751df4df04"
     sha256 cellar: :any_skip_relocation, arm64_sonoma:  "302350de47bb3fa544b88e14563c18493102acba39f3e60fd42aee0ab442ddb2"
     sha256 cellar: :any_skip_relocation, ventura:       "c862002fd4308f628117fb209fec678923251fbfccb0035cd364ca337d214fb3"
