@@ -4,6 +4,7 @@ class LiveServer < Formula
   url "https://registry.npmjs.org/live-server/-/live-server-1.2.2.tgz"
   sha256 "0b2416905687b27ecf49b994485adce24080b0412f07f8c7b382b3723dfa40bc"
   license "MIT"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
