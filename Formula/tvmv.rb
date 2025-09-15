@@ -4,7 +4,7 @@ class Tvmv < Formula
   url "https://github.com/keithfancher/tvmv/archive/refs/tags/0.6.0.tar.gz"
   sha256 "c5fdfdf3da415ddeb1b60da112b6d80c677d42390a93b3185ecfc73536bfee33"
   license "GPL-3.0-or-later"
-  revision 1
+  revision 2
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
