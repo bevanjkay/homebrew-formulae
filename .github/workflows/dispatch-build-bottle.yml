@@ -83,7 +83,7 @@ jobs:
     strategy:
       matrix:
         include: ${{fromJson(needs.prepare.outputs.runners)}}
-    runs-on: ${{matrix.runner}}
+    runs-on: ${{matrix.runs-on}}
     container: ${{matrix.container}}
     timeout-minutes: ${{fromJson(github.event.inputs.timeout)}}
     permissions:
