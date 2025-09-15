@@ -17,6 +17,7 @@ class AdobeFontsRevealer < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0a43bd3d7cffcff38c8d9488e5e2a30053649d2fdc4745e9ec0f5077df8e5c41"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "21e496d58320cdb9ca76d250acc8e87f8b9dd4603ab1feec90885af58fd43202"
     sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c5bce1a034e8396d8bf23d22034bb05ce8587544c7361c90b73341566c7442cb"
     sha256 cellar: :any_skip_relocation, ventura:       "edd07abfb89bbcdd08b565eaf5fdd0d6d4d9fc96b4b93aa6308bc802256a3ae8"
