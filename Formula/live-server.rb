@@ -8,6 +8,7 @@ class LiveServer < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256                               arm64_tahoe:   "ed1751a695955e8369d35829d8c7192064340f6a637a5f2f0f590073cc81a0b1"
     sha256                               arm64_sequoia: "0c9adfdbf3e10a3c332f1974ef4f43f6050dc86512352b002b05205be40aaa71"
     sha256                               arm64_sonoma:  "4cad6b3ac0e5e919f7f1c46b247642f28d45700c5cc27f78dcc17bcc725656e1"
     sha256                               ventura:       "e64b32386f455d8e62180e7fe1071a45a0e1403e786f367e2163dfd284620034"
