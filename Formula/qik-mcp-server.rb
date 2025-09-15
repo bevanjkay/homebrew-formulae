@@ -8,6 +8,7 @@ class QikMcpServer < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b97f6ce036c83264c80412b5e55150a132965bb84229937d4ea64d2e7589e584"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "14a542275cdffb21cd51a692d763db95429bba1600b30112bb55700441e4c216"
     sha256 cellar: :any_skip_relocation, arm64_sonoma:  "24effc74823aa056dc1a9610b88558ed37dc5ba1ca612ee3db952bf9473f9dda"
     sha256 cellar: :any_skip_relocation, ventura:       "454f8ceb36fd82b1ae2bd3ddbe253635ad30dd9dfe43c2c85585ae2c7a1c2cd5"
