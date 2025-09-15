@@ -5,7 +5,7 @@ class AdobeFontsRevealer < Formula
       branch:   "main",
       revision: "70364ff58539081f000ded8fa70018628860397d"
   version "20240422-70364ff58539081f000ded8fa70018628860397d"
-  revision 1
+  revision 2
 
   livecheck do
     url "https://api.github.com/repos/Kalaschnik/adobe-fonts-revealer/commits/main"
