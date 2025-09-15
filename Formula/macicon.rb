@@ -4,6 +4,7 @@ class Macicon < Formula
   url "https://github.com/Qrivi/macicon/archive/refs/tags/1.0.1.tar.gz"
   sha256 "055b76ade0cfa8d898a2cf59f3cc2904b4640e67f35e8151f7b724b524a71a15"
   license "MIT"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
