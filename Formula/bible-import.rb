@@ -8,10 +8,11 @@ class BibleImport < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d056246bfb056b21609e6eca69ac015557f7962c3595a8649dd75d27170250b4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4885d56ac27165556894cec08a00c6d137db588ce5f0abaa6ad3820303133f58"
-    sha256 cellar: :any_skip_relocation, ventura:       "41dc3c23a99cf82b3a434050a7b94b5dd08254cba76929011bf0f8447cb41137"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2946de3193431f75061552f23f22d79499c26aec67f680e27105ea37f1b234a9"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f81e83ec07cb07a5cc82699e91f5ec12fcabc3b06e3a6c7f648f10649c75010b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "68db4735957e0c4f0ceaef38b9eb0f13f0e7d265083739b4fe2575c153afda43"
+    sha256 cellar: :any_skip_relocation, ventura:       "7e6ff5161f7f75ac8c00ca377576bdf1d6fb1392eac92bace598bc2390d8b6f7"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "093f68adf05fabd2265f152997faa9ae739aeac7ca12427282331545ca8d3093"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a74d33527a20e5b144f3e0a4ac58b10fe178c374039475a99850f61d8b3fbd42"
   end
 
   depends_on "certifi"
