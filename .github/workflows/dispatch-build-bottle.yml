@@ -68,33 +68,43 @@ jobs:
         with:
           script: |
             const fs = require('fs');
+            const wanted = process.env.DISPATCH_BUILD_BOTTLE_RUNNER;
+            const raw = fs.readFileSync('./.github/runners.json', 'utf8');
+            let matrix;
+            try {
+              matrix = JSON.parse(raw);
+            } catch (e) {
+              core.setFailed('Failed to parse .github/runners.json: ' + e.message);
+              return [];
+            }
 
-            const runners = fs.readFileSync('./.github/runners.json');
-            let matrix = JSON.parse(runners);
+            const filtered = matrix.filter(entry => entry.runs_on === wanted);
 
-            const filtered = matrix.filter(entry => {
-              return entry.name === process.env.DISPATCH_BUILD_BOTTLE_RUNNER;
-            });
+            if (filtered.length === 0) {
+              core.setFailed(`No runner entries matched runs_on == "${wanted}" in .github/runners.json`);
+            }
 
-            return filtered
+            // Return array for matrix.include consumption
+            return filtered;
 
   bottle:
     needs: prepare
     strategy:
       matrix:
-        include: ${{fromJson(needs.prepare.outputs.runners)}}
-    runs-on: ${{matrix.runner}}
-    container: ${{matrix.container}}
-    timeout-minutes: ${{fromJson(github.event.inputs.timeout)}}
+        include: ${{ fromJson(needs.prepare.outputs.runners) }}
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runs_on }}
+    container: ${{ matrix.container && matrix.container != '' && matrix.container || null }}
+    timeout-minutes: ${{ fromJson(github.event.inputs.timeout) }}
     permissions:
       contents: read
     defaults:
       run:
         shell: /bin/bash -xeuo pipefail {0}
-        working-directory: ${{matrix.workdir || github.workspace}}
+        working-directory: ${{ matrix.workdir || github.workspace }}
     env:
-      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      HOMEBREW_GITHUB_API_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       BOTTLES_DIR: ${{ matrix.workdir || github.workspace }}/bottles
     steps:
       - name: ${{inputs.formula}}
