@@ -8,6 +8,7 @@ class Sendosc < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4e70d7bca7671aa040a814b2c37d7cb7f83a6068d8330140aae0d25ff3250337"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "4bbc7b7e9022ecb566134555dbb0de76dcedb5505d93fc06b8c4f7a9fe8c086c"
     sha256 cellar: :any_skip_relocation, arm64_sonoma:  "cf05a42294a39248c4c5f9caaf4594d2547ef9c598035ae5ef24cf66f2a0ee8c"
     sha256 cellar: :any_skip_relocation, ventura:       "cfcdaff7230a6c43586b25e7a4e9e2ea3f65821e67b049dc61c07c65e578065e"
