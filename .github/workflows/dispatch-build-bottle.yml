@@ -76,7 +76,7 @@ jobs:
               return entry.name === process.env.DISPATCH_BUILD_BOTTLE_RUNNER;
             });
 
-            core.setOutput('runners', JSON.stringify({ include: filtered }));
+            return filtered
 
   bottle:
     needs: prepare
