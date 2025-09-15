@@ -4,6 +4,7 @@ class Bible < Formula
   url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/bible-1.0.6.tar.gz"
   sha256 "2fd8363793ad9896d2a9f1f489e11a1ae3d1e27c98c7c0ed3cd015cf668752d9"
   license "MIT"
+  revision 1
 
   livecheck do
     url :stable
