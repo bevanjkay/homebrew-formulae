@@ -4,6 +4,7 @@ class FluroSongs < Formula
   url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/fluro-songs-1.0.3.tar.gz"
   sha256 "14c85c795b93edb04288f170ea98de053a83829696d3bfc991a3e81cafdefea1"
   license "MIT"
+  revision 1
 
   livecheck do
     url :stable
