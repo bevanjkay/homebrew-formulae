@@ -13,6 +13,7 @@ class FluroSongs < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "21f76a1930ecdcd9e7a55a6d1958a41015431a7b194cb65b4a16138e3bcfeebc"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "b4c69735491bf6d7fb05d4134b803aff25aa21f84999e404307cead3877972c6"
     sha256 cellar: :any_skip_relocation, arm64_sonoma:  "fb7c887e8cd5e1a525298a53521dc49e5545411c026ffbfc7a67b46915d71766"
     sha256 cellar: :any_skip_relocation, ventura:       "fa873532784a3adc4bc00c2dac9e7f02294792864c173551333ab78673317afb"
