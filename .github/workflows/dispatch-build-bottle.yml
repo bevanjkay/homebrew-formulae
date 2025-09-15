@@ -76,7 +76,7 @@ jobs:
               return entry.runs_on === process.env.DISPATCH_BUILD_BOTTLE_RUNNER;
             });
 
-            return
+            return filtered
 
   bottle:
     needs: prepare
