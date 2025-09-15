@@ -3,18 +3,26 @@ class BibleImport < Formula
 
   desc "Import custom Bibles into ProPresenter"
   homepage "https://github.com/martijnlentink/propresenter-custom-bibles"
-  url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2025-01-02.tar.gz"
-  sha256 "7019f6cbd110ac7c0686ef6a9b653d2c917ef295861fe830f28dcd14714551e8"
+  url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2025-09-14.tar.gz"
+  sha256 "78f0a065edc287d754fb6b11c5118c21d2ff7406cdc06f8cbb17eeb1471b2857"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d056246bfb056b21609e6eca69ac015557f7962c3595a8649dd75d27170250b4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4885d56ac27165556894cec08a00c6d137db588ce5f0abaa6ad3820303133f58"
-    sha256 cellar: :any_skip_relocation, ventura:       "41dc3c23a99cf82b3a434050a7b94b5dd08254cba76929011bf0f8447cb41137"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2946de3193431f75061552f23f22d79499c26aec67f680e27105ea37f1b234a9"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f81e83ec07cb07a5cc82699e91f5ec12fcabc3b06e3a6c7f648f10649c75010b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "68db4735957e0c4f0ceaef38b9eb0f13f0e7d265083739b4fe2575c153afda43"
+    sha256 cellar: :any_skip_relocation, ventura:       "7e6ff5161f7f75ac8c00ca377576bdf1d6fb1392eac92bace598bc2390d8b6f7"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "093f68adf05fabd2265f152997faa9ae739aeac7ca12427282331545ca8d3093"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a74d33527a20e5b144f3e0a4ac58b10fe178c374039475a99850f61d8b3fbd42"
   end
 
-  depends_on "python@3.12"
+  depends_on "certifi"
+  depends_on "mpdecimal"
+  depends_on "openssl@3"
+  depends_on "python-packaging"
+  depends_on "python@3.13"
+  depends_on "readline"
+  depends_on "sqlite"
+  depends_on "xz"
   uses_from_macos "libxml2"
   uses_from_macos "libxslt"
   uses_from_macos "zlib"
@@ -24,19 +32,19 @@ class BibleImport < Formula
     sha256 "1b5afbb98f6c4dcadb2e2ae6ab9fa994bbb8c1d75f4fa96d340f9437ae454406"
   end
 
-  resource "certifi" do
-    url "https://files.pythonhosted.org/packages/c2/02/a95f2b11e207f68bc64d7aae9666fed2e2b3f307748d5123dffb72a1bbea/certifi-2024.7.4.tar.gz"
-    sha256 "5a1e7645bc0ec61a09e26c36f6106dd4cf40c6db3a1fb6352b0244e7fb057c7b"
-  end
-
   resource "charset-normalizer" do
     url "https://files.pythonhosted.org/packages/63/09/c1bc53dab74b1816a00d8d030de5bf98f724c52c1635e07681d312f20be8/charset-normalizer-3.3.2.tar.gz"
     sha256 "f30c3cb33b24454a82faecaf01b19c18562b1e89558fb6c56de4d9118a032fd5"
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz"
-    sha256 "ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de"
+    url "https://files.pythonhosted.org/packages/60/6c/8ca2efa64cf75a977a0d7fac081354553ebe483345c734fb6b6515d96bbc/click-8.2.1.tar.gz"
+    sha256 "27c491cc05d968d271d5a1db13e3b5a184636d9d930f148c50b038f0d0646202"
+  end
+
+  resource "lxml" do
+    url "https://files.pythonhosted.org/packages/8f/bd/f9d01fd4132d81c6f43ab01983caea69ec9614b913c290a26738431a015d/lxml-6.0.1.tar.gz"
+    sha256 "2b3a882ebf27dd026df3801a87cf49ff791336e0f94b0fad195db77e01240690"
   end
 
   resource "idna" do
@@ -49,24 +57,14 @@ class BibleImport < Formula
     sha256 "07ae9e15e8e4cd9a788013d81f5908b3609aa76f9b1421bae9c4d7606ec86a30"
   end
 
-  resource "lxml" do
-    url "https://files.pythonhosted.org/packages/2b/b4/bbccb250adbee490553b6a52712c46c20ea1ba533a643f1424b27ffc6845/lxml-5.1.0.tar.gz"
-    sha256 "3eea6ed6e6c918e468e693c41ef07f3c3acc310b70ddd9cc72d9ef84bc9564ca"
-  end
-
-  resource "packaging" do
-    url "https://files.pythonhosted.org/packages/51/65/50db4dda066951078f0a96cf12f4b9ada6e4b811516bf0262c0f4f7064d4/packaging-24.1.tar.gz"
-    sha256 "026ed72c8ed3fcce5bf8950572258698927fd1dbda10a5e981cdf0ac37f4f002"
-  end
-
   resource "prompt-toolkit" do
-    url "https://files.pythonhosted.org/packages/47/6d/0279b119dafc74c1220420028d490c4399b790fc1256998666e3a341879f/prompt_toolkit-3.0.47.tar.gz"
-    sha256 "1e1b29cb58080b1e69f207c893a1a7bf16d127a5c30c9d17a25a5d77792e5360"
+    url "https://files.pythonhosted.org/packages/a1/96/06e01a7b38dce6fe1db213e061a4602dd6032a8a97ef6c1a862537732421/prompt_toolkit-3.0.52.tar.gz"
+    sha256 "28cde192929c8e7321de85de1ddbe736f1375148b02f2e17edd840042b1be855"
   end
 
   resource "pyinstaller" do
-    url "https://files.pythonhosted.org/packages/83/5c/752340e73c195e21112eaec094d2d176705e4c18dc42a8357b68bb0dd693/pyinstaller-6.4.0.tar.gz"
-    sha256 "1bf608ed947b58614711275a7ff169289b32560dc97ec748ebd5fa8bdec80649"
+    url "https://files.pythonhosted.org/packages/94/94/1f62e95e4a28b64cfbb5b922ef3046f968b47170d37a1e1a029f56ac9cb4/pyinstaller-6.16.0.tar.gz"
+    sha256 "53559fe1e041a234f2b4dcc3288ea8bdd57f7cad8a6644e422c27bb407f3edef"
   end
 
   resource "pyinstaller-hooks-contrib" do
@@ -75,13 +73,13 @@ class BibleImport < Formula
   end
 
   resource "regex" do
-    url "https://files.pythonhosted.org/packages/3f/51/64256d0dc72816a4fe3779449627c69ec8fee5a5625fd60ba048f53b3478/regex-2024.7.24.tar.gz"
-    sha256 "9cfd009eed1a46b27c14039ad5bbc5e71b6367c5b2e6d5f5da0ea91600817506"
+    url "https://files.pythonhosted.org/packages/b2/5a/4c63457fbcaf19d138d72b2e9b39405954f98c0349b31c601bfcb151582c/regex-2025.9.1.tar.gz"
+    sha256 "88ac07b38d20b54d79e704e38aa3bd2c0f8027432164226bdee201a1c0c9c9ff"
   end
 
   resource "requests" do
-    url "https://files.pythonhosted.org/packages/63/70/2bf7780ad2d390a8d301ad0b550f1581eadbd9a20f896afe06353c2a2913/requests-2.32.3.tar.gz"
-    sha256 "55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760"
+    url "https://files.pythonhosted.org/packages/c9/74/b3ff8e6c8446842c3f5c837e9c3dfcfe2018ea6ecef224c710c85ef728f4/requests-2.32.5.tar.gz"
+    sha256 "dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf"
   end
 
   resource "setuptools" do
@@ -90,8 +88,8 @@ class BibleImport < Formula
   end
 
   resource "tqdm" do
-    url "https://files.pythonhosted.org/packages/58/83/6ba9844a41128c62e810fddddd72473201f3eacde02046066142a2d96cc5/tqdm-4.66.5.tar.gz"
-    sha256 "e1020aef2e5096702d8a025ac7d16b1577279c9d63f8375b63083e9a5f0fcbad"
+    url "https://files.pythonhosted.org/packages/a8/4b/29b4ef32e036bb34e4ab51796dd745cdba7ed47ad142a9f4a1eb8e0c744d/tqdm-4.67.1.tar.gz"
+    sha256 "f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2"
   end
 
   resource "urllib3" do
@@ -105,7 +103,11 @@ class BibleImport < Formula
   end
 
   def install
-    python3 = "python3.12"
+    inreplace "bible_import.spec",
+              "target_arch='universal2' if sys.platform == 'darwin' else None,",
+              "target_arch=None,"
+
+    python3 = "python3.13"
     venv = virtualenv_create(buildpath, python3)
     venv.pip_install resources
 
