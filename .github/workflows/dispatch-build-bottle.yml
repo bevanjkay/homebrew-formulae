@@ -68,27 +68,22 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const runners = JSON.parse(fs.readFileSync('./.github/runners.json', 'utf8'));
-            // Input can be a single name, multiple names (space/comma separated) or 'all'
-            const rawInput = process.env.DISPATCH_BUILD_BOTTLE_RUNNER || '';
-            const wantsAll = rawInput.trim().toLowerCase() === 'all';
-            const requested = wantsAll ? [] : rawInput.split(/[ ,\n\t]+/).map(s => s.trim()).filter(Boolean);
 
-            let selected = wantsAll ? runners : runners.filter(r => requested.includes(r.name));
+            const runners = fs.readFileSync('./.github/runners.json');
+            let matrix = JSON.parse(runners);
 
-            if (!selected.length) {
-              core.setFailed(`No runners matched input '${rawInput}'. Available: ${runners.map(r=>r.name).join(', ')}`);
-              return [];
-            }
+            const filtered = matrix.filter(entry => {
+              return entry.runs_on === process.env.DISPATCH_BUILD_BOTTLE_RUNNER;
+            });
 
-            return selected;
+            return
 
   bottle:
     needs: prepare
     strategy:
       matrix:
-        include: ${{ fromJson(needs.prepare.outputs.runners) }}
-    runs-on: ${{matrix.runs-on}}
+        include: ${{fromJson(needs.prepare.outputs.runners)}}
+    runs-on: ${{matrix.runs_on}}
     container: ${{matrix.container}}
     timeout-minutes: ${{fromJson(github.event.inputs.timeout)}}
     permissions:
