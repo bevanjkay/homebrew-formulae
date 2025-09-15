@@ -54,11 +54,14 @@ permissions:
 jobs:
   prepare:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/homebrew/ubuntu22.04:main
     outputs:
       runners: ${{steps.runner-matrix.outputs.result}}
     steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          persist-credentials: false
+          
       - name: Prepare runner matrix
         id: runner-matrix
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
@@ -70,7 +73,7 @@ jobs:
             let matrix = JSON.parse(runners);
 
             return matrix
-            
+
   bottle:
     needs: prepare
     strategy:
