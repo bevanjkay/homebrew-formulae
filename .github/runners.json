@@ -15,11 +15,6 @@
         "cleanup_before": true
     },
     {
-        "name": "macOS 13 (x86_64)",
-        "runs_on": "macos-13",
-        "cleanup_before": true
-    },
-    {
         "name": "Ubuntu 24.04 (x86_64)",
         "runs_on": "ubuntu-24.04",
         "cleanup_before": false,
