@@ -6,6 +6,11 @@ class BibleImport < Formula
   url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2025-09-14.tar.gz"
   sha256 "78f0a065edc287d754fb6b11c5118c21d2ff7406cdc06f8cbb17eeb1471b2857"
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "f81e83ec07cb07a5cc82699e91f5ec12fcabc3b06e3a6c7f648f10649c75010b"
