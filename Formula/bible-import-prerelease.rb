@@ -1,29 +1,26 @@
-class BibleImport < Formula
+class BibleImportPrerelease < Formula
   include Language::Python::Virtualenv
 
   desc "Import custom Bibles into ProPresenter"
   homepage "https://github.com/martijnlentink/propresenter-custom-bibles"
-  url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2025-09-14.tar.gz"
-  sha256 "78f0a065edc287d754fb6b11c5118c21d2ff7406cdc06f8cbb17eeb1471b2857"
-
-  livecheck do
-    url :stable
-    strategy :github_latest
-    regex(/^v?(\d+(?:[.-]\d+)+)$/i)
-  end
+  url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2025-09-18-pre.tar.gz"
+  version "2025-09-18-pre"
+  sha256 "716814857d843a562cb6bc849c800893f71d27cd381d3bab292302fd3d09e25f"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c3a5f0c7d44e290a856925cf67b801dbcbf8d7da773b60dfe8d7f849af08fa14"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3921f558817c960b7b01274564a705cb79e3f77bfbb15296de213eda84457d35"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5619c7a29f459441fcd93dcc008cb79d53c8733820f2cfc6ebd782361c5b3311"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "05c42351f65ce5a36cc11466f0529c372a7b00ee503da601bb36eb5f8ca65926"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3909fea5c4be61651b95612541ba4a2119a6fe07c6d134ca83f2a8e179859945"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "819cea80c83b6f36b6f66972dd85ef19b2821cc140ff717baecb5860a83bdd08"
   end
 
   depends_on "certifi"
+  depends_on :macos
+  depends_on :macos
   depends_on "mpdecimal"
   depends_on "openssl@3"
   depends_on "python-packaging"
+  depends_on "python-tk@3.13"
   depends_on "python@3.13"
   depends_on "readline"
   depends_on "sqlite"
@@ -31,8 +28,8 @@ class BibleImport < Formula
   uses_from_macos "libxml2"
   uses_from_macos "libxslt"
   uses_from_macos "zlib"
+  conflicts_with "bible-import", because: "both install `bible-import` binaries"
 
-  conflicts_with "bible-import-prerelease", because: "both install `bible-import` binaries"
   resource "altgraph" do
     url "https://files.pythonhosted.org/packages/de/a8/7145824cf0b9e3c28046520480f207df47e927df83aa9555fb47f8505922/altgraph-0.17.4.tar.gz"
     sha256 "1b5afbb98f6c4dcadb2e2ae6ab9fa994bbb8c1d75f4fa96d340f9437ae454406"
@@ -113,6 +110,14 @@ class BibleImport < Formula
               "target_arch='universal2' if sys.platform == 'darwin' else None,",
               "target_arch=None,"
 
+    inreplace "propresenter_bible/ui/prompting.py",
+              "lang_version[\"name\"]",
+              "lang_version.name"
+
+    inreplace "propresenter_bible/ui/prompting.py",
+              "lang_version[\"local_name\"]",
+              "lang_version.local_name"
+
     python3 = "python3.13"
     venv = virtualenv_create(buildpath, python3)
     venv.pip_install resources
@@ -125,7 +130,7 @@ class BibleImport < Formula
     # The application creates a download folder in the current working directory
     # after initialisation. This test checks if the folder is created.
     fork do
-      system bin/"bible-import"
+      system bin/"bible-import", "import-bible"
     end
     sleep 20
     assert_path_exists testpath/"download"

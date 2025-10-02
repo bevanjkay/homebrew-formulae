@@ -75,7 +75,7 @@ jobs:
             console.log(labels);
             if (labels.length) {
               if (labels.includes("macos only")) {
-                matrix = matrix.filter(runner => runner.runs_on !== "ubuntu-22.04");
+                matrix = matrix.filter(runner => !runner.runs_on.includes("ubuntu"));
               }
             }
 
