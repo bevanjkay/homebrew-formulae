@@ -118,6 +118,11 @@ class BibleImportPrerelease < Formula
               "lang_version[\"local_name\"]",
               "lang_version.local_name"
 
+    inreplace "propresenter_bible/install/installer.py",
+              "        return Path('/Library/Application Support/RenewedVision/RVBibles/v2/')",
+              "        import os
+        return Path(os.path.expanduser('~')) / 'Library/Application Support/RenewedVision/RVBibles/v2/'"
+
     python3 = "python3.13"
     venv = virtualenv_create(buildpath, python3)
     venv.pip_install resources
