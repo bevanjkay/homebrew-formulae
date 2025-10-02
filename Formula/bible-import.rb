@@ -14,11 +14,10 @@ class BibleImport < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f81e83ec07cb07a5cc82699e91f5ec12fcabc3b06e3a6c7f648f10649c75010b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "68db4735957e0c4f0ceaef38b9eb0f13f0e7d265083739b4fe2575c153afda43"
-    sha256 cellar: :any_skip_relocation, ventura:       "7e6ff5161f7f75ac8c00ca377576bdf1d6fb1392eac92bace598bc2390d8b6f7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "093f68adf05fabd2265f152997faa9ae739aeac7ca12427282331545ca8d3093"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a74d33527a20e5b144f3e0a4ac58b10fe178c374039475a99850f61d8b3fbd42"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c3a5f0c7d44e290a856925cf67b801dbcbf8d7da773b60dfe8d7f849af08fa14"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3921f558817c960b7b01274564a705cb79e3f77bfbb15296de213eda84457d35"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5619c7a29f459441fcd93dcc008cb79d53c8733820f2cfc6ebd782361c5b3311"
   end
 
   depends_on "certifi"
