@@ -3,8 +3,8 @@ class BibleImport < Formula
 
   desc "Import custom Bibles into ProPresenter"
   homepage "https://github.com/martijnlentink/propresenter-custom-bibles"
-  url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2025-09-14.tar.gz"
-  sha256 "78f0a065edc287d754fb6b11c5118c21d2ff7406cdc06f8cbb17eeb1471b2857"
+  url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2025-10-05.tar.gz"
+  sha256 "9164e61ceaceec378e202396f68e7ddf9d51dbd0a78acfb9bf107dd63a023617"
 
   livecheck do
     url :stable
@@ -14,10 +14,11 @@ class BibleImport < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c3a5f0c7d44e290a856925cf67b801dbcbf8d7da773b60dfe8d7f849af08fa14"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3921f558817c960b7b01274564a705cb79e3f77bfbb15296de213eda84457d35"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5619c7a29f459441fcd93dcc008cb79d53c8733820f2cfc6ebd782361c5b3311"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fdc54539b297839e696caa28b2a299241c2494e065be1481e2e7fadcd6915203"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "37c50fa8f4c0bade60bfe39989bb241db70139be73308922059dce291217f52f"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "66c9f24f21f2767d637b01bbcb1f122b9dabcef095bcb54470e6b515a70b8f0d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "304440f89e0a8aab93482bbedd1250ef2cc29ef8c32f7264643a16817feac98c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5bb19e89cbdb204cc4c592d3057b7385d82f47716dfb146b86005dc8ccc81e66"
   end
 
   depends_on "certifi"
