@@ -5,6 +5,7 @@ class BibleImport < Formula
   homepage "https://github.com/martijnlentink/propresenter-custom-bibles"
   url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2025-10-05.tar.gz"
   sha256 "9164e61ceaceec378e202396f68e7ddf9d51dbd0a78acfb9bf107dd63a023617"
+  revision 1
 
   livecheck do
     url :stable
@@ -21,14 +22,10 @@ class BibleImport < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:  "5bb19e89cbdb204cc4c592d3057b7385d82f47716dfb146b86005dc8ccc81e66"
   end
 
-  depends_on "certifi"
-  depends_on "mpdecimal"
+  depends_on "certifi" => :no_linkage
   depends_on "openssl@3"
-  depends_on "python-packaging"
-  depends_on "python@3.13"
-  depends_on "readline"
-  depends_on "sqlite"
-  depends_on "xz"
+  depends_on "python-packaging" => :no_linkage
+  depends_on "python@3.14"
   uses_from_macos "libxml2"
   uses_from_macos "libxslt"
   uses_from_macos "zlib"
@@ -114,7 +111,7 @@ class BibleImport < Formula
               "target_arch='universal2' if sys.platform == 'darwin' else None,",
               "target_arch=None,"
 
-    python3 = "python3.13"
+    python3 = "python3.14"
     venv = virtualenv_create(buildpath, python3)
     venv.pip_install resources
 
