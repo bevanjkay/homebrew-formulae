@@ -5,6 +5,7 @@ class BibleImport < Formula
   homepage "https://github.com/martijnlentink/propresenter-custom-bibles"
   url "https://github.com/martijnlentink/propresenter-custom-bibles/archive/refs/tags/2025-10-05.tar.gz"
   sha256 "9164e61ceaceec378e202396f68e7ddf9d51dbd0a78acfb9bf107dd63a023617"
+  revision 1
 
   livecheck do
     url :stable
@@ -14,21 +15,17 @@ class BibleImport < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fdc54539b297839e696caa28b2a299241c2494e065be1481e2e7fadcd6915203"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "37c50fa8f4c0bade60bfe39989bb241db70139be73308922059dce291217f52f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "66c9f24f21f2767d637b01bbcb1f122b9dabcef095bcb54470e6b515a70b8f0d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "304440f89e0a8aab93482bbedd1250ef2cc29ef8c32f7264643a16817feac98c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5bb19e89cbdb204cc4c592d3057b7385d82f47716dfb146b86005dc8ccc81e66"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a1771ae0b42f74cac69ccb3fcf696f88d460fb269a066ac2797e4ff4185bae4b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a6ec095abce4624dbd6585c0021ad0bf227e25244849101222813ef83961ddd1"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b076ff39dbadf964c7af80994955a8e679f1a7f8b288057632af188f9ce334b5"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "4921f3b34c3d43c05863dd973ca5e86aec88a40b5b9e50a32caa202950476712"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8c993d7d1777efb4b4411b6a2cb6c30fdb8572efc20d6a3deb960b0d9d7dde09"
   end
 
-  depends_on "certifi"
-  depends_on "mpdecimal"
+  depends_on "certifi" => :no_linkage
   depends_on "openssl@3"
-  depends_on "python-packaging"
-  depends_on "python@3.13"
-  depends_on "readline"
-  depends_on "sqlite"
-  depends_on "xz"
+  depends_on "python-packaging" => :no_linkage
+  depends_on "python@3.14"
   uses_from_macos "libxml2"
   uses_from_macos "libxslt"
   uses_from_macos "zlib"
@@ -114,7 +111,7 @@ class BibleImport < Formula
               "target_arch='universal2' if sys.platform == 'darwin' else None,",
               "target_arch=None,"
 
-    python3 = "python3.13"
+    python3 = "python3.14"
     venv = virtualenv_create(buildpath, python3)
     venv.pip_install resources
 
