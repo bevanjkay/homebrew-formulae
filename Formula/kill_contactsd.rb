@@ -14,6 +14,13 @@ class KillContactsd < Formula
     end
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8a7a53ffe4238f8d8c389cbf039c224946259f7b018d58e38b847ea0a9bf5961"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8a30be4ad614895a6504727cf3ae82c96194e928191b44cb2a767729ee3c61ad"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e17b1322a20e49633cc8e14c9051ebeb889646b987edfd0b08a86f9178fd54f8"
+  end
+
   depends_on :macos
 
   patch do
