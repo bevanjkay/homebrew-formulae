@@ -3,8 +3,8 @@ class KillContactsd < Formula
   homepage "https://github.com/SteveC/kill_contactsd"
   url "https://github.com/SteveC/kill_contactsd.git",
       branch:   "main",
-      revision: "5a3076ddd01d2659b51bff304f2afacc9caf6221"
-  version "20250411-5a3076ddd01d2659b51bff304f2afacc9caf6221"
+      revision: "bc2705dc3088cf6547c9d1830a6bda98df15ac69"
+  version "20251112-bc2705dc3088cf6547c9d1830a6bda98df15ac69"
 
   livecheck do
     url "https://api.github.com/repos/SteveC/kill_contactsd/commits/main"
@@ -22,11 +22,6 @@ class KillContactsd < Formula
   end
 
   depends_on :macos
-
-  patch do
-    url "https://github.com/bevanjkay/kill_contactsd/commit/90ac583f38fa58f1f17068ea23d21e154451a61b.patch?full_index=1"
-    sha256 "a4b2560a4f1a4d2572a01459bf17ef55a59d6be01bcd24ac852c774c2addbc56"
-  end
 
   def install
     bin.install "kill_contactsd.sh" => "kill_contactsd"
