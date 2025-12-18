@@ -1,8 +1,8 @@
 class Pake < Formula
   desc "Turn any webpage into a desktop app with Rust with ease"
   homepage "https://github.com/tw93/Pake"
-  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.6.3.tgz"
-  sha256 "8c48d1d35e51e2ec762042b4c219b3a07a70923d5d06284fac23d783df52bf88"
+  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.6.4.tgz"
+  sha256 "65bf4f4386f216ed7648ad74c7a4d4a6360ec5815d89fbc0ac9b856c3ab2b12d"
   license "MIT"
 
   bottle do
@@ -14,6 +14,7 @@ class Pake < Formula
 
   depends_on :macos
   depends_on "node"
+  depends_on "pnpm"
   depends_on "rust"
 
   def install
