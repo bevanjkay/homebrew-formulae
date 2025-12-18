@@ -1,10 +1,14 @@
 class Pake < Formula
   desc "Turn any webpage into a desktop app with Rust with ease"
   homepage "https://github.com/tw93/Pake"
-  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.6.4.tgz"
-  sha256 "65bf4f4386f216ed7648ad74c7a4d4a6360ec5815d89fbc0ac9b856c3ab2b12d"
+  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.6.0.tgz"
+  sha256 "873d2b159226ac7883f8bea324fece15b5f5fb747c21e327d51c58b2646792aa"
   license "MIT"
 
+  livecheck do
+    url :homepage
+    strategy :github_latest
+  end
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
     sha256 cellar: :any, arm64_tahoe:   "63fcd0f90d1acf4f2ed032a8d5ba8c96d838e14e995ada85fa82f0f195061fe4"
@@ -20,6 +24,9 @@ class Pake < Formula
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink Dir["#{libexec}/bin/*"]
+
+    # build an app to warmup pake's cache
+    system bin/"pake", "https://google.com", "--name", "test"
 
     # Delete native binaries installed by npm, as we dont support `musl` for a `libc` implementation
     node_modules = libexec/"lib/node_modules/pake-cli/node_modules"
