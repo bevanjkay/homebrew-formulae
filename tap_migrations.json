@@ -1,4 +1,5 @@
 {
   "mas-legacy": "bevanjkay/tap/mas-static",
+  "pake": "homebrew/core",
   "sevenzip-legacy": "bevanjkay/tap/sevenzip-static"
 }
