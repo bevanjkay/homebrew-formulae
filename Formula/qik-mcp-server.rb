@@ -1,17 +1,17 @@
 class QikMcpServer < Formula
   desc "MCP server for Qik"
   homepage "https://gitlab.com/qikdevelopers/qik-mcp-server"
-  url "https://registry.npmjs.org/@qikdev/mcp/-/mcp-6.6.48.tgz"
-  sha256 "2c7113e0889cc95dd686848ce56261a8f043d8623a0f83cbb31cefa2a6c53afd"
+  url "https://registry.npmjs.org/@qikdev/mcp/-/mcp-6.7.2.tgz"
+  sha256 "abcadb07ef2aec94126e80762fac664d8caf59b5bed663713a8ed142b619d64e"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "06a54cbd8cffd39ce8818d3a147b9f6c318fa3e306e66a96a732aedefa855a77"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d943561fdf451f849b0a6d3eea58b76b450e5b1a04e4226fa42c8e7cc58bb0ea"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7e533555bb19cc0ea5dfd5f14218245c891febdabb5752234330fcefd8418805"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "25f2d158a094c0f69e3bfa9d17222c676d2d307574825fbf2721fd2d10cfe44f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ebd1afc2cbcf8530fd5b2426aba44c1c36087306e9604c56650a557cf62badd3"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7b497334fe121a9f789f25d361d050159eee48c7c7e3d6b5bb3f4bbbde8bf0d9"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0e8ca90bfc03dce39dfaca9a8f1636354b4f882b01750fbb97e6d096f24801ff"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "18bf1d685f84360fdf17a15025cd9cefddcc7bb52abaf0df83c2ffc7d25d397b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "70a149d93f58d1517ca0d2f1865f8bf5d750e18ea5c882b991ec3febdb251a56"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cf96c92fc72afe5e0ea6b23acd8c365ab8da508aa2a824a3b64bdb1ab763e76b"
   end
 
   depends_on "node"
