@@ -1,8 +1,8 @@
 class SkillsNpm < Formula
   desc "Install agent skills from npm"
   homepage "https://github.com/antfu/skills-npm"
-  url "https://registry.npmjs.org/skills-npm/-/skills-npm-0.0.3.tgz"
-  sha256 "475a4d86ae0cb29c3923a48bcb779cffb6120d25d81f9ceec68ccdbc14c05083"
+  url "https://registry.npmjs.org/skills-npm/-/skills-npm-0.1.0.tgz"
+  sha256 "87163e835215fdb2d751eb75557700c887c004482f5ec754a79bcf008d0d687c"
   license "MIT"
   head "https://github.com/antfu/skills-npm.git", branch: "main"
 
@@ -23,6 +23,7 @@ class SkillsNpm < Formula
   end
 
   test do
+    ENV["NO_COLOR"] = "1"
     assert_match version.to_s, shell_output("#{bin}/skills-npm --version")
     assert_match "Scanned 0 packages, no skills found", shell_output(bin/"skills-npm")
   end
