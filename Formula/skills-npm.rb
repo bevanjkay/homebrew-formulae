@@ -8,11 +8,11 @@ class SkillsNpm < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "156d86b9d0e792671ede6160e4561fcec3eeea4b759e5a91bda51f5620ac76ca"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c6a1a8ece3c40b687b98e920e22afbdf320b225f41246765edda49555aee79c1"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1c9f5b736e4e973fe85b6d2c8b5990a1e5ad455c2602f4ff89f1fae11c5286e7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f924ab8f606316f2d92bbc98e9277c237a876906dfd29da9f689b27704ff2721"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dffa724cee16cb401e3d56f36eef50a73160f74f3bdee4f6d1c611e3665d0e41"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e2ff30604a05d80a719d1de7caccc522bd5dec50139be4905287f4ab7ead041b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "40911db99a43efe97edb668bfdd62ffe0aeabe0ab1e45a9f1b4b6299a9b1386f"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d75cbc77463641414304cd2181b0c009a58cd4c8b89a2a8ab3e18ed26517041a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f43beb27de905d93f969e9098d113e7cb4f33220cd90af3230814305a8e7f053"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8db6975e58c7528e1a4418b2c742e387602aa9d3e991cb679e27d50e8f325776"
   end
 
   depends_on "node"
