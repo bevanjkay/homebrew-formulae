@@ -5,5 +5,5 @@ rules:
         Homebrew/actions/*: ref-pin
   dangerous-triggers:
     ignore:
-      - triage.yml:3
-      - publish.yml:3
+      - publish.yml
+      - triage.yml
