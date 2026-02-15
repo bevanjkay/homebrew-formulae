@@ -1,17 +1,17 @@
 class SurgeCli < Formula
   desc "CLI client for the surge.sh hosted service"
   homepage "https://surge.sh/"
-  url "https://registry.npmjs.org/surge/-/surge-0.24.6.tgz"
-  sha256 "becf2678a30ad17c8384c36382f5c62e27ce73a9ba184c8664cea4ee40053ee0"
+  url "https://registry.npmjs.org/surge/-/surge-0.25.0.tgz"
+  sha256 "ca6e9660386d23eb15eba669138be8032f22fcd441371cc97693022e87d374aa"
   license "ISC"
-  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "26784fe901af576fcea67964d49fc8ad26f5474d7c4a16122023a543d96760d5"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e01d6311d2fe5da6d4a6b0e9dd30d7c1cba818ed98db9007359eff8eab524ea4"
-    sha256 cellar: :any_skip_relocation, ventura:       "4e1af24e3bb5025af7d30e40b471bd58997ea0a89779cadcb2a0dc74a867c13d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "20cdf200aea0d63a194fa9517516dd644aae273c5f77a9f566125dace4ebbe9e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ab782825252f1195fbd17c608c7ba9f6ff4de2bfab35718056412230a3a2f2f8"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f86b11f71cc0983c2b91f5a91a32f818b4c17676127d2c17e3faa498d09e8d72"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "90cf73a06838a1cd4dca79a34abd8f086f7f2f72b9d16dbf84a83a6dad026e4d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "2ef4b068b95e8dfe4b6901d068453f7eb536cc8e8492c05f5dc27bc56579c5d3"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "53ddae88c97341cef39e7011ad7c65381ca5c949a65a6ad3231a2cedc1fe7266"
   end
 
   depends_on "node"
