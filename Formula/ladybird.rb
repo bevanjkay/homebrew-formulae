@@ -46,11 +46,10 @@ class Ladybird < Formula
 
   def install
     # Create a vcpkg overlay port for libyuv to fix build failures on macOS.
-    # Apple's clang does not support SVE in userspace or the i8mm march extension
-    # for macOS arm64 targets, causing the yuv_sve and yuv_neon64 targets to fail.
-    # This portfile applies the same changes as vcpkg's cmake.diff patch (via
-    # vcpkg_replace_string rather than a patch file) and wraps the SVE/i8mm targets
-    # in if(NOT APPLE) guards matching the existing LIBYUV_DISABLE_SME pattern.
+    # Apple's clang does not support the +i8mm march extension or SVE in userspace
+    # on arm64-apple-macos. The yuv_neon64 target is kept but compiled without the
+    # i8mm flag; the yuv_sve target is omitted entirely. This portfile applies the
+    # same changes as vcpkg's cmake.diff patch via vcpkg_replace_string.
     overlay = buildpath/"Meta/CMake/vcpkg/overlay-ports/libyuv"
     overlay.mkpath
 
@@ -118,8 +117,8 @@ class Ladybird < Formula
           ""
       )
 
-      # macOS fix: disable SVE and i8mm kernels; Apple's clang does not support SVE
-      # in userspace or the +i8mm march extension for arm64-apple-macos targets.
+      # macOS fix: build NEON kernels without the i8mm march flag; Apple's clang
+      # does not support the +i8mm extension or SVE in userspace on arm64-apple-macos.
       vcpkg_replace_string("${SOURCE_PATH}/CMakeLists.txt"
           [=[    # Enable AArch64 Neon dot-product and i8mm kernels.
           add_library(${ly_lib_name}_neon64 OBJECT
@@ -135,16 +134,18 @@ class Ladybird < Formula
             ${ly_src_dir}/row_sve.cc)
           target_compile_options(${ly_lib_name}_sve PRIVATE -march=armv8.5-a+i8mm+sve2)
           list(APPEND ly_lib_parts $<TARGET_OBJECTS:${ly_lib_name}_sve>)]=]
-          [=[    if(NOT APPLE)
-            # Enable AArch64 Neon dot-product and i8mm kernels.
-            add_library(${ly_lib_name}_neon64 OBJECT
-              ${ly_src_dir}/compare_neon64.cc
-              ${ly_src_dir}/rotate_neon64.cc
-              ${ly_src_dir}/row_neon64.cc
-              ${ly_src_dir}/scale_neon64.cc)
+          [=[    # Enable AArch64 Neon dot-product and i8mm kernels.
+          add_library(${ly_lib_name}_neon64 OBJECT
+            ${ly_src_dir}/compare_neon64.cc
+            ${ly_src_dir}/rotate_neon64.cc
+            ${ly_src_dir}/row_neon64.cc
+            ${ly_src_dir}/scale_neon64.cc)
+          if(NOT APPLE)
             target_compile_options(${ly_lib_name}_neon64 PRIVATE -march=armv8.2-a+dotprod+i8mm)
-            list(APPEND ly_lib_parts $<TARGET_OBJECTS:${ly_lib_name}_neon64>)
+          endif()
+          list(APPEND ly_lib_parts $<TARGET_OBJECTS:${ly_lib_name}_neon64>)
 
+          if(NOT APPLE)
             # Enable AArch64 SVE kernels.
             add_library(${ly_lib_name}_sve OBJECT
               ${ly_src_dir}/row_sve.cc)
