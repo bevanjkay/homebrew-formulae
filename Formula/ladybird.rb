@@ -25,6 +25,10 @@ class Ladybird < Formula
   depends_on "ccache" => :build
   depends_on "cmake" => :build
   depends_on "libtool" => :build
+  depends_on "nasm" => :build
+  depends_on "ninja" => :build
+  depends_on "pkgconf" => :build
+  depends_on xcode: ["15.0", :build]
   depends_on "ffmpeg"
   depends_on "icu4c"
   depends_on "jpeg-turbo"
@@ -32,15 +36,11 @@ class Ladybird < Formula
   depends_on "libavif"
   depends_on "libpng"
   depends_on "libxml2"
+  depends_on :macos
   depends_on "openssl@3"
   depends_on "sqlite"
   depends_on "webp"
   depends_on "woff2"
-  depends_on "nasm" => :build
-  depends_on "ninja" => :build
-  depends_on "pkgconf" => :build
-  depends_on xcode: ["15.0", :build]
-  depends_on :macos
 
   allow_network_access! :build
 
@@ -197,7 +197,7 @@ class Ladybird < Formula
       vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
     EOS
 
-    (overlay/"vcpkg.json").write <<~'EOS'
+    (overlay/"vcpkg.json").write <<~EOS
       {
         "name": "libyuv",
         "version": "1916",
@@ -228,7 +228,7 @@ class Ladybird < Formula
       }
     EOS
 
-    (overlay/"libyuv-config.cmake").write <<~'EOS'
+    (overlay/"libyuv-config.cmake").write <<~EOS
       include(CMakeFindDependencyMacro)
       find_dependency(JPEG)
 
@@ -236,7 +236,7 @@ class Ladybird < Formula
       include("${CMAKE_CURRENT_LIST_DIR}/libyuv-targets.cmake")
     EOS
 
-    (overlay/"usage").write <<~'EOS'
+    (overlay/"usage").write <<~EOS
       libyuv provides CMake targets:
 
         # Unofficial config package and target from vcpkg
