@@ -143,10 +143,11 @@ class Ladybird < Formula
           if(NOT APPLE)
             target_compile_options(${ly_lib_name}_neon64 PRIVATE -march=armv8.2-a+dotprod+i8mm)
           else()
-            # Apple's clang predefines __ARM_FEATURE_I8MM from hardware capability,
-            # enabling i8mm inline asm in row_neon64.cc, but the assembler rejects
-            # usdot without an explicit +i8mm march flag. Undefine it to suppress.
-            target_compile_options(${ly_lib_name}_neon64 PRIVATE -U__ARM_FEATURE_I8MM)
+            # Apple's clang predefines __ARM_FEATURE_DOTPROD and __ARM_FEATURE_I8MM
+            # based on hardware capability. libyuv gates usdot (i8mm) inline asm on
+            # __ARM_FEATURE_DOTPROD, but the assembler rejects it without an explicit
+            # +i8mm march flag. Undefine both to suppress the i8mm/dotprod code paths.
+            target_compile_options(${ly_lib_name}_neon64 PRIVATE -U__ARM_FEATURE_DOTPROD -U__ARM_FEATURE_I8MM)
           endif()
           list(APPEND ly_lib_parts $<TARGET_OBJECTS:${ly_lib_name}_neon64>)
 
