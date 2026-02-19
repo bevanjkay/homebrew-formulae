@@ -31,6 +31,8 @@ class Ladybird < Formula
   depends_on xcode: ["15.0", :build]
   depends_on :macos
 
+  allow_network_access! :build
+
   def install
     ENV["LADYBIRD_SOURCE_DIR"] = buildpath.to_s
 
