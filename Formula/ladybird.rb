@@ -45,6 +45,8 @@ class Ladybird < Formula
   allow_network_access! :build
 
   def install
+    require "macho"
+
     # Create a vcpkg overlay port for libyuv to fix build failures on macOS.
     # Apple's clang does not support the +i8mm march extension or SVE in userspace
     # on arm64-apple-macos. The yuv_neon64 target is kept but compiled without the
@@ -257,6 +259,36 @@ class Ladybird < Formula
            "-j", ENV.make_jobs.to_s
 
     prefix.install "Build/release/bin/Ladybird.app"
+
+    app = prefix/"Ladybird.app"
+    macos_dir = app/"Contents/MacOS"
+    frameworks_dir = app/"Contents/Frameworks"
+
+    macho_file = lambda do |path|
+      File.file?(path) && Utils.safe_popen_read("file", path).include?("Mach-O")
+    end
+
+    # Ensure app binaries can resolve bundled Frameworks at runtime.
+    Dir[macos_dir/"*"].each do |binary|
+      next unless macho_file.call(binary)
+      next if Utils.safe_popen_read("otool", "-l", binary).include?("@executable_path/../Frameworks")
+
+      MachO::Tools.add_rpath(binary, "@executable_path/../Frameworks")
+    end
+
+    # Library install names should resolve relative to the loading library.
+    Dir[frameworks_dir/"**/*"].each do |library|
+      next unless macho_file.call(library)
+
+      linked_libs = Utils.safe_popen_read("otool", "-L", library)
+      next unless linked_libs.include?("@executable_path/../Frameworks/libcrypto.3.dylib")
+
+      MachO::Tools.change_install_name(
+        library,
+        "@executable_path/../Frameworks/libcrypto.3.dylib",
+        "@loader_path/libcrypto.3.dylib",
+      )
+    end
 
     (bin/"ladybird").write <<~EOS
       #!/bin/bash
