@@ -143,11 +143,11 @@ class Ladybird < Formula
           if(NOT APPLE)
             target_compile_options(${ly_lib_name}_neon64 PRIVATE -march=armv8.2-a+dotprod+i8mm)
           else()
-            # The usdot (i8mm) inline asm in row_neon64.cc is compiled unconditionally
-            # on aarch64; there is no preprocessor guard to suppress it. Apple's clang
-            # driver rejects -march=armv8.2-a+dotprod+i8mm, but we can enable the
-            # i8mm target feature directly via -Xclang, bypassing the driver check.
-            target_compile_options(${ly_lib_name}_neon64 PRIVATE -Xclang -target-feature -Xclang +i8mm)
+            # Keep each -Xclang pair grouped; otherwise CMake may de-duplicate
+            # repeated -Xclang entries and leave "+i8mm" as a stray argument.
+            target_compile_options(${ly_lib_name}_neon64 PRIVATE
+              "SHELL:-Xclang -target-feature -Xclang +dotprod"
+              "SHELL:-Xclang -target-feature -Xclang +i8mm")
           endif()
           list(APPEND ly_lib_parts $<TARGET_OBJECTS:${ly_lib_name}_neon64>)
 
