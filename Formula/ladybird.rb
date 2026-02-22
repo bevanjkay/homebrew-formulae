@@ -15,6 +15,12 @@ class Ladybird < Formula
     end
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any, arm64_tahoe:   "cf41eb59bd00c1e05ecb5a3c444161b7480ef79e4b9084b0a3c57d88a22175ad"
+    sha256 cellar: :any, arm64_sequoia: "79dda94365b007385009fd7f73cade30e7debbe01d7f4d08e445c97dfe5e70be"
+  end
+
   # This build downloads dependencies via vcpkg during cmake configuration.
   # Network access is required. If the build fails with network errors, retry with:
   #   HOMEBREW_NO_SANDBOX=1 brew install bevanjkay/formulae/ladybird
