@@ -36,8 +36,8 @@ class Ladybird < Formula
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
   depends_on xcode: ["15.0", :build]
-  depends_on "ffmpeg"
   depends_on "curl"
+  depends_on "ffmpeg"
   depends_on "icu4c"
   depends_on "jpeg-turbo"
   depends_on "jpeg-xl"
