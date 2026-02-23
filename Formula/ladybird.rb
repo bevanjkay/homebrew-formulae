@@ -4,6 +4,7 @@ class Ladybird < Formula
   url "https://github.com/LadybirdBrowser/ladybird.git",
       revision: "ad92622cf496a7ed10aa55c236486ae079f9b6e7"
   version "2026.02.18"
+  revision 1
   license "BSD-2-Clause"
 
   # Version is pinned to a daily commit hash. Use `brew livecheck` to check for
@@ -277,7 +278,13 @@ class Ladybird < Formula
     # Ensure app binaries can resolve bundled Frameworks at runtime.
     Dir[macos_dir/"*"].each do |binary|
       next unless macho_file.call(binary)
-      next if Utils.safe_popen_read("otool", "-l", binary).include?("@executable_path/../Frameworks")
+
+      load_commands = Utils.safe_popen_read("otool", "-l", binary)
+      has_frameworks_rpath = load_commands
+        .scan(/cmd LC_RPATH.*?path ([^\n]+) \(/m)
+        .flatten
+        .include?("@executable_path/../Frameworks")
+      next if has_frameworks_rpath
 
       MachO::Tools.add_rpath(binary, "@executable_path/../Frameworks")
     end
