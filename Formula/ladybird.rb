@@ -5,7 +5,7 @@ class Ladybird < Formula
       revision: "ad92622cf496a7ed10aa55c236486ae079f9b6e7"
   version "2026.02.18"
   license "BSD-2-Clause"
-  revision 1
+  revision 2
 
   # Version is pinned to a daily commit hash. Use `brew livecheck` to check for
   # a newer day's commit, then update revision + version manually.
@@ -37,6 +37,7 @@ class Ladybird < Formula
   depends_on "pkgconf" => :build
   depends_on xcode: ["15.0", :build]
   depends_on "ffmpeg"
+  depends_on "curl"
   depends_on "icu4c"
   depends_on "jpeg-turbo"
   depends_on "jpeg-xl"
@@ -45,6 +46,7 @@ class Ladybird < Formula
   depends_on "libxml2"
   depends_on :macos
   depends_on "openssl@3"
+  depends_on "sdl3"
   depends_on "sqlite"
   depends_on "webp"
   depends_on "woff2"
@@ -270,6 +272,26 @@ class Ladybird < Formula
     app = prefix/"Ladybird.app"
     macos_dir = app/"Contents/MacOS"
     frameworks_dir = app/"Contents/Frameworks"
+    frameworks_dir.mkpath
+
+    # Newer Ladybird builds place runtime dylibs outside the app bundle.
+    # Bundle them so @rpath entries can resolve at launch.
+    runtime_sources = [
+      buildpath/"Build/release/lib",
+      buildpath/"Build/release/bin",
+    ]
+    runtime_sources.each do |dir|
+      next unless dir.directory?
+
+      Dir[dir/"*.dylib"].each do |dylib|
+        cp dylib, frameworks_dir
+      end
+    end
+    [Formula["curl"].opt_lib, Formula["sdl3"].opt_lib].each do |dir|
+      Dir[dir/"*.dylib"].each do |dylib|
+        cp dylib, frameworks_dir
+      end
+    end
 
     macho_file = lambda do |path|
       File.file?(path) && Utils.safe_popen_read("file", path).include?("Mach-O")
@@ -312,5 +334,6 @@ class Ladybird < Formula
 
   test do
     assert_path_exists prefix/"Ladybird.app"
+    assert_path_exists prefix/"Ladybird.app/Contents/Frameworks/liblagom-webview.0.dylib"
   end
 end
