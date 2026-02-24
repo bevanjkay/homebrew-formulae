@@ -321,18 +321,20 @@ class Ladybird < Formula
     seen = Set.new
     until queue.empty?
       binary = queue.shift
-      next unless macho_file.call(binary)
-      next if seen.include?(binary)
+      binary_path = Pathname(binary)
+      binary_s = binary_path.to_s
+      next unless macho_file.call(binary_s)
+      next if seen.include?(binary_s)
 
-      seen << binary
+      seen << binary_s
 
-      if binary.start_with?(macos_dir.to_s)
-        ensure_rpath.call(binary, "@executable_path/../Frameworks")
-      elsif binary.start_with?(frameworks_dir.to_s)
-        ensure_rpath.call(binary, "@loader_path")
+      if binary_s.start_with?(macos_dir.to_s)
+        ensure_rpath.call(binary_s, "@executable_path/../Frameworks")
+      elsif binary_s.start_with?(frameworks_dir.to_s)
+        ensure_rpath.call(binary_s, "@loader_path")
       end
 
-      linked_libraries.call(binary).each do |linked_lib|
+      linked_libraries.call(binary_s).each do |linked_lib|
         next if linked_lib.start_with?("/System/", "/usr/lib/")
 
         source_path = if linked_lib.start_with?("#{HOMEBREW_PREFIX}/")
@@ -341,7 +343,7 @@ class Ladybird < Formula
           candidate = frameworks_dir/linked_lib.delete_prefix("@rpath/")
           candidate if candidate.file?
         elsif linked_lib.start_with?("@loader_path/")
-          candidate = Pathname(binary).dirname/linked_lib.delete_prefix("@loader_path/")
+          candidate = binary_path.dirname/linked_lib.delete_prefix("@loader_path/")
           candidate if candidate.file?
         elsif linked_lib.start_with?("@executable_path/../Frameworks/")
           candidate = frameworks_dir/linked_lib.delete_prefix("@executable_path/../Frameworks/")
@@ -358,12 +360,12 @@ class Ladybird < Formula
 
         next unless linked_lib.start_with?("#{HOMEBREW_PREFIX}/")
 
-        rewritten_link = if binary.start_with?(frameworks_dir.to_s)
+        rewritten_link = if binary_s.start_with?(frameworks_dir.to_s)
           "@loader_path/#{bundled.basename}"
         else
           "@executable_path/../Frameworks/#{bundled.basename}"
         end
-        MachO::Tools.change_install_name(binary, linked_lib, rewritten_link)
+        MachO::Tools.change_install_name(binary_s, linked_lib, rewritten_link)
       end
     end
 
