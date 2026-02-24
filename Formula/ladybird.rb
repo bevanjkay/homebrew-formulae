@@ -5,7 +5,7 @@ class Ladybird < Formula
       revision: "ad92622cf496a7ed10aa55c236486ae079f9b6e7"
   version "2026.02.18"
   license "BSD-2-Clause"
-  revision 1
+  revision 2
 
   # Version is pinned to a daily commit hash. Use `brew livecheck` to check for
   # a newer day's commit, then update revision + version manually.
@@ -18,8 +18,8 @@ class Ladybird < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any, arm64_tahoe:   "24d2f846cd0704f227ff78bd1636a75509df1a9b8062609997b973dd3d3bf2db"
-    sha256 cellar: :any, arm64_sequoia: "046ba1db71662e5602992b7b238ae08f455939f79d0ea0d8a378cbd643d486d8"
+    sha256 cellar: :any, arm64_tahoe:   "d68ea9a8a9aa37b8e0ee6efc3488caa5d4a23f49b55be75f102d59ed80f563bf"
+    sha256 cellar: :any, arm64_sequoia: "890ddbbbb852ff88c45ad59be39795bb3a9dc85ac4e1036a6391a3d0ecdbb623"
   end
 
   # This build downloads dependencies via vcpkg during cmake configuration.
@@ -36,18 +36,26 @@ class Ladybird < Formula
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
   depends_on xcode: ["15.0", :build]
+  depends_on "brotli"
+  depends_on "curl"
   depends_on "ffmpeg"
   depends_on "icu4c"
   depends_on "jpeg-turbo"
   depends_on "jpeg-xl"
   depends_on "libavif"
+  depends_on "libnghttp2"
+  depends_on "libnghttp3"
+  depends_on "libngtcp2"
   depends_on "libpng"
+  depends_on "libssh2"
   depends_on "libxml2"
   depends_on :macos
   depends_on "openssl@3"
+  depends_on "sdl3"
   depends_on "sqlite"
   depends_on "webp"
   depends_on "woff2"
+  depends_on "zstd"
 
   allow_network_access! :build
 
@@ -270,6 +278,26 @@ class Ladybird < Formula
     app = prefix/"Ladybird.app"
     macos_dir = app/"Contents/MacOS"
     frameworks_dir = app/"Contents/Frameworks"
+    frameworks_dir.mkpath
+
+    # Newer Ladybird builds place runtime dylibs outside the app bundle.
+    # Bundle them so @rpath entries can resolve at launch.
+    runtime_sources = [
+      buildpath/"Build/release/lib",
+      buildpath/"Build/release/bin",
+    ]
+    runtime_sources.each do |dir|
+      next unless dir.directory?
+
+      Dir[dir/"*.dylib"].each do |dylib|
+        cp dylib, frameworks_dir
+      end
+    end
+    [Formula["curl"].opt_lib, Formula["sdl3"].opt_lib].each do |dir|
+      Dir[dir/"*.dylib"].each do |dylib|
+        cp dylib, frameworks_dir
+      end
+    end
 
     macho_file = lambda do |path|
       File.file?(path) && Utils.safe_popen_read("file", path).include?("Mach-O")
@@ -312,5 +340,6 @@ class Ladybird < Formula
 
   test do
     assert_path_exists prefix/"Ladybird.app"
+    assert_path_exists prefix/"Ladybird.app/Contents/Frameworks/liblagom-webview.0.dylib"
   end
 end
