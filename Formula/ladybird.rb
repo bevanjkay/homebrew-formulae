@@ -297,6 +297,11 @@ class Ladybird < Formula
       File.file?(path) && Utils.safe_popen_read("file", path).include?("Mach-O")
     end
 
+    ensure_owner_writable = lambda do |path|
+      mode = File.stat(path).mode
+      File.chmod(mode | 0200, path) if mode.nobits?(0200)
+    end
+
     ensure_rpath = lambda do |binary, rpath|
       load_commands = Utils.safe_popen_read("otool", "-l", binary)
       has_rpath = load_commands
@@ -327,6 +332,7 @@ class Ladybird < Formula
       next if seen.include?(binary_s)
 
       seen << binary_s
+      ensure_owner_writable.call(binary_s)
 
       if binary_s.start_with?(macos_dir.to_s)
         ensure_rpath.call(binary_s, "@executable_path/../Frameworks")
@@ -355,6 +361,7 @@ class Ladybird < Formula
         bundled = frameworks_dir/source_path.basename
         unless bundled.exist?
           cp source_path, bundled
+          ensure_owner_writable.call(bundled)
           queue << bundled
         end
 
