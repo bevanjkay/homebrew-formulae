@@ -5,7 +5,7 @@ class Ladybird < Formula
       revision: "ad92622cf496a7ed10aa55c236486ae079f9b6e7"
   version "2026.02.18"
   license "BSD-2-Clause"
-  revision 2
+  revision 3
 
   # Version is pinned to a daily commit hash. Use `brew livecheck` to check for
   # a newer day's commit, then update revision + version manually.
@@ -293,42 +293,78 @@ class Ladybird < Formula
         cp dylib, frameworks_dir
       end
     end
-    [Formula["curl"].opt_lib, Formula["sdl3"].opt_lib].each do |dir|
-      Dir[dir/"*.dylib"].each do |dylib|
-        cp dylib, frameworks_dir
-      end
-    end
-
     macho_file = lambda do |path|
       File.file?(path) && Utils.safe_popen_read("file", path).include?("Mach-O")
     end
 
-    # Ensure app binaries can resolve bundled Frameworks at runtime.
-    Dir[macos_dir/"*"].each do |binary|
-      next unless macho_file.call(binary)
-
+    ensure_rpath = lambda do |binary, rpath|
       load_commands = Utils.safe_popen_read("otool", "-l", binary)
-      has_frameworks_rpath = load_commands
-                             .scan(/cmd LC_RPATH.*?path ([^\n]+) \(/m)
-                             .flatten
-                             .include?("@executable_path/../Frameworks")
-      next if has_frameworks_rpath
+      has_rpath = load_commands
+                  .scan(/cmd LC_RPATH.*?path ([^\n]+) \(/m)
+                  .flatten
+                  .include?(rpath)
+      return if has_rpath
 
-      MachO::Tools.add_rpath(binary, "@executable_path/../Frameworks")
+      MachO::Tools.add_rpath(binary, rpath)
     end
 
-    # Library install names should resolve relative to the loading library.
-    Dir[frameworks_dir/"**/*"].each do |library|
-      next unless macho_file.call(library)
+    linked_libraries = lambda do |binary|
+      Utils.safe_popen_read("otool", "-L", binary)
+           .lines
+           .drop(1)
+           .filter_map { |line| line.strip[/\A(\S+)/, 1] }
+    end
 
-      linked_libs = Utils.safe_popen_read("otool", "-L", library)
-      next unless linked_libs.include?("@executable_path/../Frameworks/libcrypto.3.dylib")
+    # Recursively bundle every Homebrew dylib dependency and retarget absolute
+    # Cellar/opt install names to the app-local Frameworks directory.
+    queue = Dir[macos_dir/"*"] + Dir[frameworks_dir/"*.dylib"]
+    seen = Set.new
+    until queue.empty?
+      binary = queue.shift
+      next unless macho_file.call(binary)
+      next if seen.include?(binary)
 
-      MachO::Tools.change_install_name(
-        library,
-        "@executable_path/../Frameworks/libcrypto.3.dylib",
-        "@loader_path/libcrypto.3.dylib",
-      )
+      seen << binary
+
+      if binary.start_with?(macos_dir.to_s)
+        ensure_rpath.call(binary, "@executable_path/../Frameworks")
+      elsif binary.start_with?(frameworks_dir.to_s)
+        ensure_rpath.call(binary, "@loader_path")
+      end
+
+      linked_libraries.call(binary).each do |linked_lib|
+        next if linked_lib.start_with?("/System/", "/usr/lib/")
+
+        source_path = if linked_lib.start_with?("#{HOMEBREW_PREFIX}/")
+          Pathname(linked_lib)
+        elsif linked_lib.start_with?("@rpath/")
+          candidate = frameworks_dir/linked_lib.delete_prefix("@rpath/")
+          candidate if candidate.file?
+        elsif linked_lib.start_with?("@loader_path/")
+          candidate = Pathname(binary).dirname/linked_lib.delete_prefix("@loader_path/")
+          candidate if candidate.file?
+        elsif linked_lib.start_with?("@executable_path/../Frameworks/")
+          candidate = frameworks_dir/linked_lib.delete_prefix("@executable_path/../Frameworks/")
+          candidate if candidate.file?
+        end
+        next unless source_path&.file?
+        next if source_path.extname != ".dylib"
+
+        bundled = frameworks_dir/source_path.basename
+        unless bundled.exist?
+          cp source_path, bundled
+          queue << bundled
+        end
+
+        next unless linked_lib.start_with?("#{HOMEBREW_PREFIX}/")
+
+        rewritten_link = if binary.start_with?(frameworks_dir.to_s)
+          "@loader_path/#{bundled.basename}"
+        else
+          "@executable_path/../Frameworks/#{bundled.basename}"
+        end
+        MachO::Tools.change_install_name(binary, linked_lib, rewritten_link)
+      end
     end
 
     (bin/"ladybird").write <<~EOS
@@ -341,5 +377,6 @@ class Ladybird < Formula
   test do
     assert_path_exists prefix/"Ladybird.app"
     assert_path_exists prefix/"Ladybird.app/Contents/Frameworks/liblagom-webview.0.dylib"
+    assert_predicate Dir[prefix/"Ladybird.app/Contents/Frameworks/libicui18n*.dylib"], :any?
   end
 end
