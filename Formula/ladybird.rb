@@ -36,13 +36,18 @@ class Ladybird < Formula
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
   depends_on xcode: ["15.0", :build]
+  depends_on "brotli"
   depends_on "curl"
   depends_on "ffmpeg"
   depends_on "icu4c"
   depends_on "jpeg-turbo"
   depends_on "jpeg-xl"
   depends_on "libavif"
+  depends_on "libnghttp2"
+  depends_on "libnghttp3"
+  depends_on "libngtcp2"
   depends_on "libpng"
+  depends_on "libssh2"
   depends_on "libxml2"
   depends_on :macos
   depends_on "openssl@3"
@@ -50,6 +55,7 @@ class Ladybird < Formula
   depends_on "sqlite"
   depends_on "webp"
   depends_on "woff2"
+  depends_on "zstd"
 
   allow_network_access! :build
 
