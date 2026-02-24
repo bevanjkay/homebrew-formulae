@@ -18,8 +18,8 @@ class Ladybird < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any, arm64_tahoe:   "24d2f846cd0704f227ff78bd1636a75509df1a9b8062609997b973dd3d3bf2db"
-    sha256 cellar: :any, arm64_sequoia: "046ba1db71662e5602992b7b238ae08f455939f79d0ea0d8a378cbd643d486d8"
+    sha256 cellar: :any, arm64_tahoe:   "d68ea9a8a9aa37b8e0ee6efc3488caa5d4a23f49b55be75f102d59ed80f563bf"
+    sha256 cellar: :any, arm64_sequoia: "890ddbbbb852ff88c45ad59be39795bb3a9dc85ac4e1036a6391a3d0ecdbb623"
   end
 
   # This build downloads dependencies via vcpkg during cmake configuration.
