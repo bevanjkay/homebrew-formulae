@@ -7,11 +7,11 @@ class QikMcpServer < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ed65cbd39b90154ef3b6369a6303202f3bd8bbd4168195b4ce7ccc29f2328de0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "780cc4392c70252db1203c0dcb3502926133e961644e54bb1272edaf7019cbbe"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c95c65ab49652b618c50950118433ba34273876ca31ba649b038feb741adca79"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "97262d2126c7763f676382690bbb8394c6cf59b65b5adbde5b7878f3ce27e60f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "af69fb079b75d19bd0508a93634e30c19e5ab8382327948a02bd9201c2ab9a59"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ab9ba7bab595c7ca92343a27bbe66659ce59fbdbdc03a10d0e6d972407f5463a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "cb3dbd31f2ee1e1a6786029121164ac40f86e75601f2556b0f65b079c0e6c1ff"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "992c7583ef2248c5727726c57ef1e72e71001e03eb1b8ac16071589350ec8cdd"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "aaa4385ddd5ff8147db60e5f7a3fb52a39bdd994aab16a7777f83a24dfe17605"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3298901c8c6cfbeb895e7a60e41917c2206f4118a997752a3433b472a8a5d9ad"
   end
 
   depends_on "node"
