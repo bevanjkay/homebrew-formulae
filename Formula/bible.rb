@@ -31,7 +31,7 @@ class Bible < Formula
   test do
     return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
 
-    output = shell_output(bin/"bible john 3:16")
+    output = shell_output("#{bin}/bible john 3:16")
     assert_match("For this is how God loved the world", output)
   end
 end
