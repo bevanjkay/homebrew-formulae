@@ -15,6 +15,7 @@ permissions:
 jobs:
   autobump:
     runs-on: macos-latest
+    environment: github_actions
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
