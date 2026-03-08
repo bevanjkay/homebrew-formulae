@@ -53,7 +53,7 @@ permissions:
 
 jobs:
   prepare:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     outputs:
       runners: ${{steps.runner-matrix.outputs.result}}
     steps:
@@ -184,7 +184,7 @@ jobs:
           username: ${{ (github.actor != 'github-actions[bot]' && github.actor) || 'BkdBot' }}
 
       - name: Generate build provenance
-        uses: actions/attest-build-provenance@96278af6caaf10aea03fd8d33a09a777ca52d62f # v3.2.0
+        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
         with:
           subject-path: ${{ env.BOTTLES_DIR }}/*.tar.gz
 
@@ -288,7 +288,7 @@ jobs:
       pull-requests: write # for Homebrew/actions/post-comment
     needs: [bottle, upload]
     if: failure() && inputs.issue > 0
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Post comment on failure
         uses: Homebrew/actions/post-comment@main
