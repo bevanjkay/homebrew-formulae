@@ -28,7 +28,7 @@ class T3CodeCli < Formula
 
     generate_completions_from_executable(libexec/"bin/t3", "--completions")
 
-    rm_f bin/"t3"
+    rm(bin/"t3") if (bin/"t3").exist?
     (bin/"t3").write_env_script libexec/"bin/t3", USE_BUILTIN_RIPGREP: "1"
   end
 
