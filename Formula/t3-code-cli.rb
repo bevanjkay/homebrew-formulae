@@ -6,6 +6,7 @@ class T3CodeCli < Formula
   license "MIT"
 
   depends_on "node"
+  depends_on "ripgrep"
 
   def install
     system "npm", "install", *std_npm_args
@@ -13,21 +14,22 @@ class T3CodeCli < Formula
     claude_vendor = libexec/"lib/node_modules/t3/node_modules/@anthropic-ai/claude-agent-sdk/vendor"
     node_pty_prebuilds = libexec/"lib/node_modules/t3/node_modules/node-pty/prebuilds"
 
+    rm_r claude_vendor/"ripgrep"
+
     if OS.mac?
       if Hardware::CPU.arm?
         rm_r claude_vendor/"audio-capture/x64-darwin"
-        rm_r claude_vendor/"ripgrep/x64-darwin"
         rm_r node_pty_prebuilds/"darwin-x64"
       else
         rm_r claude_vendor/"audio-capture/arm64-darwin"
-        rm_r claude_vendor/"ripgrep/arm64-darwin"
         rm_r node_pty_prebuilds/"darwin-arm64"
       end
     end
 
-    bin.install_symlink libexec.glob("bin/*")
+    generate_completions_from_executable(libexec/"bin/t3", "--completions")
 
-    generate_completions_from_executable(bin/"t3", "--completions")
+    rm_f bin/"t3"
+    (bin/"t3").write_env_script libexec/"bin/t3", USE_BUILTIN_RIPGREP: "1"
   end
 
   service do
