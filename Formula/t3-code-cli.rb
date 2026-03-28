@@ -24,6 +24,12 @@ class T3CodeCli < Formula
         rm_r claude_vendor/"audio-capture/arm64-darwin"
         rm_r node_pty_prebuilds/"darwin-arm64"
       end
+    elsif OS.linux?
+      if Hardware::CPU.arm?
+        rm_r claude_vendor/"audio-capture/x64-linux"
+      else
+        rm_r claude_vendor/"audio-capture/arm64-linux"
+      end
     end
 
     generate_completions_from_executable(libexec/"bin/t3", "--completions")
