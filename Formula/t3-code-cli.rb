@@ -13,6 +13,7 @@ class T3CodeCli < Formula
 
     claude_vendor = libexec/"lib/node_modules/t3/node_modules/@anthropic-ai/claude-agent-sdk/vendor"
     node_pty_prebuilds = libexec/"lib/node_modules/t3/node_modules/node-pty/prebuilds"
+    node_pty = libexec/"lib/node_modules/t3/node_modules/node-pty"
 
     rm_r claude_vendor/"ripgrep"
 
@@ -25,11 +26,8 @@ class T3CodeCli < Formula
         rm_r node_pty_prebuilds/"darwin-arm64"
       end
     elsif OS.linux?
-      if Hardware::CPU.arm?
-        rm_r claude_vendor/"audio-capture/x64-linux"
-      else
-        rm_r claude_vendor/"audio-capture/arm64-linux"
-      end
+      rm_r claude_vendor/"audio-capture"
+      system "npm", "rebuild", "--prefix", node_pty, "--build-from-source"
     end
 
     generate_completions_from_executable(libexec/"bin/t3", "--completions")
