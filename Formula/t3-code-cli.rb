@@ -5,6 +5,15 @@ class T3CodeCli < Formula
   sha256 "e00c6eda435791e8490199bb6304a80891a29abf437cd54cad3753ec1848f74e"
   license "MIT"
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any,                 arm64_tahoe:   "a398d0614638889956a40f5d456fd43d28fd6f71d00e1adaef11275ef99390e0"
+    sha256 cellar: :any,                 arm64_sequoia: "fd45c1abe8b6f8e9f7e53f38a1c34349a30b85ae6b185fd1a8d6a18ad015c1a5"
+    sha256 cellar: :any,                 arm64_sonoma:  "021c652dd538803514f130db33ccfc547ac221ab540cfcd8708b6af75660dbde"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "666b8a17aab4e8a6cb97b80580d944aa00d3fdc3336fc54f630fcbdf2f44995b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7f25dff2fa3e5b937bf1965c4ea6f03d5b56db71a4a866b99fe1083c093a6d0f"
+  end
+
   depends_on "node"
   depends_on "ripgrep"
 
