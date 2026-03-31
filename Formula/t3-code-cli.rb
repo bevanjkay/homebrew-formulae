@@ -26,7 +26,7 @@ class T3CodeCli < Formula
       end
     elsif OS.linux?
       system "npm", "rebuild", "--prefix", node_pty, "--build-from-source"
-      rm_r node_pty_prebuilds
+      rm_r node_pty_prebuilds if node_pty_prebuilds.exist?
     end
 
     generate_completions_from_executable(libexec/"bin/t3", "--completions")
