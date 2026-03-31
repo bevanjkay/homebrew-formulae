@@ -12,6 +12,8 @@ class T3CodeCli < Formula
     system "npm", "install", *std_npm_args
 
     claude_vendor = libexec/"lib/node_modules/t3/node_modules/@anthropic-ai/claude-agent-sdk/vendor"
+    msgpackr_extract_linux = libexec/"lib/node_modules/t3/node_modules/@msgpackr-extract/" \
+                                     "msgpackr-extract-linux-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
     node_pty_prebuilds = libexec/"lib/node_modules/t3/node_modules/node-pty/prebuilds"
     node_pty = libexec/"lib/node_modules/t3/node_modules/node-pty"
 
@@ -25,6 +27,7 @@ class T3CodeCli < Formula
         rm_r node_pty_prebuilds/"darwin-arm64"
       end
     elsif OS.linux?
+      rm_r msgpackr_extract_linux if msgpackr_extract_linux.exist?
       system "npm", "rebuild", "--prefix", node_pty, "--build-from-source"
       rm_r node_pty_prebuilds if node_pty_prebuilds.exist?
     end
