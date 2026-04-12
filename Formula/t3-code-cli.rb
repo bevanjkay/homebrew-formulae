@@ -60,26 +60,31 @@ class T3CodeCli < Formula
   end
 
   test do
+    require "json"
     require "timeout"
 
-    assert_match version.to_s, shell_output("#{bin}/t3 --version")
+    package_json = JSON.parse((libexec/"lib/node_modules/t3/package.json").read)
+    assert_equal version.to_s, package_json["version"]
 
     port = free_port
     read, write = IO.pipe
     pid = fork do
       read.close
-      exec bin/"t3", "--no-browser", "--port", port.to_s, out: write, err: write
+      exec bin/"t3", "--no-browser", "--host", "127.0.0.1", "--port", port.to_s, out: write, err: write
     end
 
     write.close
 
     begin
-      sleep 5
-      expected_port = "port: #{port}"
-      startup_output = Timeout.timeout(5) { read.readpartial(4096) }
+      startup_output = +""
+      Timeout.timeout(10) do
+        until startup_output.include?("Listening on http://") && startup_output.include?(":#{port}")
+          startup_output << read.readpartial(4096)
+        end
+      end
 
-      assert_match "T3 Code running", startup_output
-      assert_match expected_port, startup_output
+      assert_match "Listening on http://", startup_output
+      assert_match ":#{port}", startup_output
 
       output = shell_output("curl --fail --silent --retry 5 --retry-connrefused http://127.0.0.1:#{port}")
       refute_empty output
