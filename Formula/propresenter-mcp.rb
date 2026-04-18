@@ -24,11 +24,12 @@ class PropresenterMcp < Formula
   end
 
   test do
-    output = IO.popen("#{bin}/propresenter-mcp 2>&1") do |io|
-      sleep 1
-      Process.kill("TERM", io.pid)
-      io.read
-    end
-    assert_match "ProPresenter MCP Server running on stdio", output
+    r, w = IO.pipe
+    pid = spawn(bin/"propresenter-mcp", [:out, :err] => w)
+    w.close
+    sleep 1
+    Process.kill("KILL", pid)
+    Process.wait(pid)
+    assert_match "ProPresenter MCP Server running on stdio", r.read
   end
 end
