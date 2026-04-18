@@ -5,6 +5,15 @@ class PropresenterMcp < Formula
   sha256 "ea5345688f12777ceba61c81bfc72e5a4c3ef67940f353189a0abf39fbdb94e8"
   license "MIT"
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "256cee079b3053fda7cb5ab6871a7831d4ceb2bf72d20ff4341b1c0669b10ed8"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9bd617d8a9e0a6d9425217b9e40da0af920d60b4149d369a871e4ab3ee09ae23"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ebd7a59fa7cac87ec136b02a95b93c471e2f3e1e499b43826fbaebbd1a8e1138"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c2de36e2e7380880b490aa934fedb9892eebc13ed6385f230344a8b4126990e9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cec1bd9f3a1361d771d853dd618f89266de019b2a3382b7cdfac77baac6a8b30"
+  end
+
   depends_on "typescript" => :build
   depends_on "node"
 
