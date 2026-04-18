@@ -24,7 +24,11 @@ class PropresenterMcp < Formula
   end
 
   test do
-    output = shell_output("timeout 1 #{bin}/propresenter-mcp 2>&1 || true")
+    output = IO.popen("#{bin}/propresenter-mcp 2>&1") do |io|
+      sleep 1
+      Process.kill("TERM", io.pid)
+      io.read
+    end
     assert_match "ProPresenter MCP Server running on stdio", output
   end
 end
