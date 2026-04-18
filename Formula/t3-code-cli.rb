@@ -1,8 +1,8 @@
 class T3CodeCli < Formula
   desc "CLI tool for T3 Code"
   homepage "https://t3.codes/"
-  url "https://registry.npmjs.org/t3/-/t3-0.0.17.tgz"
-  sha256 "f600ee2c39914198aa1994ae6ca84e532684eaeb75975a866e5b53be3177fb01"
+  url "https://registry.npmjs.org/t3/-/t3-0.0.20.tgz"
+  sha256 "0d5df95ff44cc28b6dce53d928b16621b7c4603f466272f55c628cd30e7fc1bc"
   license "MIT"
 
   bottle do
@@ -20,14 +20,10 @@ class T3CodeCli < Formula
   def install
     system "npm", "install", *std_npm_args
 
-    claude_vendor = libexec/"lib/node_modules/t3/node_modules/@anthropic-ai/claude-agent-sdk/vendor"
     msgpackr_extract_linux = libexec/"lib/node_modules/t3/node_modules/@msgpackr-extract/" \
                                      "msgpackr-extract-linux-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
     node_pty_prebuilds = libexec/"lib/node_modules/t3/node_modules/node-pty/prebuilds"
     node_pty = libexec/"lib/node_modules/t3/node_modules/node-pty"
-
-    rm_r claude_vendor/"ripgrep"
-    rm_r claude_vendor/"audio-capture"
 
     if OS.mac?
       if Hardware::CPU.arm?
@@ -43,7 +39,6 @@ class T3CodeCli < Formula
 
     generate_completions_from_executable(libexec/"bin/t3", "--completions")
 
-    rm(bin/"t3") if (bin/"t3").exist?
     (bin/"t3").write_env_script libexec/"bin/t3", USE_BUILTIN_RIPGREP: "1"
   end
 
