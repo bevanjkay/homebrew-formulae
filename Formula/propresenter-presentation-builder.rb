@@ -9,15 +9,16 @@ class PropresenterPresentationBuilder < Formula
   depends_on "node"
 
   def install
-    system "pnpm", "install"
+    system "pnpm", "install", "--frozen-lockfile"
     system "pnpm", "build"
+    system "pnpm", "prune", "--prod"
 
     (bin/"propresenter-presentation-builder").write <<~EOS
       #!/bin/bash
       exec node #{libexec}/dist/cli.js "$@"
     EOS
     (bin/"propresenter-presentation-builder").chmod 0755
-    libexec.install Dir["*"]
+    libexec.install "dist", "node_modules", "package.json"
   end
 
   test do
