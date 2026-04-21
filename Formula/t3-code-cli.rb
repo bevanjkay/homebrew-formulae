@@ -4,14 +4,15 @@ class T3CodeCli < Formula
   url "https://registry.npmjs.org/t3/-/t3-0.0.20.tgz"
   sha256 "0d5df95ff44cc28b6dce53d928b16621b7c4603f466272f55c628cd30e7fc1bc"
   license "MIT"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256                               arm64_tahoe:   "59bb6966a256e31039ed7a095f10ccef37d98264e9179eee3eafecea3879dad0"
-    sha256                               arm64_sequoia: "00bf78c44dd80465da488b3f0762ed3166e2b4a9f7d1212dff2213eb75bef070"
-    sha256                               arm64_sonoma:  "8aeb60f2081ef4314c28fd84cf2a003843b8da720556223cad36f28aa2056556"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e5fa9d511f2266b8920f3748ec3d061b60f05e1bb9317496800f05e0974cc92a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "56e3af32b782f18a8978d5db0e41fe35cca3406435f86b7a61aeb24f39f2b42a"
+    sha256                               arm64_tahoe:   "230a2133ec0ea3a9e63c598553f86f51a2580f98b1e207796f552a7c8306c72c"
+    sha256                               arm64_sequoia: "f7647da1b360c8cfd6347b1b0c39c7b5610bd26cb8f0a201afdc93f1f39dccce"
+    sha256                               arm64_sonoma:  "d2ecc7ce6d831289eba4fa31730d7eeef092615d3714f0cd9f52d079d8939c95"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8e3f5f2d35361767e8e1808dfb5486d67dbc14542dc2370a7e9b852c79ec328d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6ba297c96be0ce56b963b1fb1e94b54b560121d95aeb3f058df4c43e7e98efc0"
   end
 
   depends_on "node"
@@ -47,7 +48,7 @@ class T3CodeCli < Formula
   end
 
   service do
-    run [opt_bin/"t3", "--no-browser", "--host", "127.0.0.1", "--port", "4141", "--home-dir", var/"t3-code-cli"]
+    run [opt_bin/"t3", "--no-browser", "--host", "127.0.0.1", "--port", "4141", "--base-dir", var/"t3-code-cli"]
     keep_alive true
     working_dir var/"t3-code-cli"
     log_path var/"log/t3-code-cli.log"
