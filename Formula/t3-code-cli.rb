@@ -4,6 +4,7 @@ class T3CodeCli < Formula
   url "https://registry.npmjs.org/t3/-/t3-0.0.20.tgz"
   sha256 "0d5df95ff44cc28b6dce53d928b16621b7c4603f466272f55c628cd30e7fc1bc"
   license "MIT"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
@@ -47,7 +48,7 @@ class T3CodeCli < Formula
   end
 
   service do
-    run [opt_bin/"t3", "--no-browser", "--host", "127.0.0.1", "--port", "4141", "--home-dir", var/"t3-code-cli"]
+    run [opt_bin/"t3", "--no-browser", "--host", "127.0.0.1", "--port", "4141", "--base-dir", var/"t3-code-cli"]
     keep_alive true
     working_dir var/"t3-code-cli"
     log_path var/"log/t3-code-cli.log"
