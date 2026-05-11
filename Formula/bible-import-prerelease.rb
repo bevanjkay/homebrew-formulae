@@ -17,7 +17,6 @@ class BibleImportPrerelease < Formula
 
   depends_on "certifi"
   depends_on :macos
-  depends_on :macos
   depends_on "mpdecimal"
   depends_on "openssl@3"
   depends_on "python-packaging"
