@@ -1,8 +1,8 @@
 class SurgeCli < Formula
   desc "CLI client for the surge.sh hosted service"
   homepage "https://surge.sh/"
-  url "https://registry.npmjs.org/surge/-/surge-0.27.3.tgz"
-  sha256 "71430d04a980eb61a1c866256f5a2c2a40c2c44d43efef4c08c5b0e5e76327c4"
+  url "https://registry.npmjs.org/surge/-/surge-0.27.4.tgz"
+  sha256 "2ececcb4b2102a6bad989a1f50970d40a3a9e3e26f3255d3c849dc37948791d0"
   license "ISC"
 
   bottle do
