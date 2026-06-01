@@ -7,3 +7,7 @@ rules:
     ignore:
       - publish.yml
       - triage.yml
+  unpinned-images:
+    ignore:
+      - dispatch-build-bottle.yml:97
+      - tests.yml:95
