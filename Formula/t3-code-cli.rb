@@ -41,8 +41,8 @@ class T3CodeCli < Formula
     (bin/"t3").write_env_script libexec/"bin/t3", USE_BUILTIN_RIPGREP: "1"
   end
 
-  def post_install
-    mkdir_p var/"t3-code-cli"
+  post_install_steps do
+    mkdir_p "t3-code-cli"
   end
 
   service do

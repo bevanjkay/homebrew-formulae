@@ -94,7 +94,7 @@ jobs:
         include: ${{ fromJson(needs.prepare.outputs.runners) }}
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.runs_on }}
-    container: ${{ matrix.container && matrix.container != '' && matrix.container || null }}
+    container: ${{ matrix.container && matrix.container != '' && matrix.container || null }} # zizmor: ignore[unpinned-images] trusted Homebrew runner image
     timeout-minutes: ${{ fromJson(github.event.inputs.timeout) }}
     permissions:
       contents: read
