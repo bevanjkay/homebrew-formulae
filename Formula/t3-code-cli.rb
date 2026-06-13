@@ -41,10 +41,6 @@ class T3CodeCli < Formula
     (bin/"t3").write_env_script libexec/"bin/t3", USE_BUILTIN_RIPGREP: "1"
   end
 
-  post_install_steps do
-    mkdir_p "t3-code-cli"
-  end
-
   service do
     run [opt_bin/"t3", "--no-browser", "--host", "127.0.0.1", "--port", "4141", "--base-dir", var/"t3-code-cli"]
     keep_alive true
