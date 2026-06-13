@@ -11,11 +11,9 @@ class BBun < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256                               arm64_sequoia: "d17126f0ee0da4f3fc76c17687228b11e3e6d9bfd4613eb8b14a14054cfc981f"
-    sha256                               arm64_sonoma:  "b941e1a05ca01cb973e4fad57c9525b037e363c5aa3dc763f832000ebd9e979b"
-    sha256 cellar: :any_skip_relocation, ventura:       "2e8c3180b724df02d028b0ec689b27d8cedf71397fcd577beef1bdaa0db525d5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "75eb35ddfc851c8a05d3b96ed13761cf3b75c9008dc8c6b8fc15926e09a0fa6e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7956a8a202fcac3666867cd5a779ad0035cb9995d0823b31639d9dc97a49347b"
+    sha256 arm64_tahoe:   "615751e98e446c56345f9817b8d0adf726193355602afe6786d24b2cc55d2e73"
+    sha256 arm64_sequoia: "45a24f6a8554c032e60f347b424366f9a32d99c5a542c23c5736530d54197c9d"
+    sha256 arm64_sonoma:  "d0c8143869bcf6f9bd7cb54e1fbe61ac17ae2967a2b3c24d4dd26c972542032b"
   end
 
   if OS.mac?
