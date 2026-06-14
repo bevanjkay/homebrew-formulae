@@ -22,7 +22,7 @@ class T3CodeCli < Formula
     # runtime dependencies are already pinned via the `dependencies` field.
     pkg = JSON.parse((buildpath/"package.json").read)
     pkg.delete("overrides")
-    (buildpath/"package.json").write(JSON.pretty_generate(pkg))
+    (buildpath/"package.json").atomic_write(JSON.pretty_generate(pkg))
 
     system "npm", "install", *std_npm_args
 
