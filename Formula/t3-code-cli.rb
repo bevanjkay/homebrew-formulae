@@ -17,6 +17,13 @@ class T3CodeCli < Formula
   depends_on "ripgrep"
 
   def install
+    # t3's package.json uses pnpm-style "parent>child" overrides keys that npm
+    # rejects as invalid package names during `npm pack`. Strip them; the
+    # runtime dependencies are already pinned via the `dependencies` field.
+    pkg = JSON.parse((buildpath/"package.json").read)
+    pkg.delete("overrides")
+    (buildpath/"package.json").write(JSON.pretty_generate(pkg))
+
     system "npm", "install", *std_npm_args
 
     msgpackr_extract_linux = libexec/"lib/node_modules/t3/node_modules/@msgpackr-extract/" \
