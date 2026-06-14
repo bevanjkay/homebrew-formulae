@@ -1,22 +1,30 @@
 class T3CodeCli < Formula
   desc "CLI tool for T3 Code"
   homepage "https://t3.codes/"
-  url "https://registry.npmjs.org/t3/-/t3-0.0.24.tgz"
-  sha256 "f61c4cf156501ec3529677f1a20e2c171e9468e912f783c66c8c4ff5ba8d96eb"
+  url "https://registry.npmjs.org/t3/-/t3-0.0.27.tgz"
+  sha256 "4b57953dbd41842b362dc7e389bfb5937adeb380db99174e61f8e27fe3cdd042"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256                               arm64_tahoe:   "c3b9424859c06b62603a413d99382ad967a5ea741529ef692f2ce460f3c3b916"
-    sha256                               arm64_sequoia: "db670a70262cd6a5dbbe6ce9db8e51f370c3b943838b570964da477e84206a9a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b7b2640c2f10cf182863377495fec9f2a5926980d05f394643c1fe05633d4d51"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cc780a7b0cb1b331bb94aba2fe0858973325cba2265a126a944e9509aafe283e"
+    sha256               arm64_tahoe:   "0451aaea42552e921011d52cd73a7cc44d9c3a0f79ad6fd9163a26526aafe9e0"
+    sha256               arm64_sequoia: "e6013b0308203b0d43c7b787d268901c8ccff66bc12d0d196d943969c5c69e5a"
+    sha256               arm64_sonoma:  "7e06b7a8cc20f10ee795487ac309a6408b0ed1ec427c0fee1d2774fbcd97d484"
+    sha256 cellar: :any, arm64_linux:   "26d016cb00b6a74147f109f190ae2c96b2275cbdc555f8c219033707a267aa3c"
+    sha256 cellar: :any, x86_64_linux:  "f38f6a0c776ad20c72e607f9eb57991c7d84d4a486e08dce650ba0600f72ad87"
   end
 
   depends_on "node"
   depends_on "ripgrep"
 
   def install
+    # t3's package.json uses pnpm-style "parent>child" overrides keys that npm
+    # rejects as invalid package names during `npm pack`. Strip them; the
+    # runtime dependencies are already pinned via the `dependencies` field.
+    pkg = JSON.parse((buildpath/"package.json").read)
+    pkg.delete("overrides")
+    (buildpath/"package.json").atomic_write(JSON.pretty_generate(pkg))
+
     system "npm", "install", *std_npm_args
 
     msgpackr_extract_linux = libexec/"lib/node_modules/t3/node_modules/@msgpackr-extract/" \
