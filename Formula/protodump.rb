@@ -6,6 +6,13 @@ class Protodump < Formula
   sha256 "b86cad278b53de238a55db51a4555cedde40740bcc4ae20f86d1b7eee54ae353"
   head "https://github.com/arkadiyt/protodump.git", branch: "main"
 
+  livecheck do
+    url "https://api.github.com/repos/arkadiyt/protodump/commits/main"
+    strategy :json do |json|
+      json.dig("commit", "committer", "date")&.then { |d| d[0, 10].tr("-", ".") }
+    end
+  end
+
   depends_on "go" => :build
 
   def install
