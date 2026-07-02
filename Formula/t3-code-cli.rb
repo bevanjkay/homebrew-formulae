@@ -6,6 +6,14 @@ class T3CodeCli < Formula
   license "MIT"
   revision 1
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256               arm64_tahoe:   "315ab065454f6789f28cfa4b0573b9079cbe723898ff773b85ad3735bacab894"
+    sha256               arm64_sequoia: "da14bb3844d04b53d23145b6bfd9edcb2b848acdaf2ae60a2f507bd44d8aa62c"
+    sha256               arm64_sonoma:  "1084e74c5ee5b07a6fbcf15ef8fc7e181be3c2a1a8c05ab005a74b391a7f9e40"
+    sha256 cellar: :any, arm64_linux:   "12f04599857ed1b10e5a6a911b591942dfe70f050d87753fd986e96e053a2156"
+  end
+
   depends_on "node"
   depends_on "ripgrep"
 
