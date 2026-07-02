@@ -4,13 +4,14 @@ class T3CodeCli < Formula
   url "https://registry.npmjs.org/t3/-/t3-0.0.28.tgz"
   sha256 "b76e4593fc8c07a58a2665cb2fec20d57ca83dc2b958d83ec16c8c5ceabe3a61"
   license "MIT"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256               arm64_tahoe:   "2d8dd80ff9a41040b225ee339ee8d8c3be7728a707e48632ef7e2f52fa9c72b6"
-    sha256               arm64_sequoia: "bc546c3a91a595d0887de54c5e867d69cdfd4149c58c43e9bd5e400cc7616b3f"
-    sha256               arm64_sonoma:  "401df4b8f611f11803f6599ab48f0dd498fb2238ebba6124706353098efb9c9a"
-    sha256 cellar: :any, arm64_linux:   "bf57de84f3aa7812978b28c7b58921b2f128ac2c1e48a6b4249514ab621e6fe0"
+    sha256               arm64_tahoe:   "315ab065454f6789f28cfa4b0573b9079cbe723898ff773b85ad3735bacab894"
+    sha256               arm64_sequoia: "da14bb3844d04b53d23145b6bfd9edcb2b848acdaf2ae60a2f507bd44d8aa62c"
+    sha256               arm64_sonoma:  "1084e74c5ee5b07a6fbcf15ef8fc7e181be3c2a1a8c05ab005a74b391a7f9e40"
+    sha256 cellar: :any, arm64_linux:   "12f04599857ed1b10e5a6a911b591942dfe70f050d87753fd986e96e053a2156"
   end
 
   depends_on "node"
@@ -26,6 +27,8 @@ class T3CodeCli < Formula
 
     system "npm", "install", *std_npm_args
 
+    claude_agent_sdk_linux_musl = libexec/"lib/node_modules/t3/node_modules/@anthropic-ai/" \
+                                          "claude-agent-sdk-linux-#{Hardware::CPU.arm? ? "arm64" : "x64"}-musl"
     msgpackr_extract_linux = libexec/"lib/node_modules/t3/node_modules/@msgpackr-extract/" \
                                      "msgpackr-extract-linux-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
     node_pty_prebuilds = libexec/"lib/node_modules/t3/node_modules/node-pty/prebuilds"
@@ -38,6 +41,7 @@ class T3CodeCli < Formula
         rm_r node_pty_prebuilds/"darwin-arm64"
       end
     elsif OS.linux?
+      rm_r claude_agent_sdk_linux_musl if claude_agent_sdk_linux_musl.exist?
       rm_r msgpackr_extract_linux if msgpackr_extract_linux.exist?
       system "npm", "rebuild", "--prefix", node_pty, "--build-from-source"
       rm_r node_pty_prebuilds if node_pty_prebuilds.exist?
