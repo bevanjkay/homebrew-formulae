@@ -1,8 +1,8 @@
 class PropresenterPresentationBuilder < Formula
   desc "Generate ProPresenter presentation files from JSON input"
   homepage "https://github.com/bevanjkay/propresenter-presentation-builder"
-  url "https://github.com/bevanjkay/propresenter-presentation-builder/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "e75bf83c4d8417dfc60cba0c5fcf27e1a9ae44ad97311b5734dde25b41a4913c"
+  url "https://github.com/bevanjkay/propresenter-presentation-builder/archive/refs/tags/v0.2.0.tar.gz"
+  sha256 "d6007801f4599d675a75bf85d40744d8bed41b442ed55581ce828d9b9d197e49"
   head "https://github.com/bevanjkay/propresenter-presentation-builder.git", branch: "main"
 
   bottle do
