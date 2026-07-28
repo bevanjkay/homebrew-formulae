@@ -32,11 +32,10 @@ class Ghpr < Formula
   test do
     return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
 
-    output = shell_output(bin/"ghpr 2>&1", 1)
-    assert_match "GITHUB_TOKEN environment variable is required", output
+    output = shell_output("#{bin}/ghpr 2>&1", 1)
+    assert_match "Please enter a type", output
 
-    ENV["GITHUB_TOKEN"] = "test"
-    output = shell_output(bin/"ghpr --help")
+    output = shell_output("#{bin}/ghpr --help")
     assert_match "Automate PR approvals and merges", output
   end
 end
