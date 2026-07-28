@@ -33,7 +33,7 @@ class FluroSongs < Formula
     # Fails in Linux CI with "No such device or address (os error 2)"
     return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
 
-    output = shell_output(bin/"fluro-songs", 1)
-    assert_match("Please provide FLURO_USERNAME and FLURO_PASSWORD in the environment", output)
+    output = shell_output("#{bin}/fluro-songs test 2>&1", 1)
+    assert_match("Please provide FLURO_ACCOUNT, FLURO_USERNAME and FLURO_PASSWORD in the environment", output)
   end
 end
