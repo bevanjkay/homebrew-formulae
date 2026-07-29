@@ -7,10 +7,11 @@ class T3CodeCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256               arm64_tahoe:   "315ab065454f6789f28cfa4b0573b9079cbe723898ff773b85ad3735bacab894"
-    sha256               arm64_sequoia: "da14bb3844d04b53d23145b6bfd9edcb2b848acdaf2ae60a2f507bd44d8aa62c"
-    sha256               arm64_sonoma:  "1084e74c5ee5b07a6fbcf15ef8fc7e181be3c2a1a8c05ab005a74b391a7f9e40"
-    sha256 cellar: :any, arm64_linux:   "12f04599857ed1b10e5a6a911b591942dfe70f050d87753fd986e96e053a2156"
+    sha256               arm64_tahoe:   "f16d4ef593a6584633ea59d928b04d9971e462849feab50a8d42ee6f8d2b98f0"
+    sha256               arm64_sequoia: "1b9662155859655d1cdc7659c8b22f55affc4131fe921f2c39dcb17e3d60cb6f"
+    sha256               arm64_sonoma:  "53ed62b7f197f99e1a82d08d9d346d1cb4a280b190f0424a2770fa2fda8a2d08"
+    sha256 cellar: :any, arm64_linux:   "f755ddb67e8ad020da2d2c94e0414c1162cd8f045431c09b90e96a7ff74db92f"
+    sha256 cellar: :any, x86_64_linux:  "dd6b9aa90bd3d2296cb9921db5d7d72eb5fcd8a9efd6a4fdadcee8bcbdcb54e8"
   end
 
   depends_on "node"
