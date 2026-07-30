@@ -5,8 +5,14 @@ class Imsg < Formula
   sha256 "5fa216f8664cbc8abf4b0fe396d24f6c96b7e962d8a7c924d965d3d9e5068a8e"
   license "MIT"
 
-  # SQLite.swift needs swift-tools-version 6.1, first shipped in Xcode 16.3.
-  depends_on macos: :sequoia
+  # A version-specified macOS requirement is satisfied on Linux, so the bare one
+  # is what actually keeps this off a platform it cannot support.
+  depends_on :macos
+
+  on_macos do
+    # SQLite.swift needs swift-tools-version 6.1, first shipped in Xcode 16.3.
+    depends_on macos: :sequoia
+  end
 
   # Vendored because SwiftPM cannot fetch dependencies during a Homebrew build.
   # Versions match upstream's Package.resolved for this tag.
