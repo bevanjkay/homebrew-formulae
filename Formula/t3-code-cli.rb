@@ -47,6 +47,17 @@ class T3CodeCli < Formula
       rm_r node_pty_prebuilds if node_pty_prebuilds.exist?
     end
 
+    # 0.0.31 added prebuilt resource-monitor binaries for every platform t3
+    # supports, keyed "<platform>-<arch>"; keep only the native one. t3 already
+    # treats a missing binary as a recoverable error (no linux-arm64 build is
+    # shipped at all), so this only drops resource monitoring where upstream
+    # does not support it either.
+    resource_monitor = libexec/"lib/node_modules/t3/dist/resource-monitor"
+    if resource_monitor.exist?
+      native = "#{OS.mac? ? "darwin" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
+      resource_monitor.each_child { |target| rm_r(target) if target.basename.to_s != native }
+    end
+
     generate_completions_from_executable(libexec/"bin/t3", "--completions")
 
     (bin/"t3").write_env_script libexec/"bin/t3", USE_BUILTIN_RIPGREP: "1"
