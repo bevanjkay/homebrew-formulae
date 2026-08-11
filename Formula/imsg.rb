@@ -28,8 +28,8 @@ class Imsg < Formula
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.5.tar.gz"
-    sha256 "81230573de9717e9a9f7980f4581355c042e234d252cddef69d54179ba5f54ea"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.6.tar.gz"
+    sha256 "3b82f6ca41349fce333fb6d7d6ad0580faf5e7efd1d76b0555cf7c38685853b3"
   end
 
   resource "SQLite.swift" do
@@ -44,7 +44,7 @@ class Imsg < Formula
               '.package(path: "vendor/Commander")'
       s.gsub! '.package(url: "https://github.com/stephencelis/SQLite.swift.git", from: "0.16.0")',
               '.package(path: "vendor/SQLite.swift")'
-      s.gsub! '.package(url: "https://github.com/PhoneNumberKit/PhoneNumberKit.git", from: "5.0.5")',
+      s.gsub! '.package(url: "https://github.com/PhoneNumberKit/PhoneNumberKit.git", from: "5.0.6")',
               '.package(path: "vendor/PhoneNumberKit")'
     end
 
