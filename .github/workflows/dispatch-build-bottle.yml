@@ -58,13 +58,13 @@ jobs:
       runners: ${{steps.runner-matrix.outputs.result}}
     steps:
       - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Prepare runner matrix
         id: runner-matrix
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs');
@@ -118,7 +118,7 @@ jobs:
           echo upload="${DISPATCH_BUILD_BOTTLE_UPLOAD}"
 
       - name: Pre-test steps
-        uses: Homebrew/actions/pre-build@2026.08.24.1
+        uses: Homebrew/actions/pre-build@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
         with:
           bottles-directory: ${{ env.BOTTLES_DIR }}
           cleanup: ${{ matrix.cleanup }}
@@ -135,7 +135,7 @@ jobs:
 
       - name: Post-build steps
         if: always()
-        uses: Homebrew/actions/post-build@2026.08.24.1
+        uses: Homebrew/actions/post-build@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
         with:
           runner: ${{ matrix.runner }}
           cleanup: ${{ matrix.cleanup }}
@@ -164,7 +164,7 @@ jobs:
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@2026.08.24.1
+        uses: Homebrew/actions/setup-homebrew@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
         with:
           core: false
           cask: false
@@ -179,7 +179,7 @@ jobs:
 
       - name: Configure Git user
         id: git-user-config
-        uses: Homebrew/actions/git-user-config@2026.08.24.1
+        uses: Homebrew/actions/git-user-config@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
         with:
           username: ${{ (github.actor != 'github-actions[bot]' && github.actor) || 'BkdBot' }}
 
@@ -205,7 +205,7 @@ jobs:
           echo "head_sha=$(git -C "$HOMEBREW_CORE_PATH" rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Push commits
-        uses: Homebrew/actions/git-try-push@2026.08.24.1
+        uses: Homebrew/actions/git-try-push@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
         with:
           token: ${{ github.token }}
           directory: ${{steps.set-up-homebrew.outputs.repository-path}}
@@ -213,7 +213,7 @@ jobs:
 
       - name: Open PR with bottle commit
         id: create-pr
-        uses: Homebrew/actions/create-pull-request@2026.08.24.1
+        uses: Homebrew/actions/create-pull-request@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
         with:
           token: ${{ github.token }}
           base: ${{github.ref}}
@@ -291,7 +291,7 @@ jobs:
     runs-on: ubuntu-slim
     steps:
       - name: Post comment on failure
-        uses: Homebrew/actions/post-comment@2026.08.24.1
+        uses: Homebrew/actions/post-comment@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           issue: ${{inputs.issue}}
