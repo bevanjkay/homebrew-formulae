@@ -17,11 +17,15 @@ class Untrunc < Formula
     ENV["CPPFLAGS"] = "-I#{formula_opt_include("ffmpeg")}"
     ENV["LDFLAGS"] = "-L#{formula_opt_lib("ffmpeg")}"
 
-    system "make"
+    # VER is derived from `git` upstream, which is absent in a tarball build,
+    # so pass it explicitly or `untrunc -V` reports an empty version.
+    system "make", "VER=#{version}"
     bin.install "untrunc"
   end
 
   test do
-    assert_match "Usage: untrunc", shell_output("#{bin}/untrunc 2>&1")
+    assert_match version.to_s, shell_output("#{bin}/untrunc -V")
+    # Invoked with no arguments it prints usage and exits 255.
+    assert_match "Usage: untrunc", shell_output("#{bin}/untrunc 2>&1", 255)
   end
 end
