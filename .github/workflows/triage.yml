@@ -15,7 +15,7 @@ jobs:
     environment: github_actions
     steps:
       - name: Label pull request
-        uses: Homebrew/actions/label-pull-requests@master
+        uses: Homebrew/actions/label-pull-requests@2026.08.24.1
         if: always()
         with:
           token: ${{ secrets.BOT_TOKEN }}
