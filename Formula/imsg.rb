@@ -1,14 +1,14 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.14.1.tar.gz"
-  sha256 "7ca1c9fe31e2331528b64b45663a7e0e5ca8b95fc7e07b67a709103fd4889aca"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.14.2.tar.gz"
+  sha256 "c419bfa400a7294371e4b22f33e906014968ee596d61c3df82fcbc62b4371ae8"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 arm64_tahoe:   "c812c326fe9306b0a9c1426bff434aa8114331346aa8a97b08ae36b14631cb1e"
-    sha256 arm64_sequoia: "aa9eb6c14ed6e872a93cf8d33a60cc66a9e799e38d12cd0824d122801557641e"
+    sha256 arm64_tahoe:   "734884f6b8a997835e1d147735dd4595584a4b43229f77980c1be716c074e812"
+    sha256 arm64_sequoia: "bf0b6c3e8cd4b0c8df10ce03aadd62dcae2fc913f6fc2cd1fc00178e39c365d4"
   end
 
   # A version-specified macOS requirement is satisfied on Linux, so the bare one
@@ -28,8 +28,8 @@ class Imsg < Formula
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.6.tar.gz"
-    sha256 "3b82f6ca41349fce333fb6d7d6ad0580faf5e7efd1d76b0555cf7c38685853b3"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.7.tar.gz"
+    sha256 "38f7a9b68932fb2f788e0985cc2eb0f00f14b53489e43e407aba3682607a27bb"
   end
 
   resource "SQLite.swift" do
@@ -44,7 +44,7 @@ class Imsg < Formula
               '.package(path: "vendor/Commander")'
       s.gsub! '.package(url: "https://github.com/stephencelis/SQLite.swift.git", from: "0.16.0")',
               '.package(path: "vendor/SQLite.swift")'
-      s.gsub! '.package(url: "https://github.com/PhoneNumberKit/PhoneNumberKit.git", from: "5.0.6")',
+      s.gsub! '.package(url: "https://github.com/PhoneNumberKit/PhoneNumberKit.git", from: "5.0.7")',
               '.package(path: "vendor/PhoneNumberKit")'
     end
 
