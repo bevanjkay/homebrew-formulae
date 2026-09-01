@@ -5,6 +5,12 @@ class Remindctl < Formula
   sha256 "1d525139879d8e1ad3a6cbb508106d129fca3c154c152cc1343bdd0f13abc92b"
   license "MIT"
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d3811b61c53a43e692f4887b65f824909a285fe2bb2f4451e541c0e3e8a6ba73"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "441b1a179b34543f03922dbc4770c412b49faae7e2814873416a67da91b16dba"
+  end
+
   depends_on :macos
 
   on_macos do
