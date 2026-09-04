@@ -40,11 +40,11 @@ class Imsg < Formula
   def install
     resources.each { |r| r.stage(buildpath/"vendor"/r.name) }
     inreplace "Package.swift" do |s|
-      s.gsub!(/\.package\(url: "https:\/\/github\.com\/steipete\/Commander\.git", from: "[^"]+"\)/,
+      s.gsub!(%r{\.package\(url: "https://github\.com/steipete/Commander\.git", from: "[^"]+"\)},
               '.package(path: "vendor/Commander")')
-      s.gsub!(/\.package\(url: "https:\/\/github\.com\/stephencelis\/SQLite\.swift\.git", from: "[^"]+"\)/,
+      s.gsub!(%r{\.package\(url: "https://github\.com/stephencelis/SQLite\.swift\.git", from: "[^"]+"\)},
               '.package(path: "vendor/SQLite.swift")')
-      s.gsub!(/\.package\(url: "https:\/\/github\.com\/PhoneNumberKit\/PhoneNumberKit\.git", from: "[^"]+"\)/,
+      s.gsub!(%r{\.package\(url: "https://github\.com/PhoneNumberKit/PhoneNumberKit\.git", from: "[^"]+"\)},
               '.package(path: "vendor/PhoneNumberKit")')
     end
 
