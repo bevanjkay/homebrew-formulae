@@ -1,14 +1,14 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.14.2.tar.gz"
-  sha256 "c419bfa400a7294371e4b22f33e906014968ee596d61c3df82fcbc62b4371ae8"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.15.1.tar.gz"
+  sha256 "7e83b716a0ad7006a7ee0951948df9dd5aa7a29ca4243a77ed9a99a8155d2592"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 arm64_tahoe:   "734884f6b8a997835e1d147735dd4595584a4b43229f77980c1be716c074e812"
-    sha256 arm64_sequoia: "bf0b6c3e8cd4b0c8df10ce03aadd62dcae2fc913f6fc2cd1fc00178e39c365d4"
+    sha256 arm64_tahoe:   "aff2af9ec48503fb90d960d046e9d4fa795efd2f8b9d524d805d01141bbb6ccd"
+    sha256 arm64_sequoia: "3691bedddfd94703364bef06e4432ab1f896fea3c1992e47fa9af5896046a88c"
   end
 
   # A version-specified macOS requirement is satisfied on Linux, so the bare one
@@ -28,8 +28,8 @@ class Imsg < Formula
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.7.tar.gz"
-    sha256 "38f7a9b68932fb2f788e0985cc2eb0f00f14b53489e43e407aba3682607a27bb"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.8.tar.gz"
+    sha256 "b595007d53e7e6d3a3af44aab08e698f3ce3eb8429ab391ce29b359c152838b3"
   end
 
   resource "SQLite.swift" do
@@ -40,12 +40,12 @@ class Imsg < Formula
   def install
     resources.each { |r| r.stage(buildpath/"vendor"/r.name) }
     inreplace "Package.swift" do |s|
-      s.gsub! '.package(url: "https://github.com/steipete/Commander.git", from: "0.2.4")',
-              '.package(path: "vendor/Commander")'
-      s.gsub! '.package(url: "https://github.com/stephencelis/SQLite.swift.git", from: "0.16.0")',
-              '.package(path: "vendor/SQLite.swift")'
-      s.gsub! '.package(url: "https://github.com/PhoneNumberKit/PhoneNumberKit.git", from: "5.0.7")',
-              '.package(path: "vendor/PhoneNumberKit")'
+      s.gsub!(%r{\.package\(url: "https://github\.com/steipete/Commander\.git", from: "[^"]+"\)},
+              '.package(path: "vendor/Commander")')
+      s.gsub!(%r{\.package\(url: "https://github\.com/stephencelis/SQLite\.swift\.git", from: "[^"]+"\)},
+              '.package(path: "vendor/SQLite.swift")')
+      s.gsub!(%r{\.package\(url: "https://github\.com/PhoneNumberKit/PhoneNumberKit\.git", from: "[^"]+"\)},
+              '.package(path: "vendor/PhoneNumberKit")')
     end
 
     # Upstream patches its own SwiftPM checkouts before building; the resource
