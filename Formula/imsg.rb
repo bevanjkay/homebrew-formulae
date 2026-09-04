@@ -28,8 +28,8 @@ class Imsg < Formula
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.7.tar.gz"
-    sha256 "38f7a9b68932fb2f788e0985cc2eb0f00f14b53489e43e407aba3682607a27bb"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.8.tar.gz"
+    sha256 "b595007d53e7e6d3a3af44aab08e698f3ce3eb8429ab391ce29b359c152838b3"
   end
 
   resource "SQLite.swift" do
@@ -40,12 +40,12 @@ class Imsg < Formula
   def install
     resources.each { |r| r.stage(buildpath/"vendor"/r.name) }
     inreplace "Package.swift" do |s|
-      s.gsub! '.package(url: "https://github.com/steipete/Commander.git", from: "0.2.4")',
-              '.package(path: "vendor/Commander")'
-      s.gsub! '.package(url: "https://github.com/stephencelis/SQLite.swift.git", from: "0.16.0")',
-              '.package(path: "vendor/SQLite.swift")'
-      s.gsub! '.package(url: "https://github.com/PhoneNumberKit/PhoneNumberKit.git", from: "5.0.7")',
-              '.package(path: "vendor/PhoneNumberKit")'
+      s.gsub!(/\.package\(url: "https:\/\/github\.com\/steipete\/Commander\.git", from: "[^"]+"\)/,
+              '.package(path: "vendor/Commander")')
+      s.gsub!(/\.package\(url: "https:\/\/github\.com\/stephencelis\/SQLite\.swift\.git", from: "[^"]+"\)/,
+              '.package(path: "vendor/SQLite.swift")')
+      s.gsub!(/\.package\(url: "https:\/\/github\.com\/PhoneNumberKit\/PhoneNumberKit\.git", from: "[^"]+"\)/,
+              '.package(path: "vendor/PhoneNumberKit")')
     end
 
     # Upstream patches its own SwiftPM checkouts before building; the resource
