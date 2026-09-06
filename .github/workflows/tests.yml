@@ -16,6 +16,10 @@ concurrency:
 
 permissions: {}
 
+defaults:
+  run:
+    shell: bash -xeuo pipefail {0}
+
 jobs:
   check-syntax:
     permissions:
@@ -96,7 +100,7 @@ jobs:
     container: ${{ matrix.container && matrix.container != '' && matrix.container || null }} # zizmor: ignore[unpinned-images] trusted Homebrew runner image
     defaults:
       run:
-        shell: bash
+        shell: bash -xeuo pipefail {0}
         working-directory: ${{ matrix.working_directory || github.workspace }}
     env:
       BOTTLES_DIR: ${{ matrix.working_directory || github.workspace }}/bottles
