@@ -1,8 +1,8 @@
 class SkillsNpm < Formula
   desc "Install agent skills from npm"
   homepage "https://github.com/antfu/skills-npm"
-  url "https://registry.npmjs.org/skills-npm/-/skills-npm-1.2.0.tgz"
-  sha256 "4fd42336219a215dc3103bc36778d92ba00929b46387a949deda10f86957dbfb"
+  url "https://registry.npmjs.org/skills-npm/-/skills-npm-1.2.1.tgz"
+  sha256 "7fe27c4b4fea45a13419db82a723454bcb86f5d9d3181ab482aa01940017a4b8"
   license "MIT"
   head "https://github.com/antfu/skills-npm.git", branch: "main"
 
