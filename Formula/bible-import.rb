@@ -111,7 +111,6 @@ class BibleImport < Formula
               "target_arch='universal2' if sys.platform == 'darwin' else None,",
               "target_arch=None,"
 
-    python3 = "python3.14"
     venv = virtualenv_create(buildpath, python3)
     venv.pip_install resources
 
