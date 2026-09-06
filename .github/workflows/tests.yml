@@ -86,6 +86,7 @@ jobs:
     needs: setup-matrix
     permissions:
       contents: read
+      packages: read
       pull-requests: read
     strategy:
       fail-fast: false
@@ -106,10 +107,24 @@ jobs:
           bottles-directory: ${{ env.BOTTLES_DIR }}
           cleanup: ${{ matrix.cleanup_before }}
 
+      - name: Base64-encode GITHUB_TOKEN for HOMEBREW_DOCKER_REGISTRY_TOKEN
+        id: base64-encode
+        if: github.event_name == 'pull_request'
+        # No `-x`: tracing would print the encoded token before `add-mask` registers it.
+        shell: bash -euo pipefail {0}
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          base64_token=$(echo -n "${TOKEN}" | base64 | tr -d "\n")
+          echo "::add-mask::${base64_token}"
+          echo "token=${base64_token}" >> "${GITHUB_OUTPUT}"
+
       - run: brew test-bot --only-formulae --root-url='https://ghcr.io/v2/bevanjkay/formulae'
         id: brew-test-bot-formulae
         if: github.event_name == 'pull_request'
         working-directory: ${{ env.BOTTLES_DIR }}
+        env:
+          HOMEBREW_DOCKER_REGISTRY_TOKEN: ${{ steps.base64-encode.outputs.token }}
 
       - name: Post-build steps
         if: >
