@@ -123,7 +123,6 @@ class BibleImportPrerelease < Formula
               "        import os
         return Path(os.path.expanduser('~')) / 'Library/Application Support/RenewedVision/RVBibles/v2/'"
 
-    python3 = "python3.13"
     venv = virtualenv_create(buildpath, python3)
     venv.pip_install resources
 
