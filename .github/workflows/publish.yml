@@ -11,7 +11,9 @@ concurrency:
 
 permissions:
   actions: read
+  attestations: write # for actions/attest
   contents: write
+  id-token: write # for actions/attest
   packages: write
   pull-requests: write
 
@@ -54,12 +56,18 @@ jobs:
         run: |
           brew pr-pull \
             --debug \
+            --retain-bottle-dir \
             --clean \
             --no-cherry-pick \
             --tap="$GH_REPO" \
             --workflows=tests.yml \
             "$PR"
           echo "head_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Generate build provenance
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-path: "${{ steps.brew-pr-pull.outputs.bottle_path }}/*.tar.gz"
 
       - name: Push commits
         uses: Homebrew/actions/git-try-push@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
