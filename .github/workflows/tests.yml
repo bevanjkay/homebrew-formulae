@@ -106,7 +106,7 @@ jobs:
           bottles-directory: ${{ env.BOTTLES_DIR }}
           cleanup: ${{ matrix.cleanup_before }}
 
-      - run: brew test-bot --only-formulae --root-url='https://ghcr.io/v2/bevanjkay/homebrew-formulae'
+      - run: brew test-bot --only-formulae --root-url='https://ghcr.io/v2/bevanjkay/formulae'
         id: brew-test-bot-formulae
         if: github.event_name == 'pull_request'
         working-directory: ${{ env.BOTTLES_DIR }}
