@@ -1,14 +1,14 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.15.1.tar.gz"
-  sha256 "7e83b716a0ad7006a7ee0951948df9dd5aa7a29ca4243a77ed9a99a8155d2592"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.15.3.tar.gz"
+  sha256 "bb47544194b244053b21695b229bfb69cf00671c9453de9192cb55dd08f389d8"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 arm64_tahoe:   "aff2af9ec48503fb90d960d046e9d4fa795efd2f8b9d524d805d01141bbb6ccd"
-    sha256 arm64_sequoia: "3691bedddfd94703364bef06e4432ab1f896fea3c1992e47fa9af5896046a88c"
+    sha256 arm64_tahoe:   "f5970e861ccdfb160a90e0750138861a8a653a07e1e695671f606d99a1e875cd"
+    sha256 arm64_sequoia: "2e092aa870193f1af9b56423c097112086141e46e190c30ea86536e9fc1c74cf"
   end
 
   # A version-specified macOS requirement is satisfied on Linux, so the bare one
