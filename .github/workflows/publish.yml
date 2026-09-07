@@ -35,12 +35,14 @@ permissions:
   attestations: write # for actions/attest
   contents: write
   id-token: write # for actions/attest
+  issues: write # for Homebrew/actions/post-comment
   packages: write
   pull-requests: write
 
 env:
   GH_REPO: ${{ github.repository }}
   PR: ${{ inputs.pull_request }}
+  RUN_URL: ${{ github.event.repository.html_url }}/actions/runs/${{ github.run_id }}
 
 jobs:
   pr-pull:
@@ -53,6 +55,15 @@ jobs:
         shell: bash
         working-directory: /github/home
     steps:
+      - name: Post comment once started
+        uses: Homebrew/actions/post-comment@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
+        with:
+          token: ${{ github.token }}
+          issue: ${{ inputs.pull_request }}
+          body: ":shipit: @${{ github.actor }} has [requested bottles to be published to this PR](${{ env.RUN_URL }})."
+          bot_body: ":robot: An automated task has [requested bottles to be published to this PR](${{ env.RUN_URL }})."
+          bot: github-actions[bot]
+
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
@@ -170,3 +181,13 @@ jobs:
             --match-head-commit="$EXPECTED_SHA" \
             --merge \
             "$PR"
+
+      - name: Post comment on failure
+        if: failure()
+        uses: Homebrew/actions/post-comment@a657b8b0cd35d0f65cce41fce9b24cf054b49869 # 2026.08.24.1
+        with:
+          token: ${{ github.token }}
+          issue: ${{ inputs.pull_request }}
+          body: ":warning: @${{ github.actor }} bottle publish [failed](${{ env.RUN_URL }})."
+          bot_body: ":warning: Bottle publish [failed](${{ env.RUN_URL }})."
+          bot: github-actions[bot]

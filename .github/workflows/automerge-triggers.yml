@@ -1,0 +1,15 @@
+name: Trigger automerge
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+
+permissions: {}
+
+jobs:
+  check:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-slim
+    steps:
+      - run: true # This suffices to trigger `automerge.yml`.
