@@ -1,0 +1,205 @@
+name: automerge
+
+on:
+  workflow_run:
+    workflows:
+      - brew test-bot
+      - Trigger automerge
+    types:
+      - completed
+
+defaults:
+  run:
+    shell: bash -xeuo pipefail {0}
+
+concurrency:
+  group: automerge-${{ github.event.workflow_run.event }}-${{ github.event.workflow_run.id }}
+  cancel-in-progress: true
+
+env:
+  GH_REPO: ${{ github.repository }}
+  GH_NO_UPDATE_NOTIFIER: 1
+  GH_PROMPT_DISABLED: 1
+
+permissions: {}
+
+jobs:
+  status-check:
+    runs-on: ubuntu-slim
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      startsWith(github.event.workflow_run.event, 'pull_request')
+    outputs:
+      pull-number: ${{ steps.pr.outputs.number }}
+      publishable: ${{ steps.pr.outputs.publishable }}
+      approved: ${{ steps.approval-status.outputs.approved }}
+      complete: ${{ steps.approval-status.outputs.complete }}
+      mergeable: ${{ steps.approval-status.outputs.mergeable }}
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Find pull request and check labels
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          pr_data="$(
+            gh api \
+              --header 'Accept: application/vnd.github+json' \
+              --header 'X-GitHub-Api-Version: 2022-11-28' \
+              "repos/$GH_REPO/commits/$HEAD_SHA/pulls" \
+              --jq 'map(select(.state == "open")) | first'
+          )"
+
+          if [[ -z "$pr_data" ]] || [[ "$pr_data" = "null" ]]
+          then
+            echo "::notice ::No open pull request found for $HEAD_SHA."
+            echo "publishable=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          publishable=true
+          while IFS='' read -r label
+          do
+            if [[ "$label" = "automerge-skip" ]] ||
+               [[ "$label" = "CI-published-bottle-commits" ]]
+            then
+              publishable=false
+              break
+            fi
+          done < <(jq --raw-output '.labels[].name' <<< "$pr_data")
+
+          {
+            echo "number=$(jq --raw-output .number <<< "$pr_data")"
+            echo "publishable=$publishable"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Get approval and CI status
+        if: steps.pr.outputs.publishable == 'true'
+        id: approval-status
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ steps.pr.outputs.number }}
+          QUERY: |-
+            query ($owner: String!, $name: String!, $pr: Int!) {
+              repository(owner: $owner, name: $name) {
+                pullRequest(number: $pr) {
+                  commits(last: 1) {
+                    nodes {
+                      commit {
+                        checkSuites(last: 100) {
+                          nodes {
+                            conclusion
+                            workflowRun {
+                              workflow {
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+        run: |
+          attempt=0
+          max_attempts=5
+          timeout=5
+          GITHUB_REPOSITORY_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}"/}"
+
+          while [[ "$attempt" -lt "$max_attempts" ]]
+          do
+            attempt=$(( attempt + 1 ))
+
+            # Only reviews from users with write access count, as anyone can
+            # submit an approving review on a public repository.
+            approved="$(
+              gh api \
+                --header 'Accept: application/vnd.github+json' \
+                --header 'X-GitHub-Api-Version: 2022-11-28' \
+                "repos/$GH_REPO/pulls/$PR/reviews?per_page=100" \
+                --jq 'map(select(.author_association == "OWNER" or
+                                 .author_association == "MEMBER" or
+                                 .author_association == "COLLABORATOR")) |
+                        group_by(.user.login) | map(last.state) |
+                          any(. == "APPROVED") and all(. != "CHANGES_REQUESTED")'
+            )"
+            complete="$(
+              gh api graphql \
+                --field owner="$GITHUB_REPOSITORY_OWNER" \
+                --field name="$GITHUB_REPOSITORY_NAME" \
+                --field pr="$PR" \
+                --raw-field query="$QUERY" \
+                --jq '.data.repository.pullRequest.commits.nodes[].commit.checkSuites.nodes |
+                        map(select(.workflowRun.workflow.name == "brew test-bot")) |
+                          last | .conclusion == "SUCCESS"'
+            )"
+            # See https://github.com/octokit/octokit.net/issues/1763 for possible `mergeable_state` values.
+            mergeable="$(
+              gh api \
+                --header 'Accept: application/vnd.github+json' \
+                --header 'X-GitHub-Api-Version: 2022-11-28' \
+                "repos/$GH_REPO/pulls/$PR" \
+                --jq '(.mergeable_state == "clean") and (.draft | not)'
+            )"
+
+            if [[ "$approved" = "true" ]] &&
+               [[ "$complete" = "true" ]] &&
+               [[ "$mergeable" = "true" ]] ||
+               [[ "$attempt" -eq "$max_attempts" ]]
+            then
+              break
+            fi
+
+            echo "::notice ::PR #$PR status:"
+            echo "::notice ::Approved?    $approved"
+            echo "::notice ::CI Complete? $complete"
+            echo "::notice ::Mergeable?   $mergeable"
+            echo "::notice ::Checking again in ${timeout}s..."
+            sleep "$timeout"
+            timeout=$(( timeout * 2 ))
+          done
+
+          {
+            echo "approved=$approved"
+            echo "complete=$complete"
+            echo "mergeable=$mergeable"
+          } >> "$GITHUB_OUTPUT"
+
+  merge:
+    runs-on: ubuntu-slim
+    needs: status-check
+    if: >
+      needs.status-check.outputs.publishable == 'true' &&
+      needs.status-check.outputs.approved == 'true' &&
+      needs.status-check.outputs.complete == 'true' &&
+      needs.status-check.outputs.mergeable == 'true'
+    permissions:
+      actions: write # to dispatch publish.yml
+    steps:
+      - name: Dispatch publish workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ needs.status-check.outputs.pull-number }}
+        run: |
+          RUN_NAME="Publish PR #$PR"
+          export RUN_NAME
+          active_runs="$(
+            gh run list \
+              --workflow=publish.yml \
+              --json displayTitle,status \
+              --jq 'map(select(.displayTitle == env.RUN_NAME and
+                               (.status == "queued" or .status == "in_progress" or .status == "waiting"))) |
+                      length'
+          )"
+          if [[ "$active_runs" != "0" ]]
+          then
+            echo "::notice ::A publish run for PR #$PR is already active."
+            exit 0
+          fi
+
+          gh workflow run publish.yml --ref main --field pull_request="$PR"
