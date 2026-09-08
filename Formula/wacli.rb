@@ -8,11 +8,11 @@ class Wacli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c9a04a7dd56cdc2bb99bd62eb78434608cd614bc75c7d740dcbcbf91469e9dd7"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d25c4731e38da7a93b1bbb1c7b6c2996ec5230ad583d00a8f749a8a60c3663e4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d882366ddf768e7ecc4b9cd79fc5ce130c44e3aeacb695aa18cc1197f5157145"
-    sha256 cellar: :any,                 arm64_linux:   "53b3aa64de241135b84c4178f13c4f1f7a1f06ff67dbe1cc1d28aa8f6f197e88"
-    sha256 cellar: :any,                 x86_64_linux:  "e7967ffbdd20c9bc9b8ba6c81d5fd5ab6c1f62784da0d9dc2b51c3b51b9003f5"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ecec21598733f3937442dc57ae6e0cea66bb2a4b0f26ef1f5c3261f8537a1d89"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2272abf27c6e04adee7cb4892b8b19456677d8ea93fc5827145d194481421a5b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "50df1a0f6dc93e858df6f731e7832cfefe91052fee6e29e91d2db132021af906"
+    sha256 cellar: :any,                 arm64_linux:   "f14e209b05a550be3ccde0ada0a885bd050737aa3c6b54e6a1d2594f15484224"
+    sha256 cellar: :any,                 x86_64_linux:  "46b71388e763ed48f1c416d441ec7d68fb73bfa91c980ac4ab1b50d7c0c2778b"
   end
 
   depends_on "go" => :build
