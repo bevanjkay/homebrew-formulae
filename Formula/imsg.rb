@@ -7,8 +7,8 @@ class Imsg < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 arm64_tahoe:   "f5970e861ccdfb160a90e0750138861a8a653a07e1e695671f606d99a1e875cd"
-    sha256 arm64_sequoia: "2e092aa870193f1af9b56423c097112086141e46e190c30ea86536e9fc1c74cf"
+    sha256 arm64_tahoe:   "e4136c29436b450f30fe75147e3c7de68520e3182029d1a296122c095eb4f390"
+    sha256 arm64_sequoia: "b7517a0a4b618c8540f8d3e34edc6ec5bb26e8432e250eade65ba25832e6c385"
   end
 
   # A version-specified macOS requirement is satisfied on Linux, so the bare one
