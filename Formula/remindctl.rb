@@ -1,14 +1,14 @@
 class Remindctl < Formula
   desc "Command-line access to Apple Reminders"
   homepage "https://github.com/openclaw/remindctl"
-  url "https://github.com/openclaw/remindctl/archive/refs/tags/v0.3.6.tar.gz"
-  sha256 "ad0cb1d57f5b112f351a9e16afcc8d1df2006bb728ea8675db4d7bab9f1cbf4a"
+  url "https://github.com/openclaw/remindctl/archive/refs/tags/v0.3.7.tar.gz"
+  sha256 "989a353f4d9d5f822cee00fc1e030d71387a38ce02c5697e209ffde38d4533e5"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b287fbb3cb7fc837143c06ac6c11724830db469ba637b93acd3a869f9dc6d958"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8c662d3fa81b7482c934c67571b2dc74eb4b44ad4693ba8f8c6675c42a50ad26"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "75dc17fc88fade782f03a57e74621df1ca5eb0291e342c6a2670b3892d7763ad"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "427a1470720d2adad0ff73647f8ea7d886a499ffdc9e1a6779d6e1efee8fdb95"
   end
 
   depends_on :macos
