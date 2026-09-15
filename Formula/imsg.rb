@@ -28,8 +28,8 @@ class Imsg < Formula
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.8.tar.gz"
-    sha256 "b595007d53e7e6d3a3af44aab08e698f3ce3eb8429ab391ce29b359c152838b3"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.9.tar.gz"
+    sha256 "2a0e9c155c4c7aafdb70756bb2034422409931d544154ec873b473e0e7515a0c"
   end
 
   resource "SQLite.swift" do
@@ -38,20 +38,21 @@ class Imsg < Formula
   end
 
   def install
-    resources.each { |r| r.stage(buildpath/"vendor"/r.name) }
+    # patch-deps.sh takes a SwiftPM scratch path and patches "checkouts" beneath
+    # it, so stage the vendored dependencies where it expects to find them.
+    resources.each { |r| r.stage(buildpath/"vendor/checkouts"/r.name) }
     inreplace "Package.swift" do |s|
       s.gsub!(%r{\.package\(url: "https://github\.com/steipete/Commander\.git", from: "[^"]+"\)},
-              '.package(path: "vendor/Commander")')
+              '.package(path: "vendor/checkouts/Commander")')
       s.gsub!(%r{\.package\(url: "https://github\.com/stephencelis/SQLite\.swift\.git", from: "[^"]+"\)},
-              '.package(path: "vendor/SQLite.swift")')
+              '.package(path: "vendor/checkouts/SQLite.swift")')
       s.gsub!(%r{\.package\(url: "https://github\.com/PhoneNumberKit/PhoneNumberKit\.git", from: "[^"]+"\)},
-              '.package(path: "vendor/PhoneNumberKit")')
+              '.package(path: "vendor/checkouts/PhoneNumberKit")')
     end
 
     # Upstream patches its own SwiftPM checkouts before building; the resource
     # bundle lookup fix in there is what lets imsg find its metadata at runtime.
-    inreplace "scripts/patch-deps.sh", ".build/checkouts", "vendor"
-    system "scripts/patch-deps.sh"
+    system "scripts/patch-deps.sh", "vendor"
 
     system "scripts/generate-version.sh"
     system "swift", "build", "--disable-sandbox", "--configuration", "release", "--product", "imsg"
