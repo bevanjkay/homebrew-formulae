@@ -1,8 +1,8 @@
 class T3CodeCli < Formula
   desc "CLI tool for T3 Code"
   homepage "https://t3.codes/"
-  url "https://registry.npmjs.org/t3/-/t3-0.0.40.tgz"
-  sha256 "51a24c2cf5933c6964ccd5f2b2ba12d071ca562c803fce46ef0a34fe0776f427"
+  url "https://registry.npmjs.org/t3/-/t3-0.0.42.tgz"
+  sha256 "d923ecad696895bbeb19c80b983a6d791fe0366545b3556797ce278cf596fd70"
   license "MIT"
 
   bottle do
