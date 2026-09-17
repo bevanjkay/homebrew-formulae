@@ -18,45 +18,10 @@ class T3CodeCli < Formula
   depends_on "ripgrep"
 
   def install
-    # t3's package.json uses pnpm-style "parent>child" overrides keys that npm
-    # rejects as invalid package names during `npm pack`. Strip them; the
-    # runtime dependencies are already pinned via the `dependencies` field.
-    pkg = JSON.parse((buildpath/"package.json").read)
-    pkg.delete("overrides")
-    (buildpath/"package.json").atomic_write(JSON.pretty_generate(pkg))
-
+    # 0.0.42 turned t3 into a launcher: the real CLI is a self-contained
+    # executable in the @t3code/t3-<platform>-<arch> optional dependency, which
+    # npm resolves to the native one and which ships only native artefacts.
     system "npm", "install", *std_npm_args
-
-    claude_agent_sdk_linux_musl = libexec/"lib/node_modules/t3/node_modules/@anthropic-ai/" \
-                                          "claude-agent-sdk-linux-#{Hardware::CPU.arm? ? "arm64" : "x64"}-musl"
-    msgpackr_extract_linux = libexec/"lib/node_modules/t3/node_modules/@msgpackr-extract/" \
-                                     "msgpackr-extract-linux-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
-    node_pty_prebuilds = libexec/"lib/node_modules/t3/node_modules/node-pty/prebuilds"
-    node_pty = libexec/"lib/node_modules/t3/node_modules/node-pty"
-
-    if OS.mac?
-      if Hardware::CPU.arm?
-        rm_r node_pty_prebuilds/"darwin-x64"
-      else
-        rm_r node_pty_prebuilds/"darwin-arm64"
-      end
-    elsif OS.linux?
-      rm_r claude_agent_sdk_linux_musl if claude_agent_sdk_linux_musl.exist?
-      rm_r msgpackr_extract_linux if msgpackr_extract_linux.exist?
-      system "npm", "rebuild", "--prefix", node_pty, "--build-from-source"
-      rm_r node_pty_prebuilds if node_pty_prebuilds.exist?
-    end
-
-    # 0.0.31 added prebuilt resource-monitor binaries for every platform t3
-    # supports, keyed "<platform>-<arch>"; keep only the native one. t3 already
-    # treats a missing binary as a recoverable error (no linux-arm64 build is
-    # shipped at all), so this only drops resource monitoring where upstream
-    # does not support it either.
-    resource_monitor = libexec/"lib/node_modules/t3/dist/resource-monitor"
-    if resource_monitor.exist?
-      native = "#{OS.mac? ? "darwin" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
-      resource_monitor.each_child { |target| rm_r(target) if target.basename.to_s != native }
-    end
 
     generate_completions_from_executable(libexec/"bin/t3", "--completions")
 
@@ -72,11 +37,9 @@ class T3CodeCli < Formula
   end
 
   test do
-    require "json"
     require "timeout"
 
-    package_json = JSON.parse((libexec/"lib/node_modules/t3/package.json").read)
-    assert_equal version.to_s, package_json["version"]
+    assert_match "t3 v#{version}", shell_output("#{bin}/t3 --version")
 
     port = free_port
     read, write = IO.pipe
