@@ -18,14 +18,29 @@ class T3CodeCli < Formula
   depends_on "ripgrep"
 
   def install
-    # 0.0.42 turned t3 into a launcher: the real CLI is a self-contained
-    # executable in the @t3code/t3-<platform>-<arch> optional dependency, which
-    # npm resolves to the native one and which ships only native artefacts.
     system "npm", "install", *std_npm_args
 
-    generate_completions_from_executable(libexec/"bin/t3", "--completions")
+    # The real CLI is the self-contained executable in the
+    # @t3code/t3-<platform>-<arch> optional dependency, which npm resolves to
+    # the native one. It loads client/, resource-monitor/ and its native
+    # node_modules from its own directory, so hoist it to libexec and run it
+    # directly rather than through the launcher: under npm's nesting the
+    # install name Homebrew relocates libfff_c.dylib to overruns the header
+    # padding it was linked with, and relocation fails.
+    platform = "#{OS.mac? ? "darwin" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
+    payload = libexec/"lib/node_modules/t3/node_modules/@t3code/t3-#{platform}"
+    odie "npm skipped the @t3code/t3-#{platform} optional dependency!" unless payload.exist?
 
-    (bin/"t3").write_env_script libexec/"bin/t3", USE_BUILTIN_RIPGREP: "1"
+    payload.children.each { |child| mv child, libexec }
+    rm_r [libexec/"bin", libexec/"lib"]
+
+    # The musl builds need musl's libc.so, which a glibc system does not have
+    # and `brew linkage` rejects; the glibc build beside each one is what loads.
+    libexec.glob("node_modules/**/*musl*").each { |path| rm_r path if path.exist? } if OS.linux?
+
+    generate_completions_from_executable(libexec/"t3", "--completions")
+
+    (bin/"t3").write_env_script libexec/"t3", USE_BUILTIN_RIPGREP: "1"
   end
 
   service do
