@@ -1,66 +1,45 @@
 class T3CodeCli < Formula
   desc "CLI tool for T3 Code"
   homepage "https://t3.codes/"
-  url "https://registry.npmjs.org/t3/-/t3-0.0.40.tgz"
-  sha256 "51a24c2cf5933c6964ccd5f2b2ba12d071ca562c803fce46ef0a34fe0776f427"
+  url "https://registry.npmjs.org/t3/-/t3-0.0.42.tgz"
+  sha256 "d923ecad696895bbeb19c80b983a6d791fe0366545b3556797ce278cf596fd70"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256               arm64_tahoe:   "fe84ee18e2b5374fc6dc54d826356a66f23d1bde9b056d340812a20eeed6676c"
-    sha256               arm64_sequoia: "3a3bdb280ddd80e333d15c16ea4b46dcaf763fe01e83bb9c7c8c847e8104b5d0"
-    sha256               arm64_sonoma:  "c4bd93970e5403ee31983e41b2b64ae792fff3494b9e8c684f16636ba2dbcf82"
-    sha256 cellar: :any, arm64_linux:   "e3b65f017262431a5c536e0b1fa2f7af55032a8a5b70768e4ea0c232cc12cf5d"
-    sha256 cellar: :any, x86_64_linux:  "5c28dcd8b38b55c1b6b6aedbe8389bacfddd17880cc3a916a266d840efda1d5b"
+    sha256                               arm64_tahoe:   "dd535383c7c540be94730993fbe5e6d703304743f66018fe3c7f68fa69bb49be"
+    sha256                               arm64_sequoia: "6fb8c106fe998df64a756c5b28424d903b6b77231621a7fcb0bc59e2b870ee08"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a312cbf88dd2850571eea5f8a171d33d1f43c9feb93a78b79ab532cd18da483d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dfc61d705210c1227a1040082d1b006df62e3bb0ed87c56d549fbea52e1cb148"
   end
 
   depends_on "node"
   depends_on "ripgrep"
 
   def install
-    # t3's package.json uses pnpm-style "parent>child" overrides keys that npm
-    # rejects as invalid package names during `npm pack`. Strip them; the
-    # runtime dependencies are already pinned via the `dependencies` field.
-    pkg = JSON.parse((buildpath/"package.json").read)
-    pkg.delete("overrides")
-    (buildpath/"package.json").atomic_write(JSON.pretty_generate(pkg))
-
     system "npm", "install", *std_npm_args
 
-    claude_agent_sdk_linux_musl = libexec/"lib/node_modules/t3/node_modules/@anthropic-ai/" \
-                                          "claude-agent-sdk-linux-#{Hardware::CPU.arm? ? "arm64" : "x64"}-musl"
-    msgpackr_extract_linux = libexec/"lib/node_modules/t3/node_modules/@msgpackr-extract/" \
-                                     "msgpackr-extract-linux-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
-    node_pty_prebuilds = libexec/"lib/node_modules/t3/node_modules/node-pty/prebuilds"
-    node_pty = libexec/"lib/node_modules/t3/node_modules/node-pty"
+    # The real CLI is the self-contained executable in the
+    # @t3code/t3-<platform>-<arch> optional dependency, which npm resolves to
+    # the native one. It loads client/, resource-monitor/ and its native
+    # node_modules from its own directory, so hoist it to libexec and run it
+    # directly rather than through the launcher: under npm's nesting the
+    # install name Homebrew relocates libfff_c.dylib to overruns the header
+    # padding it was linked with, and relocation fails.
+    platform = "#{OS.mac? ? "darwin" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
+    payload = libexec/"lib/node_modules/t3/node_modules/@t3code/t3-#{platform}"
+    odie "npm skipped the @t3code/t3-#{platform} optional dependency!" unless payload.exist?
 
-    if OS.mac?
-      if Hardware::CPU.arm?
-        rm_r node_pty_prebuilds/"darwin-x64"
-      else
-        rm_r node_pty_prebuilds/"darwin-arm64"
-      end
-    elsif OS.linux?
-      rm_r claude_agent_sdk_linux_musl if claude_agent_sdk_linux_musl.exist?
-      rm_r msgpackr_extract_linux if msgpackr_extract_linux.exist?
-      system "npm", "rebuild", "--prefix", node_pty, "--build-from-source"
-      rm_r node_pty_prebuilds if node_pty_prebuilds.exist?
-    end
+    payload.children.each { |child| mv child, libexec }
+    rm_r [libexec/"bin", libexec/"lib"]
 
-    # 0.0.31 added prebuilt resource-monitor binaries for every platform t3
-    # supports, keyed "<platform>-<arch>"; keep only the native one. t3 already
-    # treats a missing binary as a recoverable error (no linux-arm64 build is
-    # shipped at all), so this only drops resource monitoring where upstream
-    # does not support it either.
-    resource_monitor = libexec/"lib/node_modules/t3/dist/resource-monitor"
-    if resource_monitor.exist?
-      native = "#{OS.mac? ? "darwin" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
-      resource_monitor.each_child { |target| rm_r(target) if target.basename.to_s != native }
-    end
+    # The musl builds need musl's libc.so, which a glibc system does not have
+    # and `brew linkage` rejects; the glibc build beside each one is what loads.
+    libexec.glob("node_modules/**/*musl*").each { |path| rm_r path if path.exist? } if OS.linux?
 
-    generate_completions_from_executable(libexec/"bin/t3", "--completions")
+    generate_completions_from_executable(libexec/"t3", "--completions")
 
-    (bin/"t3").write_env_script libexec/"bin/t3", USE_BUILTIN_RIPGREP: "1"
+    (bin/"t3").write_env_script libexec/"t3", USE_BUILTIN_RIPGREP: "1"
   end
 
   service do
@@ -72,11 +51,9 @@ class T3CodeCli < Formula
   end
 
   test do
-    require "json"
     require "timeout"
 
-    package_json = JSON.parse((libexec/"lib/node_modules/t3/package.json").read)
-    assert_equal version.to_s, package_json["version"]
+    assert_match "t3 v#{version}", shell_output("#{bin}/t3 --version")
 
     port = free_port
     read, write = IO.pipe
