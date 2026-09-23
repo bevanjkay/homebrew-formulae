@@ -1,14 +1,14 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.15.6.tar.gz"
-  sha256 "f0df34e3a69f1e331fde285eaa99782c29520ef591a69f50fe16f0b70ba6d021"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.15.8.tar.gz"
+  sha256 "2e7eb01ca25642f410571ceff92c0ae4c6383fb2831e36641e4ac0d5d5ba448e"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 arm64_tahoe:   "b0f8eec061062736f9c2949b631fa5e78fcb009ebb7fca0753372de939f77b96"
-    sha256 arm64_sequoia: "1f0977ce0dcd034651b4dd89b7f27e2ba999ffe949ce2cdb441e18a863d72a6d"
+    sha256 arm64_tahoe:   "955326fd9303cd3d1017243f3ffa5d254ce5c9a074a0bafdbf95ecdb64a499fe"
+    sha256 arm64_sequoia: "1f5f5a9fbf14ff47604a46df294fe90d9efa63527d982a4055870f1ae29aa8af"
   end
 
   # A version-specified macOS requirement is satisfied on Linux, so the bare one
@@ -23,13 +23,13 @@ class Imsg < Formula
   # Vendored because SwiftPM cannot fetch dependencies during a Homebrew build.
   # Versions match upstream's Package.resolved for this tag.
   resource "Commander" do
-    url "https://github.com/steipete/Commander/archive/refs/tags/v0.2.4.tar.gz"
-    sha256 "33adc1d87615be729dceea38ee0358dec8484f35f7070caac29fe5e1902fcbd3"
+    url "https://github.com/steipete/Commander/archive/refs/tags/v0.3.0.tar.gz"
+    sha256 "5f584868a22b237f1c7106de04389c97c7825a1786431bf2b17f05f9df7bd40a"
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.9.tar.gz"
-    sha256 "2a0e9c155c4c7aafdb70756bb2034422409931d544154ec873b473e0e7515a0c"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.10.tar.gz"
+    sha256 "2a54311daabae5863e2f0d5255e61bf29ea0db9d24157eb2fe5e76a3783fbba9"
   end
 
   resource "SQLite.swift" do
