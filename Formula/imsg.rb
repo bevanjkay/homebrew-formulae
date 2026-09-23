@@ -23,13 +23,13 @@ class Imsg < Formula
   # Vendored because SwiftPM cannot fetch dependencies during a Homebrew build.
   # Versions match upstream's Package.resolved for this tag.
   resource "Commander" do
-    url "https://github.com/steipete/Commander/archive/refs/tags/v0.2.4.tar.gz"
-    sha256 "33adc1d87615be729dceea38ee0358dec8484f35f7070caac29fe5e1902fcbd3"
+    url "https://github.com/steipete/Commander/archive/refs/tags/v0.3.0.tar.gz"
+    sha256 "5f584868a22b237f1c7106de04389c97c7825a1786431bf2b17f05f9df7bd40a"
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.9.tar.gz"
-    sha256 "2a0e9c155c4c7aafdb70756bb2034422409931d544154ec873b473e0e7515a0c"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.10.tar.gz"
+    sha256 "2a54311daabae5863e2f0d5255e61bf29ea0db9d24157eb2fe5e76a3783fbba9"
   end
 
   resource "SQLite.swift" do
