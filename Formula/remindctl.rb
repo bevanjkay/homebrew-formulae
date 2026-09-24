@@ -18,14 +18,14 @@ class Remindctl < Formula
   end
 
   resource "Commander" do
-    url "https://github.com/steipete/Commander/archive/refs/tags/v0.2.4.tar.gz"
-    sha256 "33adc1d87615be729dceea38ee0358dec8484f35f7070caac29fe5e1902fcbd3"
+    url "https://github.com/steipete/Commander/archive/refs/tags/v0.3.0.tar.gz"
+    sha256 "5f584868a22b237f1c7106de04389c97c7825a1786431bf2b17f05f9df7bd40a"
   end
 
   def install
     resource("Commander").stage(buildpath/"vendor/Commander")
     inreplace "Package.swift",
-              '.package(url: "https://github.com/steipete/Commander.git", from: "0.2.0")',
+              '.package(url: "https://github.com/steipete/Commander.git", from: "0.3.0")',
               '.package(path: "vendor/Commander")'
 
     system "scripts/generate-version.sh"
