@@ -1,14 +1,14 @@
 class Remindctl < Formula
   desc "Command-line access to Apple Reminders"
   homepage "https://github.com/openclaw/remindctl"
-  url "https://github.com/openclaw/remindctl/archive/refs/tags/v0.3.7.tar.gz"
-  sha256 "989a353f4d9d5f822cee00fc1e030d71387a38ce02c5697e209ffde38d4533e5"
+  url "https://github.com/openclaw/remindctl/archive/refs/tags/v0.3.8.tar.gz"
+  sha256 "25a18712ae80580e854afe4fc5b6deedea3346000edf837b65d41f1f5abc1dee"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "75dc17fc88fade782f03a57e74621df1ca5eb0291e342c6a2670b3892d7763ad"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "427a1470720d2adad0ff73647f8ea7d886a499ffdc9e1a6779d6e1efee8fdb95"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d459e7f4ca41451adabd2459efe75f2f4ac9ef9dbc4eba5dbd53b383402b3d96"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "697459ac9a8dfa6630828ddeffd4c00455b75797343ac81676e3f399cfd2adaa"
   end
 
   depends_on :macos
@@ -18,14 +18,14 @@ class Remindctl < Formula
   end
 
   resource "Commander" do
-    url "https://github.com/steipete/Commander/archive/refs/tags/v0.2.4.tar.gz"
-    sha256 "33adc1d87615be729dceea38ee0358dec8484f35f7070caac29fe5e1902fcbd3"
+    url "https://github.com/steipete/Commander/archive/refs/tags/v0.3.0.tar.gz"
+    sha256 "5f584868a22b237f1c7106de04389c97c7825a1786431bf2b17f05f9df7bd40a"
   end
 
   def install
     resource("Commander").stage(buildpath/"vendor/Commander")
     inreplace "Package.swift",
-              '.package(url: "https://github.com/steipete/Commander.git", from: "0.2.0")',
+              %r{\.package\(url: "https://github\.com/steipete/Commander\.git",(?:[^()]|\([^()]*\))*\)},
               '.package(path: "vendor/Commander")'
 
     system "scripts/generate-version.sh"
