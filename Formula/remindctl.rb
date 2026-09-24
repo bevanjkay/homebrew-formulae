@@ -7,8 +7,8 @@ class Remindctl < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "75dc17fc88fade782f03a57e74621df1ca5eb0291e342c6a2670b3892d7763ad"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "427a1470720d2adad0ff73647f8ea7d886a499ffdc9e1a6779d6e1efee8fdb95"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d459e7f4ca41451adabd2459efe75f2f4ac9ef9dbc4eba5dbd53b383402b3d96"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "697459ac9a8dfa6630828ddeffd4c00455b75797343ac81676e3f399cfd2adaa"
   end
 
   depends_on :macos
