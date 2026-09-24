@@ -1,18 +1,18 @@
 class Wacli < Formula
   desc "WhatsApp CLI built on whatsmeow"
   homepage "https://github.com/openclaw/wacli"
-  url "https://github.com/openclaw/wacli/archive/refs/tags/v0.18.3.tar.gz"
-  sha256 "c3d23c5a02b2d0d415b07572acee955e4bbec2066e3d46b0e2f1f0c2f0428472"
+  url "https://github.com/openclaw/wacli/archive/refs/tags/v0.19.0.tar.gz"
+  sha256 "b7ad4f58fc9c09e34f0888f654aa704361c6509b57cbff300459974b859f6ae5"
   license "MIT"
   head "https://github.com/openclaw/wacli.git", branch: "main"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "491fa3a95607d78caa886560bba03041fe0c0bb714b8acaadffb894545cd9d27"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "97c58f027015eb94eb10e6dea0460cbed92be06d8d01ecd767120b6be14582d3"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0d00751e13ffb4625761739e059afb15b5e023b98d6bd2924b3aaf7549078950"
-    sha256 cellar: :any,                 arm64_linux:   "6f008abde6cf1b3213129334fb65b183516a4baeb31803d2d60391f867931637"
-    sha256 cellar: :any,                 x86_64_linux:  "c30c90ff913d4631b211ef89f8b408ac7cdf21d185dd3b800eabc29dd8e5d90f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5d8cc2e59ecd7a55c96c5e38e48587431092290351cfe595762c4f35a3902d80"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "4702f5b24710bcf865529f59d77fa7970e1885dab3efd60e386515ed3a3c32ef"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0123805f0cb85489df323f816bcb0c72c0085941b19f401f12a6af04fbed8d15"
+    sha256 cellar: :any,                 arm64_linux:   "96feeb9c288c0cd6d18773d723b1fbf41df885b5d4ac1334038e7b718451d2d6"
+    sha256 cellar: :any,                 x86_64_linux:  "fad24b334a563072c8b75ddeaa4f98da041a45361842b2f0f0636a87df9a6714"
   end
 
   depends_on "go" => :build
