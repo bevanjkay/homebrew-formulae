@@ -25,7 +25,7 @@ class Remindctl < Formula
   def install
     resource("Commander").stage(buildpath/"vendor/Commander")
     inreplace "Package.swift",
-              '.package(url: "https://github.com/steipete/Commander.git", from: "0.3.0")',
+              %r{\.package\(url: "https://github\.com/steipete/Commander\.git",(?:[^()]|\([^()]*\))*\)},
               '.package(path: "vendor/Commander")'
 
     system "scripts/generate-version.sh"
