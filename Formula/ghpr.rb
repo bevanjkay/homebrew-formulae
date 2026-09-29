@@ -32,8 +32,8 @@ class Ghpr < Formula
   test do
     return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
 
-    output = shell_output("#{bin}/ghpr 2>&1", 1)
-    assert_match "Please enter a type", output
+    output = shell_output("#{bin}/ghpr 2>&1", 2)
+    assert_match "Missing required option", output
 
     output = shell_output("#{bin}/ghpr --help")
     assert_match "Automate PR approvals and merges", output
