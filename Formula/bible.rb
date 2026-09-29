@@ -1,8 +1,8 @@
 class Bible < Formula
   desc "CLI for YouVersion Suggest API"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/bible-1.1.0.tar.gz"
-  sha256 "f7465afb7095928c6c7af3a36580185c7c84853df20c887abc0ca9e3290cd409"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/bible-1.1.1.tar.gz"
+  sha256 "9a18030db9189e6a23b65bf93c14fafeba7962d55d41132cfec4133395bd1311"
   license "MIT"
 
   livecheck do
@@ -12,11 +12,10 @@ class Bible < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1265ce8466dc7133e13c65098adec3fa06b3fcb2dff620f28419b594229b2c3e"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "88c131672dc8f06d9b349086ed9452c4294a4e76179651e4680326358d417b55"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0c51347d29bbc8637dccdc3f4ad5153ae930538de51fa80f791bc7513f052ff9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "fe7f7f9fe9b652a107e7eb9d7fafe47f12089b122a1de4989e35a4c80379898a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8dc9c07f4a836d58ad749fea8e76e6ebad748b0a968347c4be04b95b566c1272"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b78184cdf29ada01778766b6be11df715721a0aada7b0228282635350859c8c6"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6fa00d951eb11be9adc28a7b8ed403c291d0ecf887ae00115ad40a451e0a215a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d815323de0dfcea35cf18e89661ad94f6295b9531d87888c44215bc6fb0ac0ae"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a04a6ad3a5309c6f52472a106432ea0e0a10068428debd880da7f423b548fc07"
   end
 
   depends_on "deno" => :build
