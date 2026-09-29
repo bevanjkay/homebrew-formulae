@@ -1,8 +1,8 @@
 class Bible < Formula
   desc "CLI for YouVersion Suggest API"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/bible-1.1.0.tar.gz"
-  sha256 "f7465afb7095928c6c7af3a36580185c7c84853df20c887abc0ca9e3290cd409"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/bible-1.1.1.tar.gz"
+  sha256 "9a18030db9189e6a23b65bf93c14fafeba7962d55d41132cfec4133395bd1311"
   license "MIT"
 
   livecheck do
