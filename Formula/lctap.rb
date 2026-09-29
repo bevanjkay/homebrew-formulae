@@ -1,8 +1,8 @@
 class Lctap < Formula
   desc "CLI for bumping tap casks in parallel"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/lctap-1.0.2.tar.gz"
-  sha256 "4ae75b676bac25380bb9a296328401666915786867cebba7935ad5b5be3654d5"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/lctap-1.0.3.tar.gz"
+  sha256 "23d90990b397d9e6ad193fb6269b424f27ace44d8028d6b752c304c03933a21b"
   license "MIT"
 
   livecheck do
