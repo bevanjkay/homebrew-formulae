@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@f8d4222eb633e65c2a0157383cf80861fc7fae7f # 2026.09.07.1
+        uses: Homebrew/actions/setup-homebrew@848c272c7bfe984a197bd4d16383f4c106ec61e6 # 2026.09.21.1
         with:
           core: false
           cask: false
@@ -106,7 +106,7 @@ jobs:
       BOTTLES_DIR: ${{ matrix.working_directory || github.workspace }}/bottles
     steps:
       - name: Pre-test steps
-        uses: Homebrew/actions/pre-build@f8d4222eb633e65c2a0157383cf80861fc7fae7f # 2026.09.07.1
+        uses: Homebrew/actions/pre-build@848c272c7bfe984a197bd4d16383f4c106ec61e6 # 2026.09.21.1
         with:
           bottles-directory: ${{ env.BOTTLES_DIR }}
           cleanup: ${{ matrix.cleanup_before }}
@@ -134,7 +134,7 @@ jobs:
         if: >
           github.event_name == 'pull_request' &&
           !contains(fromJson('["skipped", "cancelled"]'), steps.brew-test-bot-formulae.conclusion)
-        uses: Homebrew/actions/post-build@f8d4222eb633e65c2a0157383cf80861fc7fae7f # 2026.09.07.1
+        uses: Homebrew/actions/post-build@848c272c7bfe984a197bd4d16383f4c106ec61e6 # 2026.09.21.1
         with:
           bottles-directory: ${{ env.BOTTLES_DIR }}
           logs-directory: ${{ format('{0}/logs', env.BOTTLES_DIR) }}
