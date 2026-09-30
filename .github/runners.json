@@ -1,5 +1,10 @@
 [
     {
+        "name": "macOS 27 (arm64)",
+        "runs_on": "xcode-27",
+        "cleanup_before": true
+    },
+    {
         "name": "macOS 26 (arm64)",
         "runs_on": "macos-26",
         "cleanup_before": true
@@ -7,11 +12,6 @@
     {
         "name": "macOS 15 (arm64)",
         "runs_on": "macos-15",
-        "cleanup_before": true
-    },
-    {
-        "name": "macOS 14 (arm64)",
-        "runs_on": "macos-14",
         "cleanup_before": true
     },
     {
