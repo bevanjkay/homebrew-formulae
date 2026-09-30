@@ -4,6 +4,7 @@ class T3CodeCli < Formula
   url "https://registry.npmjs.org/t3/-/t3-0.0.44.tgz"
   sha256 "90ebb457474d49cb509e08939db8bc94afab1f0fa46c1f33b470fa2370d068cf"
   license "MIT"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
