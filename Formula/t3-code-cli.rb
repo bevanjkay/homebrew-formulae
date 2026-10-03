@@ -1,10 +1,9 @@
 class T3CodeCli < Formula
   desc "CLI tool for T3 Code"
   homepage "https://t3.codes/"
-  url "https://registry.npmjs.org/t3/-/t3-0.0.44.tgz"
-  sha256 "90ebb457474d49cb509e08939db8bc94afab1f0fa46c1f33b470fa2370d068cf"
+  url "https://registry.npmjs.org/t3/-/t3-0.0.45.tgz"
+  sha256 "b39b4e078370947e58c8ed9d9250105d949cf87919053347bf26b05db3da770a"
   license "MIT"
-  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
