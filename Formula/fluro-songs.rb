@@ -1,8 +1,8 @@
 class FluroSongs < Formula
   desc "Search for songs in Fluro"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/fluro-songs-1.1.1.tar.gz"
-  sha256 "df7668d5085a40fec0dbcb6d6590974054985c48f8fe8a7e4fab8545646b02a2"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/fluro-songs-1.1.2.tar.gz"
+  sha256 "d3646470413a698aae66563738f966a99ed33d700071f8e4057ab16f5dc90a73"
   license "MIT"
 
   livecheck do
@@ -12,10 +12,11 @@ class FluroSongs < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a8dc6b7e22a73947fd543e06a6826234b59bd84b3e6d73fbf73652b46ef6f11c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6571394c4a1da1a82e7f0cc9c02bcfd918e020898baa97c6305857a89790b699"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a3af5cd01f895485e148387f59cf962455c51048836ac6f85d12074b45626182"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1a715bbb46533a2c2afac894668855d9cc975f9d79c085eb7c6a1e3e9717e187"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "d459140cb86cc0dd95636b682e466701df7bea0d0b39e84c185c7745e40feaf4"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "02bc63c3209fa7656bab70e285fb47e2a7f814909630b0a5a747ccce411d9b1c"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "52d89554e397640276e8c27ae9a22b9d20f4af18140a11fa3005eac0d3ce7d31"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "d14ae6c48a1ae35e1d023cfdf2f93fef23d80333286291e7462c712896c477af"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "3f274a20214f7c420e1608ba29bb3cbd320d6813cb571669bafe1a830c1d3420"
   end
 
   depends_on "deno" => :build
