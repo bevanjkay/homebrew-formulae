@@ -1,8 +1,8 @@
 class FluroSongs < Formula
   desc "Search for songs in Fluro"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/fluro-songs-1.1.1.tar.gz"
-  sha256 "df7668d5085a40fec0dbcb6d6590974054985c48f8fe8a7e4fab8545646b02a2"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/fluro-songs-1.1.2.tar.gz"
+  sha256 "d3646470413a698aae66563738f966a99ed33d700071f8e4057ab16f5dc90a73"
   license "MIT"
 
   livecheck do
