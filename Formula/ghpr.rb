@@ -12,10 +12,11 @@ class Ghpr < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bb0db8b42f8c7596c1206ce79a2d46108bc7315cfb91a41be2c563c22dcf1fd0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "84437746c60da75d720b5cbaad696c1cdba6664135cef90df2f504fcc53e1f33"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "be32c486a77639835ccc51edf2a7c9f9e29708239cda7fadabf03200f5ab3553"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ea64882d37a852fafb284cec3d84ab8f23cd33942dae67fa146f5a6e385292c0"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "482cbb1dd3f0f7a21426039878a20ef6a08f989d5b36a76d2ad1fc783d586eff"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "73771d48253469c9d98f40c76bd4339735c6835768ed94b69694274b48a4183b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "8d72078fdb6bf1c016a626690b2619a89860de2ad2f0374fff2f16dafa564603"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "36b5da610c36b8e4581748368e7513ef1efe0f87f581b39d1f54d25f0a89488f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "060b3fda22414847733ae66c5c60c56cba28d56c11bff313c2403e24ccbb56a8"
   end
 
   depends_on "node"
