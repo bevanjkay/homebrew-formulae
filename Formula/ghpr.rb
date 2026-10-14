@@ -1,8 +1,8 @@
 class Ghpr < Formula
   desc "Approve and automerge GitHub PRs"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/ghpr-1.3.1.tar.gz"
-  sha256 "fa8bca2f021ef694f23881451e165428d16648bf71e35525ad630fa70da83eea"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/ghpr-1.4.0.tar.gz"
+  sha256 "77e78d870663b2a00baa08f26421edcb8e1c1c833f9cfb00e0bc024ce37c486a"
   license "MIT"
 
   livecheck do
@@ -18,21 +18,18 @@ class Ghpr < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:  "ea64882d37a852fafb284cec3d84ab8f23cd33942dae67fa146f5a6e385292c0"
   end
 
-  depends_on "deno" => :build
+  depends_on "node"
 
   def install
-    cd("ghpr") do
-      system "deno", "install"
-      system "deno", "run", "build"
-      bin.install "ghpr"
-    end
+    system "npm", "ci"
+    system "npm", "run", "build", "--workspace", "ghpr"
+    cd("ghpr") { system "npm", "install", *std_npm_args }
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
-
-    output = shell_output("#{bin}/ghpr 2>&1", 2)
-    assert_match "Missing required option", output
+    output = shell_output("#{bin}/ghpr 2>&1", 1)
+    assert_match "required option", output
 
     output = shell_output("#{bin}/ghpr --help")
     assert_match "Automate PR approvals and merges", output
