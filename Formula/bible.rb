@@ -12,10 +12,11 @@ class Bible < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b78184cdf29ada01778766b6be11df715721a0aada7b0228282635350859c8c6"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6fa00d951eb11be9adc28a7b8ed403c291d0ecf887ae00115ad40a451e0a215a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d815323de0dfcea35cf18e89661ad94f6295b9531d87888c44215bc6fb0ac0ae"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a04a6ad3a5309c6f52472a106432ea0e0a10068428debd880da7f423b548fc07"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "7593dd474306c235c13be65900d1e964a3972e1a0fdf4585bb1f505f04fff03e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "70d185ed3df9205adcdd31ef4f8ea4252128bdddbe399e1271ac200284571b16"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "931410640fe7e54d7b285b41d3d4df5c30c5fe5518e1f72805dd0982afe476dd"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "91a778c041eb5adc88e27148564227dcb7505a21332e00dbc04fc2b339d7a166"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "01505c13f2c42e4c662a20811a5f388d2f2f6e9525f82035a9ffca9d759d8fe7"
   end
 
   depends_on "node"
