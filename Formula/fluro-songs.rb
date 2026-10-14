@@ -1,8 +1,8 @@
 class FluroSongs < Formula
   desc "Search for songs in Fluro"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/fluro-songs-1.1.2.tar.gz"
-  sha256 "d3646470413a698aae66563738f966a99ed33d700071f8e4057ab16f5dc90a73"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/fluro-songs-2.0.0.tar.gz"
+  sha256 "0ec3d9936e1f78b7816c5c8e7552d78213a32837e47e2fa1938bf4914b639fed"
   license "MIT"
 
   livecheck do
@@ -19,21 +19,17 @@ class FluroSongs < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:      "3f274a20214f7c420e1608ba29bb3cbd320d6813cb571669bafe1a830c1d3420"
   end
 
-  depends_on "deno" => :build
+  depends_on "node"
 
   def install
-    cd("fluro-songs") do
-      system "deno", "install"
-      system "deno", "run", "build"
-      bin.install "fluro-songs"
-    end
+    system "npm", "ci"
+    system "npm", "run", "build", "--workspace", "fluro-songs"
+    cd("fluro-songs") { system "npm", "install", *std_npm_args }
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do
-    # Fails in Linux CI with "No such device or address (os error 2)"
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
-
     output = shell_output("#{bin}/fluro-songs test 2>&1", 1)
-    assert_match("Please provide FLURO_ACCOUNT, FLURO_USERNAME and FLURO_PASSWORD in the environment", output)
+    assert_match("Please provide FLURO_TOKEN in the environment", output)
   end
 end
