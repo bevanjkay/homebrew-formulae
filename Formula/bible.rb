@@ -1,8 +1,8 @@
 class Bible < Formula
   desc "CLI for YouVersion Suggest API"
   homepage "https://github.com/bevanjkay/custom-scripts"
-  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/bible-1.1.1.tar.gz"
-  sha256 "9a18030db9189e6a23b65bf93c14fafeba7962d55d41132cfec4133395bd1311"
+  url "https://github.com/bevanjkay/custom-scripts/archive/refs/tags/bible-1.2.0.tar.gz"
+  sha256 "2db0a5fe8e1c6f49afb92007dae027ac885ef3f27606a53046ed4b0ff4f5a44f"
   license "MIT"
 
   livecheck do
@@ -18,19 +18,16 @@ class Bible < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:  "a04a6ad3a5309c6f52472a106432ea0e0a10068428debd880da7f423b548fc07"
   end
 
-  depends_on "deno" => :build
+  depends_on "node"
 
   def install
-    cd("bible") do
-      system "deno", "install"
-      system "deno", "run", "build"
-      bin.install "bible"
-    end
+    system "npm", "ci"
+    system "npm", "run", "build", "--workspace", "bible"
+    cd("bible") { system "npm", "install", *std_npm_args }
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
-
     output = shell_output("#{bin}/bible john 3:16")
     assert_match("For this is how God loved the world", output)
   end
