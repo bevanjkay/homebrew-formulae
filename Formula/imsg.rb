@@ -29,8 +29,8 @@ class Imsg < Formula
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.10.tar.gz"
-    sha256 "2a54311daabae5863e2f0d5255e61bf29ea0db9d24157eb2fe5e76a3783fbba9"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.12.tar.gz"
+    sha256 "8f3856e604a81d701e083bd740c48f1e941b9ea84078eb3453c56ae587dbdaec"
   end
 
   resource "SQLite.swift" do
