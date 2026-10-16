@@ -28,6 +28,12 @@ class Imsg < Formula
     sha256 "5f584868a22b237f1c7106de04389c97c7825a1786431bf2b17f05f9df7bd40a"
   end
 
+  # Only linked on Linux, but SwiftPM still has to resolve it on macOS.
+  resource "CSQLite" do
+    url "https://github.com/stephencelis/CSQLite/archive/refs/tags/3.53.3.tar.gz"
+    sha256 "abbb3649e78979213be523d5b63802dc0fdd0d0822dc947f998fc8b145a57f89"
+  end
+
   resource "PhoneNumberKit" do
     url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.12.tar.gz"
     sha256 "8f3856e604a81d701e083bd740c48f1e941b9ea84078eb3453c56ae587dbdaec"
@@ -47,6 +53,8 @@ class Imsg < Formula
               '.package(path: "vendor/checkouts/Commander")')
       s.gsub!(%r{\.package\(url: "https://github\.com/stephencelis/SQLite\.swift\.git", from: "[^"]+"\)},
               '.package(path: "vendor/checkouts/SQLite.swift")')
+      s.gsub!(%r{\.package\(url: "https://github\.com/stephencelis/CSQLite", from: "[^"]+"\)},
+              '.package(path: "vendor/checkouts/CSQLite")')
       s.gsub!(%r{\.package\(url: "https://github\.com/PhoneNumberKit/PhoneNumberKit\.git", from: "[^"]+"\)},
               '.package(path: "vendor/checkouts/PhoneNumberKit")')
     end
