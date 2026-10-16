@@ -1,15 +1,15 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.16.0.tar.gz"
-  sha256 "41118628a656a5f03daab7a7b037655ba49b93e496ea73d78adfc56a1112e70b"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.17.0.tar.gz"
+  sha256 "42c505e0b480fb5b48744a88ab86f11e6ca2e3a6705cf7b639234b625bc695d8"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 arm64_golden_gate: "40388a642362765b1f08eeaf3ef726a916b89a357208299817ce5a7ef8439dc0"
-    sha256 arm64_tahoe:       "d0becdc27badbb356b9032e19952fdf42e52355174928232b76250132089d6f9"
-    sha256 arm64_sequoia:     "b40ce8d3bfdafa77a3b1fbc3159f6e1eaf9e0ba48a8c65497da5d0e7043d7f1e"
+    sha256 arm64_golden_gate: "d3ac2575bf683ad59be12b0ec08f7ddf88d30338f68d85db9a17d0d19e4ac1c9"
+    sha256 arm64_tahoe:       "6dadfbfd46a88293912b5d32304c279733dcad649d8c977e42eb3d34c9897b24"
+    sha256 arm64_sequoia:     "aa28843879eef1d3efc7f60b3086d04dbe39cf0ee29b654c512b4439c1fa3ae4"
   end
 
   # A version-specified macOS requirement is satisfied on Linux, so the bare one
@@ -28,9 +28,15 @@ class Imsg < Formula
     sha256 "5f584868a22b237f1c7106de04389c97c7825a1786431bf2b17f05f9df7bd40a"
   end
 
+  # Only linked on Linux, but SwiftPM still has to resolve it on macOS.
+  resource "CSQLite" do
+    url "https://github.com/stephencelis/CSQLite/archive/refs/tags/3.53.3.tar.gz"
+    sha256 "abbb3649e78979213be523d5b63802dc0fdd0d0822dc947f998fc8b145a57f89"
+  end
+
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.10.tar.gz"
-    sha256 "2a54311daabae5863e2f0d5255e61bf29ea0db9d24157eb2fe5e76a3783fbba9"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.12.tar.gz"
+    sha256 "8f3856e604a81d701e083bd740c48f1e941b9ea84078eb3453c56ae587dbdaec"
   end
 
   resource "SQLite.swift" do
@@ -47,6 +53,8 @@ class Imsg < Formula
               '.package(path: "vendor/checkouts/Commander")')
       s.gsub!(%r{\.package\(url: "https://github\.com/stephencelis/SQLite\.swift\.git", from: "[^"]+"\)},
               '.package(path: "vendor/checkouts/SQLite.swift")')
+      s.gsub!(%r{\.package\(url: "https://github\.com/stephencelis/CSQLite", from: "[^"]+"\)},
+              '.package(path: "vendor/checkouts/CSQLite")')
       s.gsub!(%r{\.package\(url: "https://github\.com/PhoneNumberKit/PhoneNumberKit\.git", from: "[^"]+"\)},
               '.package(path: "vendor/checkouts/PhoneNumberKit")')
     end
