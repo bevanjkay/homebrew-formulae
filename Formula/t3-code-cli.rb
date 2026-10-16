@@ -1,17 +1,17 @@
 class T3CodeCli < Formula
   desc "CLI tool for T3 Code"
   homepage "https://t3.codes/"
-  url "https://registry.npmjs.org/t3/-/t3-0.0.45.tgz"
-  sha256 "b39b4e078370947e58c8ed9d9250105d949cf87919053347bf26b05db3da770a"
+  url "https://registry.npmjs.org/t3/-/t3-0.1.0.tgz"
+  sha256 "f0bfbe51e189cf876baf9752bb416495f487b14ef857d218d2cde014d0d12941"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256                               arm64_golden_gate: "3f2958ac058eedd47a0f5b0cce0807945c906b95f92a747281102ad66c20cc3a"
-    sha256                               arm64_tahoe:       "121fffd73efdf9230d92268b4931acd881f23abb56730dd7809cd1077257d79f"
-    sha256                               arm64_sequoia:     "78a9ec79f66a9741e979d08b09c9ea3a680702d6b68ebdf494f9487686ed2a6b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "70ec1ec54ef549bf6376cbca9433581db8c76bb876c37ab72e8d11890fabf7d3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "5ca28e06eb7d344ebfa2bf8d622d82bff81650d6db83c6f0478d88eb7d932c79"
+    sha256                               arm64_golden_gate: "23f1b191f2d77f30712823b2fe1d37b55b0e8acde5582eeeda1a93b6836c8760"
+    sha256                               arm64_tahoe:       "43fb57e923476b08012c3708a8fb323fde53f6016860da3062e7c6bf9989947b"
+    sha256                               arm64_sequoia:     "b34e531a764f48d359be0fd5dd633cf0ef41c0321470e85f124fbc38f7911e09"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "45386fefed51606854dd66f1a9f28489309449754e6e74a8f2ea1b1182b1d81f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "86e942a1001088740ebf2a4f54fec5cf17969f068950e3897abb853ef26fe3d1"
   end
 
   depends_on "node"
