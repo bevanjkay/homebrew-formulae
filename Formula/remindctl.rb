@@ -20,6 +20,13 @@ class Remindctl < Formula
   resource "Commander" do
     url "https://github.com/steipete/Commander/archive/refs/tags/v0.3.0.tar.gz"
     sha256 "5f584868a22b237f1c7106de04389c97c7825a1786431bf2b17f05f9df7bd40a"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/openclaw/remindctl/refs/tags/v#{LATEST_VERSION}/Package.resolved"
+      strategy :json do |json|
+        json["pins"]&.find { |pin| pin["identity"] == "commander" }&.dig("state", "version")
+      end
+    end
   end
 
   def install
