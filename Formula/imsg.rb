@@ -30,8 +30,8 @@ class Imsg < Formula
 
   # Only linked on Linux, but SwiftPM still has to resolve it on macOS.
   resource "CSQLite" do
-    url "https://github.com/stephencelis/CSQLite/archive/refs/tags/3.53.3.tar.gz"
-    sha256 "abbb3649e78979213be523d5b63802dc0fdd0d0822dc947f998fc8b145a57f89"
+    url "https://github.com/stephencelis/CSQLite/archive/refs/tags/3.53.4.tar.gz"
+    sha256 "099669b10a2ddab6889768f8c7836ee93fc2fc57c84c6c40d8e56eb125360738"
   end
 
   resource "PhoneNumberKit" do
