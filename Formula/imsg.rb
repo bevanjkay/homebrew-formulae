@@ -1,15 +1,15 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.17.0.tar.gz"
-  sha256 "42c505e0b480fb5b48744a88ab86f11e6ca2e3a6705cf7b639234b625bc695d8"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.18.0.tar.gz"
+  sha256 "c0ffa52780e2964eef3b63d227a10bcbbe35802a45e62f9fffc8443f656c19ac"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 arm64_golden_gate: "d3ac2575bf683ad59be12b0ec08f7ddf88d30338f68d85db9a17d0d19e4ac1c9"
-    sha256 arm64_tahoe:       "6dadfbfd46a88293912b5d32304c279733dcad649d8c977e42eb3d34c9897b24"
-    sha256 arm64_sequoia:     "aa28843879eef1d3efc7f60b3086d04dbe39cf0ee29b654c512b4439c1fa3ae4"
+    sha256 arm64_golden_gate: "7780ba3355930fbe991203e284c96319737c623f46ac60810900f650da17957f"
+    sha256 arm64_tahoe:       "54386a8f32c54881128c8ab556026c123fd8be6fc95ddba6a20fc2b1f84a12b1"
+    sha256 arm64_sequoia:     "e2eaf29009e683a90ae3ef843a7464535b4a1cd38e489d4e307f8fd2c79ce37f"
   end
 
   # A version-specified macOS requirement is satisfied on Linux, so the bare one
@@ -26,22 +26,50 @@ class Imsg < Formula
   resource "Commander" do
     url "https://github.com/steipete/Commander/archive/refs/tags/v0.3.0.tar.gz"
     sha256 "5f584868a22b237f1c7106de04389c97c7825a1786431bf2b17f05f9df7bd40a"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
+      strategy :json do |json|
+        json["pins"]&.find { |pin| pin["identity"] == "commander" }&.dig("state", "version")
+      end
+    end
   end
 
   # Only linked on Linux, but SwiftPM still has to resolve it on macOS.
   resource "CSQLite" do
-    url "https://github.com/stephencelis/CSQLite/archive/refs/tags/3.53.3.tar.gz"
-    sha256 "abbb3649e78979213be523d5b63802dc0fdd0d0822dc947f998fc8b145a57f89"
+    url "https://github.com/stephencelis/CSQLite/archive/refs/tags/3.53.4.tar.gz"
+    sha256 "099669b10a2ddab6889768f8c7836ee93fc2fc57c84c6c40d8e56eb125360738"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
+      strategy :json do |json|
+        json["pins"]&.find { |pin| pin["identity"] == "csqlite" }&.dig("state", "version")
+      end
+    end
   end
 
   resource "PhoneNumberKit" do
     url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.12.tar.gz"
     sha256 "8f3856e604a81d701e083bd740c48f1e941b9ea84078eb3453c56ae587dbdaec"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
+      strategy :json do |json|
+        json["pins"]&.find { |pin| pin["identity"] == "phonenumberkit" }&.dig("state", "version")
+      end
+    end
   end
 
   resource "SQLite.swift" do
     url "https://github.com/stephencelis/SQLite.swift/archive/refs/tags/0.16.0.tar.gz"
     sha256 "b5a495909a7d4e31d85edf12bfede358222d3fe837f181a0faa79e3563060844"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
+      strategy :json do |json|
+        json["pins"]&.find { |pin| pin["identity"] == "sqlite.swift" }&.dig("state", "version")
+      end
+    end
   end
 
   def install
