@@ -1,15 +1,15 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.18.0.tar.gz"
-  sha256 "c0ffa52780e2964eef3b63d227a10bcbbe35802a45e62f9fffc8443f656c19ac"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.19.0.tar.gz"
+  sha256 "91cd6d59fc3b6fab6ac97165727446fd2cf542dac0be569aa6a13a5e1507893f"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 arm64_golden_gate: "7780ba3355930fbe991203e284c96319737c623f46ac60810900f650da17957f"
-    sha256 arm64_tahoe:       "54386a8f32c54881128c8ab556026c123fd8be6fc95ddba6a20fc2b1f84a12b1"
-    sha256 arm64_sequoia:     "e2eaf29009e683a90ae3ef843a7464535b4a1cd38e489d4e307f8fd2c79ce37f"
+    sha256 arm64_golden_gate: "7dae4fa92ee6e336827337f7112b890044eb6a6bedd7832684db70d4738e08d6"
+    sha256 arm64_tahoe:       "0ee0bc1a47357f9015d55383e8799c3328d14ec7ad899d8ee628fb28e58cd40f"
+    sha256 arm64_sequoia:     "cfddccdc1aed6f57de9f06d4aa85f5ce02119266520f6c640435cbd0f7cb394b"
   end
 
   # A version-specified macOS requirement is satisfied on Linux, so the bare one
@@ -61,8 +61,8 @@ class Imsg < Formula
   end
 
   resource "SQLite.swift" do
-    url "https://github.com/stephencelis/SQLite.swift/archive/refs/tags/0.16.0.tar.gz"
-    sha256 "b5a495909a7d4e31d85edf12bfede358222d3fe837f181a0faa79e3563060844"
+    url "https://github.com/stephencelis/SQLite.swift/archive/refs/tags/0.17.0.tar.gz"
+    sha256 "721a620a764f1e06bb5aac174b852b58eb84b63bcc5dd6b1df3637293c80ba96"
 
     livecheck do
       url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
