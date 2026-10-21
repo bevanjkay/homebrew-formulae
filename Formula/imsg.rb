@@ -26,22 +26,50 @@ class Imsg < Formula
   resource "Commander" do
     url "https://github.com/steipete/Commander/archive/refs/tags/v0.3.0.tar.gz"
     sha256 "5f584868a22b237f1c7106de04389c97c7825a1786431bf2b17f05f9df7bd40a"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
+      strategy :json do |json|
+        json["pins"]&.find { |pin| pin["identity"] == "commander" }&.dig("state", "version")
+      end
+    end
   end
 
   # Only linked on Linux, but SwiftPM still has to resolve it on macOS.
   resource "CSQLite" do
     url "https://github.com/stephencelis/CSQLite/archive/refs/tags/3.53.4.tar.gz"
     sha256 "099669b10a2ddab6889768f8c7836ee93fc2fc57c84c6c40d8e56eb125360738"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
+      strategy :json do |json|
+        json["pins"]&.find { |pin| pin["identity"] == "csqlite" }&.dig("state", "version")
+      end
+    end
   end
 
   resource "PhoneNumberKit" do
     url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.12.tar.gz"
     sha256 "8f3856e604a81d701e083bd740c48f1e941b9ea84078eb3453c56ae587dbdaec"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
+      strategy :json do |json|
+        json["pins"]&.find { |pin| pin["identity"] == "phonenumberkit" }&.dig("state", "version")
+      end
+    end
   end
 
   resource "SQLite.swift" do
     url "https://github.com/stephencelis/SQLite.swift/archive/refs/tags/0.16.0.tar.gz"
     sha256 "b5a495909a7d4e31d85edf12bfede358222d3fe837f181a0faa79e3563060844"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
+      strategy :json do |json|
+        json["pins"]&.find { |pin| pin["identity"] == "sqlite.swift" }&.dig("state", "version")
+      end
+    end
   end
 
   def install
