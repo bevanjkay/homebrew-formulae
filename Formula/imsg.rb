@@ -1,8 +1,8 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.18.0.tar.gz"
-  sha256 "c0ffa52780e2964eef3b63d227a10bcbbe35802a45e62f9fffc8443f656c19ac"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.19.0.tar.gz"
+  sha256 "91cd6d59fc3b6fab6ac97165727446fd2cf542dac0be569aa6a13a5e1507893f"
   license "MIT"
 
   bottle do
@@ -61,8 +61,8 @@ class Imsg < Formula
   end
 
   resource "SQLite.swift" do
-    url "https://github.com/stephencelis/SQLite.swift/archive/refs/tags/0.16.0.tar.gz"
-    sha256 "b5a495909a7d4e31d85edf12bfede358222d3fe837f181a0faa79e3563060844"
+    url "https://github.com/stephencelis/SQLite.swift/archive/refs/tags/0.17.0.tar.gz"
+    sha256 "721a620a764f1e06bb5aac174b852b58eb84b63bcc5dd6b1df3637293c80ba96"
 
     livecheck do
       url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
