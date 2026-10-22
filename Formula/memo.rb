@@ -9,9 +9,9 @@ class Memo < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "af564b061df15f3b761304ee97ff7d9d52d67a5ba3a8bd81396a971661de0767"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "4ddda3406217e61292fc0b21e0d121312433e4db96d08ac8681787df97484abb"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6787f2422ffe17858531dda50d43a1b6938e3d8b946095a91ba47364cf21820b"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "a346b571c7ba78ce4877786142cc16d51a4f816cb6e44428bcf3aef70cff174e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "74a3d62edc89afdbdb989aa58a571c758a353a45c63c18eef067de1ece7b0e2c"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "5bce60d70cb9b5d6258a478287922efca79700bf5541bfecafac4bf2bd5903d8"
   end
 
   depends_on :macos
