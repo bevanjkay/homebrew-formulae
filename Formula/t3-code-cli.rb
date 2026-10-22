@@ -1,38 +1,62 @@
 class T3CodeCli < Formula
   desc "CLI tool for T3 Code"
   homepage "https://t3.codes/"
-  url "https://registry.npmjs.org/t3/-/t3-0.1.0.tgz"
-  sha256 "f0bfbe51e189cf876baf9752bb416495f487b14ef857d218d2cde014d0d12941"
+  url "https://registry.npmjs.org/t3/-/t3-0.1.1.tgz"
+  sha256 "11e89f2aa3ba3dd510c411edf88d35bc44e7616a893db69c2b5ea22f79db9a04"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256                               arm64_golden_gate: "23f1b191f2d77f30712823b2fe1d37b55b0e8acde5582eeeda1a93b6836c8760"
-    sha256                               arm64_tahoe:       "43fb57e923476b08012c3708a8fb323fde53f6016860da3062e7c6bf9989947b"
-    sha256                               arm64_sequoia:     "b34e531a764f48d359be0fd5dd633cf0ef41c0321470e85f124fbc38f7911e09"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "45386fefed51606854dd66f1a9f28489309449754e6e74a8f2ea1b1182b1d81f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "86e942a1001088740ebf2a4f54fec5cf17969f068950e3897abb853ef26fe3d1"
+    sha256                               arm64_golden_gate: "b99a2a77548d37cb79f62664d41b13b72be43e6a46f6f7ef00e7e5541f844e55"
+    sha256                               arm64_tahoe:       "87183c3d09e3c345fd7c15a6375546de531c1ed351c09a00e3fd9a14abc78483"
+    sha256                               arm64_sequoia:     "bee387e9c1c6c90529444b7b82aa2ec5b098ff2d4c46863efe29ffcdbcb5db9c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "465e799c58b687904c9b9a83dcc138e71ccb2c9f2e46992e9f223117d197235a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "0b7db680accf8d4485e1006cf4bd3c14ceeb6ee3d68953260ccb83b31b7f5d1c"
   end
 
-  depends_on "node"
   depends_on "ripgrep"
 
+  # Since 0.1.1 the npm package is only a launcher that downloads the
+  # self-contained executable from the GitHub release at runtime. The npm
+  # tarball stays as the stable URL so `brew bump` can still update this
+  # formula: it cannot rewrite per-platform URLs in on_* blocks, but it does
+  # update top-level resources that follow the parent's version.
+  resource "darwin-arm64" do
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.1/t3-0.1.1-darwin-arm64.tar.gz"
+    sha256 "8f5f435483266c1e6f46b35336fea134e364100045a8712cb52f41b88e3b0b05"
+
+    livecheck do
+      formula :parent
+    end
+  end
+
+  resource "linux-arm64" do
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.1/t3-0.1.1-linux-arm64.tar.gz"
+    sha256 "a23729574bec2665d53cfe67997edbf5f29dd592c3b7c3e774aec3dfc5c7e217"
+
+    livecheck do
+      formula :parent
+    end
+  end
+
+  resource "linux-x64" do
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.1/t3-0.1.1-linux-x64.tar.gz"
+    sha256 "33c43ea2f803215662f5a31fdf9e1bca86ab67cac4f2398565c2ba12e17c2185"
+
+    livecheck do
+      formula :parent
+    end
+  end
+
   def install
-    system "npm", "install", *std_npm_args
-
-    # The real CLI is the self-contained executable in the
-    # @t3code/t3-<platform>-<arch> optional dependency, which npm resolves to
-    # the native one. It loads client/, resource-monitor/ and its native
-    # node_modules from its own directory, so hoist it to libexec and run it
-    # directly rather than through the launcher: under npm's nesting the
-    # install name Homebrew relocates libfff_c.dylib to overruns the header
-    # padding it was linked with, and relocation fails.
+    # The executable loads client/, resource-monitor/ and its native
+    # node_modules from its own directory, so keep the archive's layout in
+    # libexec. A deeper path breaks relocation: the install name Homebrew
+    # rewrites libfff_c.dylib to overruns the header padding it was linked with.
     platform = "#{OS.mac? ? "darwin" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
-    payload = libexec/"lib/node_modules/t3/node_modules/@t3code/t3-#{platform}"
-    odie "npm skipped the @t3code/t3-#{platform} optional dependency!" unless payload.exist?
+    odie "T3 Code has no #{platform} build!" unless resources.map(&:name).include?(platform)
 
-    payload.children.each { |child| mv child, libexec }
-    rm_r [libexec/"bin", libexec/"lib"]
+    resource(platform).stage libexec
 
     # The musl builds need musl's libc.so, which a glibc system does not have
     # and `brew linkage` rejects; the glibc build beside each one is what loads.
