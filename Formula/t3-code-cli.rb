@@ -14,25 +14,49 @@ class T3CodeCli < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:      "86e942a1001088740ebf2a4f54fec5cf17969f068950e3897abb853ef26fe3d1"
   end
 
-  depends_on "node"
   depends_on "ripgrep"
 
+  # Since 0.1.1 the npm package is only a launcher that downloads the
+  # self-contained executable from the GitHub release at runtime. The npm
+  # tarball stays as the stable URL so `brew bump` can still update this
+  # formula: it cannot rewrite per-platform URLs in on_* blocks, but it does
+  # update top-level resources that follow the parent's version.
+  resource "darwin-arm64" do
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.1/t3-0.1.1-darwin-arm64.tar.gz"
+    sha256 "8f5f435483266c1e6f46b35336fea134e364100045a8712cb52f41b88e3b0b05"
+
+    livecheck do
+      formula :parent
+    end
+  end
+
+  resource "linux-arm64" do
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.1/t3-0.1.1-linux-arm64.tar.gz"
+    sha256 "a23729574bec2665d53cfe67997edbf5f29dd592c3b7c3e774aec3dfc5c7e217"
+
+    livecheck do
+      formula :parent
+    end
+  end
+
+  resource "linux-x64" do
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.1/t3-0.1.1-linux-x64.tar.gz"
+    sha256 "33c43ea2f803215662f5a31fdf9e1bca86ab67cac4f2398565c2ba12e17c2185"
+
+    livecheck do
+      formula :parent
+    end
+  end
+
   def install
-    system "npm", "install", *std_npm_args
-
-    # The real CLI is the self-contained executable in the
-    # @t3code/t3-<platform>-<arch> optional dependency, which npm resolves to
-    # the native one. It loads client/, resource-monitor/ and its native
-    # node_modules from its own directory, so hoist it to libexec and run it
-    # directly rather than through the launcher: under npm's nesting the
-    # install name Homebrew relocates libfff_c.dylib to overruns the header
-    # padding it was linked with, and relocation fails.
+    # The executable loads client/, resource-monitor/ and its native
+    # node_modules from its own directory, so keep the archive's layout in
+    # libexec. A deeper path breaks relocation: the install name Homebrew
+    # rewrites libfff_c.dylib to overruns the header padding it was linked with.
     platform = "#{OS.mac? ? "darwin" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
-    payload = libexec/"lib/node_modules/t3/node_modules/@t3code/t3-#{platform}"
-    odie "npm skipped the @t3code/t3-#{platform} optional dependency!" unless payload.exist?
+    odie "T3 Code has no #{platform} build!" unless resources.map(&:name).include?(platform)
 
-    payload.children.each { |child| mv child, libexec }
-    rm_r [libexec/"bin", libexec/"lib"]
+    resource(platform).stage libexec
 
     # The musl builds need musl's libc.so, which a glibc system does not have
     # and `brew linkage` rejects; the glibc build beside each one is what loads.
