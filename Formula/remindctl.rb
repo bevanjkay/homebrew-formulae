@@ -35,6 +35,11 @@ class Remindctl < Formula
               %r{\.package\(url: "https://github\.com/steipete/Commander\.git",(?:[^()]|\([^()]*\))*\)},
               '.package(path: "vendor/Commander")'
 
+    # Swift 6.1 (Xcode 16) misreports a data race on the closure's implicit captures
+    inreplace "Sources/RemindCore/EventKitStore.swift",
+              "originalCalendarID) {\n",
+              "originalCalendarID) { [eventStore, reminder] in\n"
+
     system "scripts/generate-version.sh"
     system "swift", "build", "--disable-sandbox", "--configuration", "release", "--product", "remindctl"
 
