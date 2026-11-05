@@ -1,8 +1,8 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.20.0.tar.gz"
-  sha256 "0d3983c298b964f4bb85504a28e0bc722b0948216df641ae0a64b66cd4ad875e"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.21.0.tar.gz"
+  sha256 "259b4d29c0d95961c155d379348fc902e56ce785bc9488e795673a180cba0b10"
   license "MIT"
 
   bottle do
@@ -49,8 +49,8 @@ class Imsg < Formula
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.12.tar.gz"
-    sha256 "8f3856e604a81d701e083bd740c48f1e941b9ea84078eb3453c56ae587dbdaec"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.13.tar.gz"
+    sha256 "eeca9defeefe87ee73b8678df133ddfe73eb2a76091be4f45f7111290b8b9f4e"
 
     livecheck do
       url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
