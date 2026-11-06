@@ -11,6 +11,15 @@ class Qik < Formula
     url :stable
   end
 
+  bottle do
+    root_url "https://ghcr.io/v2/bevanjkay/formulae"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "d48ed1a3aee357c1c12c5a1f50795fd6847ce9c0f2effd3573157495fb8a8f13"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "92b97dea911689809048f5b3f6e3dfc225c7744dc54492883c6b865fd2e5dd37"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "26ce5d492841e26ddc56fcfddd08e19aa2049c2dd612d80e48de1a112bddd07b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "c3990044ba11da2ca81f8bf61cfce4e501f5a9e7c4c6791a729d3ef86fed86d4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "649540318cca6d02655e0d9a8e2d2e48c7d56df740163a500b70efb5524e2920"
+  end
+
   # The npm package is only a Node launcher for the self-contained binary in
   # these per-platform packages. It stays as the stable URL so `brew bump` can
   # update this formula: it cannot rewrite per-platform URLs in on_* blocks, but
