@@ -1,8 +1,8 @@
 class T3CodeCli < Formula
   desc "CLI tool for T3 Code"
   homepage "https://t3.codes/"
-  url "https://registry.npmjs.org/t3/-/t3-0.1.7.tgz"
-  sha256 "47d67b343b6c0c087ad8579b572a422d0649bae6ed1941c757c1c309eede61e0"
+  url "https://registry.npmjs.org/t3/-/t3-0.1.9.tgz"
+  sha256 "d660f1bea9e9b93ba0db5ee72f19b8790fa4651aa59d0d506c4ac8fc83145e1b"
   license "MIT"
 
   bottle do
@@ -16,14 +16,19 @@ class T3CodeCli < Formula
 
   depends_on "ripgrep"
 
+  on_linux do
+    # @transcribe-cpp ships a ggml Vulkan backend for on-device dictation.
+    depends_on "vulkan-loader"
+  end
+
   # Since 0.1.1 the npm package is only a launcher that downloads the
   # self-contained executable from the GitHub release at runtime. The npm
   # tarball stays as the stable URL so `brew bump` can still update this
   # formula: it cannot rewrite per-platform URLs in on_* blocks, but it does
   # update top-level resources that follow the parent's version.
   resource "darwin-arm64" do
-    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.7/t3-0.1.7-darwin-arm64.tar.gz"
-    sha256 "fecfb296ed142942d0cb2dee1c53a6faca54a4012a312a470d4dc6c3215d1ab3"
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.9/t3-0.1.9-darwin-arm64.tar.gz"
+    sha256 "7d2eb8c0687b70ca03a9d35498381852d3792983589e82d1fb1831c08f0b2301"
 
     livecheck do
       formula :parent
@@ -31,8 +36,8 @@ class T3CodeCli < Formula
   end
 
   resource "linux-arm64" do
-    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.7/t3-0.1.7-linux-arm64.tar.gz"
-    sha256 "5a528e23af394cc6f359036d3cb8441fda14129d477630fc6c53e4f4a1025bc8"
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.9/t3-0.1.9-linux-arm64.tar.gz"
+    sha256 "52023bc5728a4dee4de361ad6fef7c236f1efb2742ff25e29d5c55e2fb662eea"
 
     livecheck do
       formula :parent
@@ -40,8 +45,8 @@ class T3CodeCli < Formula
   end
 
   resource "linux-x64" do
-    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.7/t3-0.1.7-linux-x64.tar.gz"
-    sha256 "c089892bf7922e2e73c6f44a5d1ea125c99f70e378c18361cbbed2fba1920e6c"
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.9/t3-0.1.9-linux-x64.tar.gz"
+    sha256 "0141025335da334759cecd8db3483e09772f3600ca03674698524e7d94291362"
 
     livecheck do
       formula :parent
