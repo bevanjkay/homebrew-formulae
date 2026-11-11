@@ -7,11 +7,11 @@ class T3CodeCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256               arm64_golden_gate: "e75adbf22bd68a0a2e21a7d00664b13c379a20cfd82730bfeff203201dbb6caa"
-    sha256               arm64_tahoe:       "85c76eae2047b5a7cd2b80dc36622d35a288a7ccef9c54e4bf0cb1079df6f77c"
-    sha256               arm64_sequoia:     "410e309bc8831845c575136885cfe12eb2535a0a1cedc60949feeecbef070b96"
-    sha256 cellar: :any, arm64_linux:       "aaea316ff3739c600ddff4ef1d81006fe6300d143f382676335125c7e132e673"
-    sha256 cellar: :any, x86_64_linux:      "52f909908ac7cd28af6688624e9d3efd4988e36f416b35f76af19d359f25d6a9"
+    sha256               arm64_golden_gate: "2c4e55125812343ff1ad156f08540ddeb11d1379efacd4da93c37bcdbf238cea"
+    sha256               arm64_tahoe:       "d7b4f2563ee2cde0e82371ad7b893071ee2445ebaf78c90ddbdbe80640cb44aa"
+    sha256               arm64_sequoia:     "211aef79e3b9be261858297dbff6e39f9fe6562da7b5b3a9a940208064136cd6"
+    sha256 cellar: :any, arm64_linux:       "aac229ad176da7c53ff58e6fc0235a7e0d96d9439b7c6890d4ea7ea3855d1042"
+    sha256 cellar: :any, x86_64_linux:      "840fd509a2a9dc2abf8383844ccf5ca7b7fed1e313471c4e3e1dc5565509d100"
   end
 
   depends_on "ripgrep"
