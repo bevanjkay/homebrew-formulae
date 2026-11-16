@@ -3,8 +3,8 @@ class Memo < Formula
 
   desc "Manage Apple Notes and Reminders from the command-line"
   homepage "https://github.com/antoniorodr/memo"
-  url "https://github.com/antoniorodr/memo/archive/refs/tags/v0.6.2.tar.gz"
-  sha256 "17015996aac2c76ccd721ad9709816d186216474ff90e553e53c488c681cdb34"
+  url "https://github.com/antoniorodr/memo/archive/refs/tags/v0.7.0.tar.gz"
+  sha256 "79e92fc6dbd1d08dabef6e79bc102b58bac0dbd86ee549f5fa3eaadf9cbad292"
   license "Apache-2.0"
 
   bottle do
