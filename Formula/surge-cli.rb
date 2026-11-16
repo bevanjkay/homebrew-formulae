@@ -4,6 +4,7 @@ class SurgeCli < Formula
   url "https://registry.npmjs.org/surge/-/surge-0.57.0.tgz"
   sha256 "0b4052491488542a86829ad46d58dd684c7ee32f5f6340c46b0093af8a7eb38b"
   license "ISC"
+  revision 1
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
