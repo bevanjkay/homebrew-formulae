@@ -8,11 +8,11 @@ class SurgeCli < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "2a81883f80a621e1bbd4f411172dd6448a5925e76c4c7ef739510095fdea2610"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "a6caff6cb23645625661399b7e3d5414241109520d318919666f122c562e4887"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "db68c64b9a3602fee7a22b379952eac40e5b2af842227ac83acb342209cb8db9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "3dfc116d7e9b85313a819f88c4a949a3bcd6ea4ed837d3439fd157137a7a1423"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "e22a78ee1a2f5230b011e339f7f2d31879edda157c880399453b699a742ee207"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "334c89fbc11e02d0e75dfbd6e0ef556ebf190f04f1230b56f85895de4e249836"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "c1079bc2888950a7ccb25e291bb3120da6c8b445c1d98ebb9f71bd543777a502"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "3ed3767d1118812a83bfd1d8189882eb7e0634c370e7456505a7bb4b07d819ed"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "19dfec3d85b23cd17d16bffd1bc195e7f63e91090237726817292b6305fef6ed"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "b7807b8393d76b1e48525a5ef38835ad167f34c992aa0afd3a45719e868bb844"
   end
 
   depends_on "node"
