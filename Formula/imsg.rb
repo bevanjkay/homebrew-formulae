@@ -1,15 +1,15 @@
 class Imsg < Formula
   desc "Send and read iMessage / SMS from the terminal"
   homepage "https://github.com/openclaw/imsg"
-  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.21.0.tar.gz"
-  sha256 "259b4d29c0d95961c155d379348fc902e56ce785bc9488e795673a180cba0b10"
+  url "https://github.com/openclaw/imsg/archive/refs/tags/v0.21.1.tar.gz"
+  sha256 "a31fd2f6d72705ac0b1edf4238068a87d776a983679e0f17ae670ce9fc71e16e"
   license "MIT"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 arm64_golden_gate: "ab4416b506601143798506270d0a91ad5528c64fc6016dac3736d9db6125cdb1"
-    sha256 arm64_tahoe:       "cc7969e52a5f112ede49d2eee138f009379e9339808698e11038daa73eb9ce02"
-    sha256 arm64_sequoia:     "d0d5839f8dc5d933a8361a7c6be8f6898e979b5a2d287313c0102566d07e35c0"
+    sha256 arm64_golden_gate: "e5da712c0a7aa3c8d2313b2b3490684153017e8b10493235555fb0eda4ba180c"
+    sha256 arm64_tahoe:       "ec6db6afef96a6d948da1e7adc5b6ba715b4c257750534dd12a93311fa8757b9"
+    sha256 arm64_sequoia:     "a2f21a54e95da9cccc6821cc655c44f233312290890e01d65b103d311fc70b09"
   end
 
   # A version-specified macOS requirement is satisfied on Linux, so the bare one
@@ -49,8 +49,8 @@ class Imsg < Formula
   end
 
   resource "PhoneNumberKit" do
-    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.13.tar.gz"
-    sha256 "eeca9defeefe87ee73b8678df133ddfe73eb2a76091be4f45f7111290b8b9f4e"
+    url "https://github.com/PhoneNumberKit/PhoneNumberKit/archive/refs/tags/5.0.14.tar.gz"
+    sha256 "b8d530ad2137c9256707d125a61057ce6050a006325bd80c2ed04db5eeb16a3c"
 
     livecheck do
       url "https://raw.githubusercontent.com/openclaw/imsg/refs/tags/v#{LATEST_VERSION}/Package.resolved"
