@@ -153,7 +153,7 @@ jobs:
     needs: bottle
     if: inputs.upload
     container:
-      image: ghcr.io/homebrew/ubuntu22.04:main
+      image: ghcr.io/homebrew/brew:main
     env:
       HOMEBREW_SIMULATE_MACOS_ON_LINUX: 1
       GH_REPO: ${{github.repository}}
