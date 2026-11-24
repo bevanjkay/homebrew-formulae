@@ -13,11 +13,13 @@ class Qik < Formula
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "d48ed1a3aee357c1c12c5a1f50795fd6847ce9c0f2effd3573157495fb8a8f13"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "92b97dea911689809048f5b3f6e3dfc225c7744dc54492883c6b865fd2e5dd37"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "26ce5d492841e26ddc56fcfddd08e19aa2049c2dd612d80e48de1a112bddd07b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:       "c3990044ba11da2ca81f8bf61cfce4e501f5a9e7c4c6791a729d3ef86fed86d4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:      "649540318cca6d02655e0d9a8e2d2e48c7d56df740163a500b70efb5524e2920"
+    rebuild 1
+    manifest_sha256 "284b937b2313dedaf59bd4ccc52fb8c6e5d1c0698e0b1e4b97d20656c845531b"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "97d52573ffee9bad3cbfc0f436ffcade039053f4d116d26dce2f6f2226a5ae32"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "cb97f6c29c75cafc16085a15d1c92a73500b46dcdf35c02e7b53e9966ed65d15"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "f902aa5bf861aee2f55d59c61403f8bccdb66ab9d9f425bbf7f0370d8959703a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:       "280513fa129fcb75a818c7fefe39918124e95719535bd2a48903f9e87c0b8d10"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:      "1a8687ba4d78ee96d90034aecd31377c39bc935331668cc0d23744735d63af74"
   end
 
   # The npm package is only a Node launcher for the self-contained binary in
