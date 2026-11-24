@@ -61,7 +61,9 @@ class Qik < Formula
   end
 
   def install
-    platform = "#{OS.mac? ? "darwin" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
+    os = OS.mac? ? "darwin" : "linux"
+    arch = Hardware::CPU.arm? ? "arm64" : "x64"
+    platform = "#{os}-#{arch}"
     resource(platform).stage { bin.install "bin/qik" }
 
     generate_completions_from_executable(bin/"qik", "completions")
