@@ -59,7 +59,9 @@ class T3CodeCli < Formula
     # node_modules from its own directory, so keep the archive's layout in
     # libexec. A deeper path breaks relocation: the install name Homebrew
     # rewrites libfff_c.dylib to overruns the header padding it was linked with.
-    platform = "#{OS.mac? ? "darwin" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
+    os = OS.mac? ? "darwin" : "linux"
+    arch = Hardware::CPU.arm? ? "arm64" : "x64"
+    platform = "#{os}-#{arch}"
     odie "T3 Code has no #{platform} build!" unless resources.map(&:name).include?(platform)
 
     resource(platform).stage libexec
