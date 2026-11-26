@@ -3,15 +3,16 @@ class Memo < Formula
 
   desc "Manage Apple Notes and Reminders from the command-line"
   homepage "https://github.com/antoniorodr/memo"
-  url "https://github.com/antoniorodr/memo/archive/refs/tags/v0.7.0.tar.gz"
-  sha256 "79e92fc6dbd1d08dabef6e79bc102b58bac0dbd86ee549f5fa3eaadf9cbad292"
+  url "https://github.com/antoniorodr/memo/archive/refs/tags/v0.7.1.tar.gz"
+  sha256 "42e277fae84aad702cb2adae26b148b7ad0063a6d0ca7aa9170e87b56eb43f7c"
   license "Apache-2.0"
 
   bottle do
     root_url "https://ghcr.io/v2/bevanjkay/formulae"
-    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "8588f30924241bb15c3af7c1202bcbee5e90c2abaddf227e2d383bf7005accc5"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "2aaa85c7aff4f1a4332b02a7490104fd9650c5288dd0193ab640d93e96a2fca8"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "f6c3a37c7dfe08b641eb3caa137b563eceedaf5567f2fd3eb366ef1bb684666b"
+    manifest_sha256 "1922dabd38d403edfdca340866f70e4e797a0f0f9cbfc678da6a16a37825b900"
+    sha256 cellar: :any_skip_relocation, arm64_golden_gate: "eb1ad1ebadf4527cb6d58daddb0e8dc1996da8768b19ccb2934582d305e4adc0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:       "7b11819a088f9afeca2abd8042d0e1c5f4b4e12e7cd3ee04e9df5e342fba3664"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia:     "79f43462cf6b75b454de8f990a0234849762cade9eb93d92a4318d4e24952c55"
   end
 
   depends_on :macos
