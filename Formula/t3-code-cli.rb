@@ -1,8 +1,8 @@
 class T3CodeCli < Formula
   desc "CLI tool for T3 Code"
   homepage "https://t3.codes/"
-  url "https://registry.npmjs.org/t3/-/t3-0.1.12.tgz"
-  sha256 "b38114f56fb9f8852fc6745c6829812efad0f959f860326c3826337f60548d57"
+  url "https://registry.npmjs.org/t3/-/t3-0.1.13.tgz"
+  sha256 "6ebfe5ba06b6a41e0811c994020b1724949ac550ce1e0f5ffa3451d0d3ba6f08"
   license "MIT"
 
   bottle do
@@ -28,8 +28,8 @@ class T3CodeCli < Formula
   # formula: it cannot rewrite per-platform URLs in on_* blocks, but it does
   # update top-level resources that follow the parent's version.
   resource "darwin-arm64" do
-    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.12/t3-0.1.12-darwin-arm64.tar.gz"
-    sha256 "1b78c9754160623661c5942a7e22f5a62a64bf1f96ab397f50bbc7c6b6115ca4"
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.13/t3-0.1.13-darwin-arm64.tar.gz"
+    sha256 "d83b2e1ef9557e12f340a7299646203cdcdd5ee0af3272e6922c26410cfef396"
 
     livecheck do
       formula :parent
@@ -37,8 +37,8 @@ class T3CodeCli < Formula
   end
 
   resource "linux-arm64" do
-    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.12/t3-0.1.12-linux-arm64.tar.gz"
-    sha256 "29cfbab19117aa436f1700382afb9cfe5d7ef47609cabba9356271a0bca5ad98"
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.13/t3-0.1.13-linux-arm64.tar.gz"
+    sha256 "c553c17db07030d032808989427db5022bf04027ebcec2218c69fb1a5fa1377f"
 
     livecheck do
       formula :parent
@@ -46,8 +46,8 @@ class T3CodeCli < Formula
   end
 
   resource "linux-x64" do
-    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.12/t3-0.1.12-linux-x64.tar.gz"
-    sha256 "9ba3db46e3554fb9970fd5ede9e823c2f6d6f6763f40340bd4c8ef6b09501c54"
+    url "https://github.com/pingdotgg/t3code/releases/download/v0.1.13/t3-0.1.13-linux-x64.tar.gz"
+    sha256 "64e0f8446d3f618b157d4e5a0a6808ab3c8bf1a1b3e44eab3100e554be05e5d7"
 
     livecheck do
       formula :parent
